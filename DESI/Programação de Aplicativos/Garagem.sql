@@ -57,7 +57,7 @@ CREATE TABLE `user` (
   `nome` varchar(45) NOT NULL,
   `level_id` int(2) NOT NULL,
   `senha` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
+  `email` varchar(90) NOT NULL,
   `status` int(1) NOT NULL,
   PRIMARY KEY (`iduser`),
   KEY `levelId_fk_idx` (`level_id`),
@@ -70,7 +70,7 @@ CREATE TABLE `level` (
   `id_level_itens` int(2) NOT NULL,
   `status` int(1) NOT NULL,
   PRIMARY KEY (`idlevel`),
-  KEY `idLevelItens_fk_idx` (`id_level_itens`),
+  KEY `idLevelItens_fk_idx` (`id_level_itens`),user
   CONSTRAINT `idLevelItens_fk` FOREIGN KEY (`id_level_itens`) REFERENCES `level_itens` (`idlevel_itens`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
