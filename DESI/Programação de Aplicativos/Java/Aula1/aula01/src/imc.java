@@ -5,11 +5,13 @@ public class imc {
     public static void main(String[] args) throws Exception {
         // Definindo a língua do código
         Locale.setDefault(Locale.US);
+
         // Criando um novo Scanner
         Scanner ler = new Scanner(System.in);
 
         // Definição de Variável
         double peso, altura, imc;
+
 
         // Solicita o peso do usuário
         System.out.print("\nInforme o seu peso (Ex: 100): ");
@@ -23,7 +25,7 @@ public class imc {
         imc = peso / (altura * altura);
 
         // Informa o resultado do cálculo
-        System.out.printf("Seu imc é: %.2f%n", imc);
+        System.out.printf("Seu imc e: %.2f%n", imc);
 
         ler.close();  // Fecha o scanner
     }
