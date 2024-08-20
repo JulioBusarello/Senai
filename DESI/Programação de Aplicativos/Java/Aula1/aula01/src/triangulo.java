@@ -13,7 +13,7 @@ public class triangulo {
         double a,b,c,p;
         double area1,area2;
 
-        // Pedindo valores triangulo 1
+        // Pedindo valores Triângulo 1
         System.out.println("Informe o lado a do triangulo X: ");
         a = ler.nextDouble();
         System.out.println("Informe o lado b do triangulo X: ");
@@ -21,12 +21,12 @@ public class triangulo {
         System.out.println("Informe o lado c do triangulo X: ");
         c = ler.nextDouble();
 
-        // Calculos triangulo 1
+        // Calculos Triângulo 1
         p = (a+b+c)/2;
 
         area1 = Math.sqrt(p*(p-a)*(p-b)*(p-c));
 
-        // Pedindo valores triangulo 2
+        // Pedindo valores Triângulo 2
         System.out.println("Informe o lado a do triangulo Y: ");
         a = ler.nextDouble();
         System.out.println("Informe o lado b do triangulo Y: ");
@@ -34,7 +34,7 @@ public class triangulo {
         System.out.println("Informe o lado c do triangulo Y: ");
         c = ler.nextDouble();
 
-        // Calculos triangulo 2
+        // Calculos Triângulo 2
         p = (a+b+c)/2;
 
         area2 = Math.sqrt(p*(p-a)*(p-b)*(p-c));
