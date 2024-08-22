@@ -14,19 +14,19 @@ public class Funcionario {
         // Definição de Variáveis
         Employee funcionario = new Employee();
 
-        System.out.println("Name: ");
+        System.out.print("Name: ");
         funcionario.name = ler.nextLine();
-        System.out.println("Gross salary: ");
+        System.out.print("Gross salary: ");
         funcionario.grossSalary = ler.nextDouble();
-        System.out.println("Tax: ");
+        System.out.print("Tax: ");
         funcionario.tax = ler.nextDouble();
 
-        System.out.println("Employee: "+funcionario.name+", $"+funcionario.netSalary());
+        System.out.println("\nEmployee: "+funcionario.name+", $"+funcionario.netSalary());
 
-        System.out.println("Which percentage to increase salary? ");
+        System.out.print("\nWhich percentage to increase salary? ");
         funcionario.increaseSalary(ler.nextDouble());
 
-        System.out.println("Updated data: "+funcionario.name+", $"+funcionario.grossSalary);
+        System.out.println("\nUpdated data: "+funcionario.name+", $"+funcionario.netSalary());
         ler.close();
     }
 }
