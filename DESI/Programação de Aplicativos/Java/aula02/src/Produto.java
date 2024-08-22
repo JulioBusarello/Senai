@@ -12,8 +12,7 @@ public class Produto {
         Scanner ler = new Scanner(System.in);
 
         // Definição de Variáveis
-        Product produto;
-        produto = new Product();
+        Product produto = new Product();
         
         System.out.print("Enter the product data:");
         System.out.print("\nName: ");
