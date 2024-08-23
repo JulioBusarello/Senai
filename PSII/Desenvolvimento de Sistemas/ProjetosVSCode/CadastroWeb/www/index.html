@@ -13,25 +13,55 @@
 
         <form action="#" method="post" id="userForm">
             <label for = "name">Nome:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" placeholder="Insira seu nome completo" required>
 
             <label for = "email">E-mail:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" placeholder="nome@exemplo.com" required>
 
             <label for = "phone">Telefone:</label>
-            <input type="tel" id="phone" name="phone" required>
+            <input type="tel" id="phone" name="phone" placeholder="DDD 91111-1111" required>
 
             <label for = "address">Endereço:</label>
-            <input type="text" id="address" name="address" required>
+            <input type="text" id="address" name="address" placeholder="bairro, rua, numero" required>
 
             <label for = "city">Cidade:</label>
-            <input type="text" id="city" name="city" required>
+            <input type="text" id="city" name="city" placeholder="Insira apenas a cidade" required>
 
             <label for = "state">Estado:</label>
-            <input type="text" id="state" name="state" required>
+            <!--<input type="text" id="state" name="state" placeholder="Insira a sigla do estado" required>-->
+            <select class="form-select" aria-label="Default select example" id="state" name="state">
+                <option selected >Selecione o estado</option>
+                <option value="AC">Acre</option>                    <!--01-->
+                <option value="AL">Alagoas</option>                 <!--02-->
+                <option value="AP">Amapá</option>                   <!--03-->
+                <option value="AM">Amazonas</option>                <!--04-->
+                <option value="BA">Bahia</option>                   <!--05-->
+                <option value="CE">Ceará</option>                   <!--06-->
+                <option value="ES">Espírito Santo</option>          <!--07-->
+                <option value="GO">Goiás</option>                   <!--08-->
+                <option value="MA">Maranhão</option>                <!--09-->
+                <option value="MT">Mato Grosso</option>             <!--10-->
+                <option value="MS">Mato Grosso do Sul</option>      <!--11-->
+                <option value="MG">Minas Gerais</option>            <!--12-->
+                <option value="PA">Pará</option>                    <!--13-->
+                <option value="PB">Paraíba</option>                 <!--14-->
+                <option value="PR">Paraná</option>                  <!--15-->
+                <option value="PE">Pernambuco</option>              <!--16-->
+                <option value="PI">Piauí</option>                   <!--17-->
+                <option value="RJ">Rio de Janeiro</option>          <!--18-->
+                <option value="RN">Rio Grande do Norte</option>     <!--19-->
+                <option value="RS">Rio Grande do Sul</option>       <!--20-->
+                <option value="RO">Rondônia</option>                <!--21-->
+                <option value="RR">Roraima</option>                 <!--22-->
+                <option value="SC">Santa Catarina</option>          <!--23-->
+                <option value="SP">São Paulo</option>               <!--24-->
+                <option value="SE">Sergipe</option>                 <!--25-->
+                <option value="TO">Tocantins</option>               <!--26-->
+                <option value="DF">Distrito Federal</option>        <!--27-->
+            </select>
 
             <label for = "message">Mensagem:</label>
-            <textarea id="message" name="message" rows="5" cols="33"></textarea>
+            <textarea id="message" name="message" rows="5" cols="33" placeholder="Caso queira adicione uma mensagem"></textarea>
 
             <div class="botoes">
                 <button type="submit" id="addButton" class="addButton">Enviar</button>
