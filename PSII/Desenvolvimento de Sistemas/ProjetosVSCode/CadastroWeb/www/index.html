@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro Web</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="cadastro">
-        <h1>Cadastro de Usuários</h1>
+        <h1>Cadastro</h1>
 
-        <form id="userForm">
+        <form action="#" method="post" id="userForm">
             <label for = "name">Nome:</label>
             <input type="text" id="name" name="name" required>
 
@@ -18,7 +19,7 @@
             <input type="email" id="email" name="email" required>
 
             <label for = "phone">Telefone:</label>
-            <input type="text" id="phone" name="phone" required>
+            <input type="tel" id="phone" name="phone" required>
 
             <label for = "address">Endereço:</label>
             <input type="text" id="address" name="address" required>
@@ -33,29 +34,31 @@
             <textarea id="message" name="message" rows="5" cols="33"></textarea>
 
             <div class="botoes">
-                <button type="button" id="addButton" class="addButton">Enviar</button>
-                <button type="button" id="clearButton" class="clearButton">Cancelar</button>
+                <button type="submit" id="addButton" class="addButton">Enviar</button>
+                <button type="reset" id="clearButton" class="clearButton">Cancelar</button>
             </div>
         </form>
     </div>
 
-    <!--
-    <h2>Registros:</h2>
-    <table id="userTable">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Telefone</th>
-                <th>Endereço</th>
-                <th>Cidade</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-        </tbody>
-    </table>-->
-    
+    <div class="registro">
+        <h2>Registros:</h2>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Telefone</th>
+                    <th>Endereço</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Mensagem</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+        <button type="reset" id="resetTableButton" class="resetTableButton">Resetar Tabela</button>
+    </div>
 </body>
 </html>

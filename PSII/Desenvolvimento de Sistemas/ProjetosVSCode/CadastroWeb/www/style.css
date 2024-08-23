@@ -1,0 +1,137 @@
+/* -- Cadastro -- */
+
+body{
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #fffceb;
+}
+
+h1, h2{
+    color: #333;
+    text-align: center;
+}
+
+div.cadastro{
+    background-color: #ececec;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    box-shadow: 0 0 15px rgb(0,0,0,0.2);
+}
+
+form{
+    display: grid;
+    gap: 7px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label{
+    align-self: center;
+}
+
+textarea{
+    resize: vertical;
+    outline: none;
+    background-color: #e4e4e4;
+    border-color: #d8d8d8;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+textarea:focus {
+    transform: scale(1.01);
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    min-width: 400px;
+    outline: none;
+    background-color: #e4e4e4;
+    border-color: #d8d8d8;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+input:focus {
+    transform: scale(1.01);
+}
+
+button{
+    padding: 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    min-width: 80px;
+    background-color: #c2c2c2;
+}
+
+div.botoes{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+button.addButton:hover {
+    background-color: #008512d2;
+    transform: scale(1.02);
+}
+
+button.clearButton:hover {
+    background-color: #9b0000d2;
+    transform: scale(1.02);
+}
+
+/* -- Registros -- */
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th,td {
+    padding: 10px;
+    text-align: center;
+}
+
+th{
+    background-color: #e4e4e4;
+    font-weight: 100;
+}
+
+div.registro{
+    margin-top: 30px;
+    background-color: #ececec;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    width: fit-content;
+    height: fit-content;
+    padding: 20px;
+    padding-top: 2px;
+    box-shadow: 0 0 15px rgb(0,0,0,0.2);
+}
+
+button.resetTableButton{
+    margin-top: 15px;
+}
+
+button.resetTableButton:hover {
+    background-color: #00369bd2;
+    transform: scale(1.02);
+}
