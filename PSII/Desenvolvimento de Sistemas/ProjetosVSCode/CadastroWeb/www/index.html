@@ -8,7 +8,7 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <div class="cadastro">
+    <main class="cadastro">
         <h1>Cadastro</h1>
 
         <form action="#" method="post" id="userForm">
@@ -29,8 +29,8 @@
 
             <label for = "state">Estado:</label>
             <!--<input type="text" id="state" name="state" placeholder="Insira a sigla do estado" required>-->
-            <select class="form-select" aria-label="Default select example" id="state" name="state">
-                <option selected >Selecione o estado</option>
+            <select class="form-select" aria-label="Default select example" id="state" name="state" required>
+                <option value="" disabled selected>Selecione o estado</option>
                 <option value="AC">Acre</option>                    <!--01-->
                 <option value="AL">Alagoas</option>                 <!--02-->
                 <option value="AP">Amapá</option>                   <!--03-->
@@ -61,16 +61,16 @@
             </select>
 
             <label for = "message">Mensagem:</label>
-            <textarea id="message" name="message" rows="5" cols="33" placeholder="Caso queira adicione uma mensagem"></textarea>
+            <textarea id="message" name="message" rows="5" cols="33" placeholder="Caso queira, adicione uma mensagem"></textarea>
 
             <div class="botoes">
                 <button type="submit" id="addButton" class="addButton">Enviar</button>
                 <button type="reset" id="clearButton" class="clearButton">Cancelar</button>
             </div>
         </form>
-    </div>
+    </main>
 
-    <div class="registro">
+    <main class="registro">
         <h2>Registros:</h2>
         <table id="userTable">
             <thead>
@@ -89,6 +89,6 @@
             </tbody>
         </table>
         <button type="reset" id="resetTableButton" class="resetTableButton">Resetar Tabela</button>
-    </div>
+    </main>
 </body>
 </html>

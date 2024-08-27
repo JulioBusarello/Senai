@@ -1,35 +1,45 @@
-/* -- Cadastro -- */
+:root{
+    --border-color: #d8d8d8;
+    --main-color: #ececec;
+    --head-color: #333;
+    --input-color: #e4e4e4;
+    --button-color: #c2c2c2;
+    --accept-color: #008512d2;
+    --reject-color: #9b0000d2;
+    --background-color: #fffceb;
+}
+
+/* -- Geral -- */
 
 body{
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #fffceb;
+    background-color: var(--background-color);
 }
 
 h1, h2{
-    color: #333;
+    color: var(--head-color);
     text-align: center;
 }
 
-div.cadastro{
-    background-color: #ececec;
-    margin-left: auto;
-    margin-right: auto;
+main{
+    background-color: var(--main-color);
+    margin: auto;
     border-radius: 10px;
     width: fit-content;
     height: fit-content;
-    padding: 10px;
-    padding-left: 25px;
-    padding-right: 25px;
     box-shadow: 0 0 15px rgb(0,0,0,0.2);
+}
+
+/* -- Cadastro -- */
+
+main.cadastro{
+    padding: 10px 25px;
 }
 
 form{
     display: grid;
-    gap: 7px;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    gap: 5px;
 }
 
 label{
@@ -38,55 +48,25 @@ label{
 
 textarea{
     resize: vertical;
-    outline: none;
-    background-color: #e4e4e4;
-    border-color: #d8d8d8;
-    border-style: solid;
-    border-radius: 5px;
-}
-
-textarea:focus {
-    transform: scale(1.01);
-}
-
-input[type="text"],
-input[type="tel"],
-input[type="email"] {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    min-width: 400px;
-    outline: none;
-    background-color: #e4e4e4;
-    border-color: #d8d8d8;
-    border-style: solid;
-    border-radius: 5px;
 }
 
 select {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    min-width: 400px;
-    outline: none;
-    background-color: #e4e4e4;
-    border-color: #d8d8d8;
-    border-style: solid;
-    border-radius: 5px;
-}
-
-input:focus {
-    transform: scale(1.01);
-}
-
-button{
-    padding: 10px;
-    color: white;
-    border: none;
     cursor: pointer;
+}
+
+select, input, textarea {
+    width: 100%;
+    background-color: var(--input-color);
+    border: 1px solid var(--border-color);
+    outline: none;
+    padding: 8px;
+    min-width: 400px;
+    box-sizing: border-box;
+}
+
+select, input, textarea, button {
     border-radius: 5px;
-    min-width: 80px;
-    background-color: #c2c2c2;
+    padding: 8px;
 }
 
 div.botoes{
@@ -95,17 +75,32 @@ div.botoes{
     width: 100%;
 }
 
+button{
+    color: white;
+    border: none;
+    cursor: pointer;
+    min-width: 80px;
+    background-color: var(--button-color);
+}
+
 button.addButton:hover {
-    background-color: #008512d2;
-    transform: scale(1.02);
+    background-color: var(--accept-color);
 }
 
 button.clearButton:hover {
-    background-color: #9b0000d2;
-    transform: scale(1.02);
+    background-color: var(--reject-color);
+}
+
+button:hover, :focus {
+    transform: scale(1.01);
 }
 
 /* -- Registros -- */
+
+main.registro{
+    margin-top: 30px;
+    padding: 20px;
+}
 
 table{
     width: 100%;
@@ -122,21 +117,8 @@ th,td {
 }
 
 th{
-    background-color: #e4e4e4;
+    background-color: var(--input-color);
     font-weight: 100;
-}
-
-div.registro{
-    margin-top: 30px;
-    background-color: #ececec;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 5px;
-    width: fit-content;
-    height: fit-content;
-    padding: 20px;
-    padding-top: 2px;
-    box-shadow: 0 0 15px rgb(0,0,0,0.2);
 }
 
 button.resetTableButton{
@@ -144,6 +126,5 @@ button.resetTableButton{
 }
 
 button.resetTableButton:hover {
-    background-color: #00369bd2;
-    transform: scale(1.02);
+    background-color: var(--reject-color);
 }
