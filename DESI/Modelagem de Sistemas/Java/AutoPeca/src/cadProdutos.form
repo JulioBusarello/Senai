@@ -25,34 +25,47 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jsepLinha" max="32767" attributes="0"/>
           <Component id="jlSubTitulo" alignment="1" max="32767" attributes="0"/>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jlNome" max="32767" attributes="0"/>
-                  <Component id="jlCodigo" alignment="0" pref="134" max="32767" attributes="0"/>
-                  <Component id="jlValor" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jlFornecedor" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jlCategoria" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jtfNome" max="32767" attributes="0"/>
-                  <Component id="jcboxCategoria" max="32767" attributes="0"/>
-                  <Component id="jtfCodigo" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jtfRS" min="-2" pref="37" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jtfValor" min="-2" pref="298" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jcboxFornecedores" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <Component id="jbtnVoltar" min="-2" pref="54" max="-2" attributes="0"/>
               <EmptySpace pref="24" max="32767" attributes="0"/>
               <Component id="jlTitulo" min="-2" pref="333" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jlCodigo1" max="32767" attributes="0"/>
+                          <Component id="jlNome" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jlCodigo" alignment="0" pref="134" max="32767" attributes="0"/>
+                          <Component id="jlValor" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jtfNome" max="32767" attributes="0"/>
+                          <Component id="jtfCodigo" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jtfRS" min="-2" pref="37" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jtfValor" min="-2" pref="298" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jtfCodigo1" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jlFornecedor" pref="128" max="32767" attributes="0"/>
+                          <Component id="jlCategoria" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jcboxFornecedores" max="32767" attributes="0"/>
+                          <Component id="jcboxCategoria" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -88,6 +101,11 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlCodigo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfCodigo1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jlFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jcboxFornecedores" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
@@ -96,7 +114,7 @@
                   <Component id="jlCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jcboxCategoria" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="25" max="32767" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -127,7 +145,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
         </Property>
-        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="text" type="java.lang.String" value="C&#xf3;digo do Produto"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
@@ -137,7 +155,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
         </Property>
-        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="text" type="java.lang.String" value="Nome do Produto"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
@@ -147,7 +165,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
         </Property>
-        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="text" type="java.lang.String" value="Valor do Produto"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
@@ -157,7 +175,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
         </Property>
-        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="text" type="java.lang.String" value="Fornecedor"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
@@ -167,7 +185,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
         </Property>
-        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="text" type="java.lang.String" value="Categoria"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
@@ -235,6 +253,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnVoltarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlCodigo1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="text" type="java.lang.String" value="Quantidade"/>
+        <Property name="horizontalTextPosition" type="int" value="4"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfCodigo1">
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtfCodigo1FocusGained"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfCodigo1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

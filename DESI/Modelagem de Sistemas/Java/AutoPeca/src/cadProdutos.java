@@ -40,6 +40,8 @@ public class cadProdutos extends javax.swing.JFrame {
         jcboxFornecedores = new javax.swing.JComboBox<>();
         jtfRS = new javax.swing.JTextField();
         jbtnVoltar = new javax.swing.JButton();
+        jlCodigo1 = new javax.swing.JLabel();
+        jtfCodigo1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,27 +54,27 @@ public class cadProdutos extends javax.swing.JFrame {
         jlSubTitulo.setText("Cadastro de Produtos");
 
         jlCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlCodigo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlCodigo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlCodigo.setText("Código do Produto");
         jlCodigo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         jlNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlNome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlNome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlNome.setText("Nome do Produto");
         jlNome.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         jlValor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlValor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlValor.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlValor.setText("Valor do Produto");
         jlValor.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         jlFornecedor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlFornecedor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlFornecedor.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlFornecedor.setText("Fornecedor");
         jlFornecedor.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         jlCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlCategoria.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jlCategoria.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlCategoria.setText("Categoria");
         jlCategoria.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
@@ -126,36 +128,60 @@ public class cadProdutos extends javax.swing.JFrame {
             }
         });
 
+        jlCodigo1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlCodigo1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jlCodigo1.setText("Quantidade");
+        jlCodigo1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        jtfCodigo1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtfCodigo1FocusGained(evt);
+            }
+        });
+        jtfCodigo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCodigo1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jsepLinha)
             .addComponent(jlSubTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jlNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                    .addComponent(jlValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlFornecedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlCategoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtfNome)
-                    .addComponent(jcboxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtfCodigo)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jtfRS, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jcboxFornecedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jbtnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(100, 100, 100))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlCodigo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                            .addComponent(jlValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfNome)
+                            .addComponent(jtfCodigo)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jtfRS, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfCodigo1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                            .addComponent(jlCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcboxFornecedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcboxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,13 +210,17 @@ public class cadProdutos extends javax.swing.JFrame {
                     .addComponent(jtfRS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlCodigo1)
+                    .addComponent(jtfCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlFornecedor)
                     .addComponent(jcboxFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlCategoria)
                     .addComponent(jcboxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 25, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -226,6 +256,14 @@ public class cadProdutos extends javax.swing.JFrame {
     private void jtfNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNomeFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNomeFocusGained
+
+    private void jtfCodigo1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfCodigo1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCodigo1FocusGained
+
+    private void jtfCodigo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodigo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCodigo1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,6 +306,7 @@ public class cadProdutos extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcboxFornecedores;
     private javax.swing.JLabel jlCategoria;
     private javax.swing.JLabel jlCodigo;
+    private javax.swing.JLabel jlCodigo1;
     private javax.swing.JLabel jlFornecedor;
     private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlSubTitulo;
@@ -275,6 +314,7 @@ public class cadProdutos extends javax.swing.JFrame {
     private javax.swing.JLabel jlValor;
     private javax.swing.JSeparator jsepLinha;
     private javax.swing.JTextField jtfCodigo;
+    private javax.swing.JTextField jtfCodigo1;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfRS;
     private javax.swing.JTextField jtfValor;

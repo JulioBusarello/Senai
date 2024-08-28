@@ -34,14 +34,8 @@ public class Principal extends javax.swing.JFrame {
         jbtnGerenciarEstoque = new javax.swing.JButton();
         jsepLinha = new javax.swing.JSeparator();
         txareaAvisos = new java.awt.TextArea();
-        jlCadastroProdutos = new javax.swing.JLabel();
-        jlCadastroFornecedores = new javax.swing.JLabel();
-        jlEstoque = new javax.swing.JLabel();
-        jlGerenciarEstoque = new javax.swing.JLabel();
         jbtnAcessarFornecedores = new javax.swing.JButton();
-        jlFornecedores = new javax.swing.JLabel();
         jbtnAcessarOrdensServico = new javax.swing.JButton();
-        jlOrdensServico = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
 
@@ -56,53 +50,34 @@ public class Principal extends javax.swing.JFrame {
         jlTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlTitulo.setText("ABC Auto Peças");
 
-        jbtnAcessarProdutos.setText("Acessar");
+        jbtnAcessarProdutos.setText("Cadastro de Produtos");
         jbtnAcessarProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnAcessarProdutosActionPerformed(evt);
             }
         });
 
-        jbtnAcessarEstoque.setText("Acessar");
+        jbtnAcessarEstoque.setText("Estoque");
+        jbtnAcessarEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAcessarEstoqueActionPerformed(evt);
+            }
+        });
 
-        jbtnCadastroFornecedores.setText("Acessar");
+        jbtnCadastroFornecedores.setText("Cadastro de Fornecedores");
 
-        jbtnGerenciarEstoque.setText("Acessar");
+        jbtnGerenciarEstoque.setText("Gerenciar Estoque");
 
-        txareaAvisos.setBackground(new java.awt.Color(60, 63, 65));
+        txareaAvisos.setBackground(new java.awt.Color(203, 203, 203));
         txareaAvisos.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txareaAvisos.setEditable(false);
         txareaAvisos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        txareaAvisos.setForeground(new java.awt.Color(187, 187, 187));
+        txareaAvisos.setForeground(new java.awt.Color(60, 63, 65));
         txareaAvisos.setText("Avisos do dia\n- A meta foi alcançada");
 
-        jlCadastroProdutos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlCadastroProdutos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlCadastroProdutos.setText("Cadastro de Produtos");
+        jbtnAcessarFornecedores.setText("Fornecedores");
 
-        jlCadastroFornecedores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlCadastroFornecedores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlCadastroFornecedores.setText("Cadastro de Fornecedores");
-
-        jlEstoque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlEstoque.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlEstoque.setText("Estoque");
-
-        jlGerenciarEstoque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlGerenciarEstoque.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlGerenciarEstoque.setText("Gerenciar Estoque");
-
-        jbtnAcessarFornecedores.setText("Acessar");
-
-        jlFornecedores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlFornecedores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlFornecedores.setText("Fornecedores");
-
-        jbtnAcessarOrdensServico.setText("Acessar");
-
-        jlOrdensServico.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlOrdensServico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlOrdensServico.setText("Ordens de Serviço");
+        jbtnAcessarOrdensServico.setText("Ordens de Serviço");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,35 +86,13 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jbtnAcessarFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jlFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbtnCadastroFornecedores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlCadastroFornecedores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbtnAcessarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbtnAcessarOrdensServico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlOrdensServico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jlEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbtnAcessarProdutos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlCadastroProdutos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(1, 1, 1)
-                                    .addComponent(jbtnGerenciarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jlGerenciarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                    .addComponent(jbtnCadastroFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnGerenciarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnAcessarProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnAcessarFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnAcessarOrdensServico, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnAcessarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(txareaAvisos, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jsepLinha)
             .addComponent(jlTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -151,39 +104,25 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jsepLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txareaAvisos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(jbtnAcessarProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jlOrdensServico, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlCadastroProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbtnAcessarOrdensServico, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jlFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlCadastroFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(35, 35, 35)
-                                    .addComponent(jbtnAcessarFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jbtnCadastroFornecedores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addComponent(jbtnAcessarProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlGerenciarEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jbtnAcessarOrdensServico, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnCadastroFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnAcessarFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnGerenciarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnAcessarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbtnAcessarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbtnGerenciarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addComponent(txareaAvisos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -195,6 +134,10 @@ public class Principal extends javax.swing.JFrame {
         cadastro.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jbtnAcessarProdutosActionPerformed
+
+    private void jbtnAcessarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAcessarEstoqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnAcessarEstoqueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,12 +183,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jbtnAcessarProdutos;
     private javax.swing.JButton jbtnCadastroFornecedores;
     private javax.swing.JButton jbtnGerenciarEstoque;
-    private javax.swing.JLabel jlCadastroFornecedores;
-    private javax.swing.JLabel jlCadastroProdutos;
-    private javax.swing.JLabel jlEstoque;
-    private javax.swing.JLabel jlFornecedores;
-    private javax.swing.JLabel jlGerenciarEstoque;
-    private javax.swing.JLabel jlOrdensServico;
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JSeparator jsepLinha;
     private java.awt.TextArea txareaAvisos;

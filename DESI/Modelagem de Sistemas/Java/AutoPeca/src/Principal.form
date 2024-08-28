@@ -46,47 +46,14 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace pref="1" max="-2" attributes="0"/>
-                              <Component id="jbtnAcessarFornecedores" min="-2" pref="179" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jlFornecedores" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jbtnCadastroFornecedores" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
-                          <Component id="jlCadastroFornecedores" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jbtnAcessarEstoque" min="-2" pref="179" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jbtnAcessarOrdensServico" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
-                                  <Component id="jlOrdensServico" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="jlEstoque" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jbtnAcessarProdutos" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
-                          <Component id="jlCadastroProdutos" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                  <Component id="jbtnGerenciarEstoque" min="-2" pref="179" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jlGerenciarEstoque" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
+                  <Component id="jbtnCadastroFornecedores" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
+                  <Component id="jbtnGerenciarEstoque" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
+                  <Component id="jbtnAcessarProdutos" min="-2" pref="179" max="-2" attributes="0"/>
+                  <Component id="jbtnAcessarFornecedores" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
+                  <Component id="jbtnAcessarOrdensServico" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
+                  <Component id="jbtnAcessarEstoque" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
               <Component id="txareaAvisos" min="-2" pref="199" max="-2" attributes="0"/>
           </Group>
           <Component id="jsepLinha" alignment="0" max="32767" attributes="0"/>
@@ -100,51 +67,28 @@
               <Component id="jlTitulo" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jsepLinha" min="-2" pref="10" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txareaAvisos" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="jbtnAcessarProdutos" min="-2" pref="26" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jlOrdensServico" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="jlCadastroProdutos" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jbtnAcessarOrdensServico" min="-2" pref="26" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace pref="21" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="jlFornecedores" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="jlCadastroFornecedores" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
-                                  <Component id="jbtnAcessarFornecedores" min="-2" pref="26" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="jbtnCadastroFornecedores" alignment="1" min="-2" pref="26" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="jbtnAcessarProdutos" min="-2" pref="26" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jlEstoque" alignment="3" max="32767" attributes="0"/>
-                          <Component id="jlGerenciarEstoque" alignment="3" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jbtnAcessarOrdensServico" min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jbtnCadastroFornecedores" min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jbtnAcessarFornecedores" min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jbtnGerenciarEstoque" min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jbtnAcessarEstoque" min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jbtnAcessarEstoque" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="jbtnGerenciarEstoque" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="txareaAvisos" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -164,7 +108,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jbtnAcessarProdutos">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Acessar"/>
+        <Property name="text" type="java.lang.String" value="Cadastro de Produtos"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnAcessarProdutosActionPerformed"/>
@@ -172,17 +116,20 @@
     </Component>
     <Component class="javax.swing.JButton" name="jbtnAcessarEstoque">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Acessar"/>
+        <Property name="text" type="java.lang.String" value="Estoque"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnAcessarEstoqueActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnCadastroFornecedores">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Acessar"/>
+        <Property name="text" type="java.lang.String" value="Cadastro de Fornecedores"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnGerenciarEstoque">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Acessar"/>
+        <Property name="text" type="java.lang.String" value="Gerenciar Estoque"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSeparator" name="jsepLinha">
@@ -190,7 +137,7 @@
     <Component class="java.awt.TextArea" name="txareaAvisos">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="41" green="3f" red="3c" type="rgb"/>
+          <Color blue="cb" green="cb" red="cb" type="rgb"/>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Cursor de Texto"/>
@@ -200,72 +147,18 @@
           <Font name="Arial" size="12" style="0"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="bb" green="bb" red="bb" type="rgb"/>
+          <Color blue="41" green="3f" red="3c" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Avisos do dia&#xa;- A meta foi alcan&#xe7;ada"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jlCadastroProdutos">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Cadastro de Produtos"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlCadastroFornecedores">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Cadastro de Fornecedores"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlEstoque">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Estoque"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlGerenciarEstoque">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Gerenciar Estoque"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="jbtnAcessarFornecedores">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Acessar"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlFornecedores">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Fornecedores"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnAcessarOrdensServico">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Acessar"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlOrdensServico">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Ordens de Servi&#xe7;o"/>
       </Properties>
     </Component>
