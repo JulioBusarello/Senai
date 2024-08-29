@@ -1,83 +1,211 @@
-CREATE SCHEMA `garagem` ;
+-- APAGAR O DATABASE
+DROP SCHEMA garagem;
 
-CREATE TABLE `car` (
-  `placa` int(7) NOT NULL AUTO_INCREMENT,
-  `fabricante` int(10) NOT NULL,
-  `modelo` int(2) NOT NULL,
-  `ano` int(2) NOT NULL,
-  `cor` int(2) NOT NULL,
-  `opcionais` int(2) NOT NULL,
-  PRIMARY KEY (`placa`),
-  KEY `fabric_fk_idx` (`fabricante`),
-  KEY `model_fk_idx` (`modelo`),
-  KEY `year_fk_idx` (`ano`),
-  KEY `color_fk_idx` (`cor`),
-  KEY `opcionais_fk_idx` (`opcionais`),
-  CONSTRAINT `color_fk` FOREIGN KEY (`cor`) REFERENCES `color` (`idcolor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fabric_fk` FOREIGN KEY (`fabricante`) REFERENCES `manufactory` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `model_fk` FOREIGN KEY (`modelo`) REFERENCES `manufactory` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `opcionais_fk` FOREIGN KEY (`opcionais`) REFERENCES `opcionais` (`idopcionais`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `year_fk` FOREIGN KEY (`ano`) REFERENCES `ano` (`idano`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- CRIAR O DATABASE
+CREATE SCHEMA garagem;
 
-CREATE TABLE `manufactory` (
-  `codigo` int(11) NOT NULL,
-  `fabricante` varchar(20) NOT NULL,
-  `modelo` varchar(20) NOT NULL,
-  PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- FORÇAR USAR O DATABASE
+USE GARAGEM;
 
-CREATE TABLE `garagem`.`ano` (
-  `idano` INT NOT NULL AUTO_INCREMENT,
-  `ano` INT(4) NOT NULL,
-  PRIMARY KEY (`idano`));
+-- CRIAR TABELA DE USER
+CREATE TABLE `garagem`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NOT NULL,
+  `level_id` INT NOT NULL,
+  `senha` VARCHAR(16) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `status` INT NULL,
+  PRIMARY KEY (`id`))
+COMMENT = 'Tabela de Usuario';
+
+-- CRIAR A TABELA LEVEL
+CREATE TABLE `garagem`.`level` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `descricao` VARCHAR(45) NOT NULL,
+  `id_level_items` INT NOT NULL,
+  `status` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+COMMENT = 'Tabela de Level';
+
+-- CRIAR A TABELA CAR
+CREATE TABLE `garagem`.`car` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `fabricante` INT NOT NULL,
+  `cor` INT NOT NULL,
+  `ano` INT NOT NULL,
+  `opcionais` INT NOT NULL,
+  `cep` VARCHAR(8) NOT NULL,
+  `status` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+COMMENT = 'Tabela de Carros';
+
+-- CRIAR TABELA MANUFACTORY
+CREATE TABLE `garagem`.`manufactory` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `fabricante` VARCHAR(45) NOT NULL,
+  `modelo` VARCHAR(45) NOT NULL,
+  `status` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`));
   
+  -- CRIAR TABELA COR
   CREATE TABLE `garagem`.`color` (
-  `idcolor` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`idcolor`));
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `cor` VARCHAR(45) NOT NULL,
+  `status` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+COMMENT = 'Tabela de Cores';
 
-CREATE TABLE `opcionais` (
-  `idopcionais` int(11) NOT NULL AUTO_INCREMENT,
-  `descricao` varchar(150) NOT NULL,
-  `opc_itens` int(2) NOT NULL,
-  PRIMARY KEY (`idopcionais`),
-  KEY `opcionaisItens_fk_idx` (`opc_itens`),
-  CONSTRAINT `opcionaisItens_fk` FOREIGN KEY (`opc_itens`) REFERENCES `opcionais_itens` (`idopcionais_itens`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-  
-  CREATE TABLE `garagem`.`opcionais_itens` (
-  `idopcionais_itens` INT NOT NULL AUTO_INCREMENT,
+-- CRIAR A TABELA ANO
+CREATE TABLE `garagem`.`year` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `ano` INT NOT NULL,
+  `status` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+COMMENT = 'Tabela de Ano';
+
+-- CRIAR TABELA DE ITENS DO LEVEL
+CREATE TABLE `garagem`.`level_items` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `codigo` INT NOT NULL,
-  `descricao` VARCHAR(150) NOT NULL,
-  PRIMARY KEY (`idopcionais_itens`));
+  `descricao` VARCHAR(45) NOT NULL,
+  `status` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+COMMENT = 'Tabela de Detalhes de Niveis';
+
+-- ADICIONAR FK DE LEVEL INDEXADA ITENS
+ALTER TABLE `garagem`.`level` 
+ADD INDEX `id_level_items_fk_idx` (`id_level_items` ASC) ;
+;
+
+ALTER TABLE `garagem`.`level` 
+ADD CONSTRAINT `id_level_items_fk`
+  FOREIGN KEY (`id_level_items`)
+  REFERENCES `garagem`.`level_items` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `garagem`.`user` 
+ADD INDEX `level_id_fk_idx` (`level_id` ASC) ;
+;
+ALTER TABLE `garagem`.`user` 
+ADD CONSTRAINT `level_id_fk`
+  FOREIGN KEY (`level_id`)
+  REFERENCES `garagem`.`level` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
   
-CREATE TABLE `user` (
-  `iduser` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(45) NOT NULL,
-  `level_id` int(2) NOT NULL,
-  `senha` varchar(45) NOT NULL,
-  `email` varchar(90) NOT NULL,
-  `status` int(1) NOT NULL,
-  PRIMARY KEY (`iduser`),
-  KEY `levelId_fk_idx` (`level_id`),
-  CONSTRAINT `levelId_fk` FOREIGN KEY (`level_id`) REFERENCES `level` (`idlevel`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  ALTER TABLE `garagem`.`car` 
+ADD INDEX `ano_fk_idx` (`ano` ASC) ,
+ADD INDEX `cor_fk_idx` (`cor` ASC) ;
+;
+ALTER TABLE `garagem`.`car` 
+ADD CONSTRAINT `ano_fk`
+  FOREIGN KEY (`ano`)
+  REFERENCES `garagem`.`year` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `cor_fk`
+  FOREIGN KEY (`cor`)
+  REFERENCES `garagem`.`color` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
 
-CREATE TABLE `level` (
-  `idlevel` int(11) NOT NULL AUTO_INCREMENT,
-  `descricao` varchar(150) NOT NULL,
-  `id_level_itens` int(2) NOT NULL,
-  `status` int(1) NOT NULL,
-  PRIMARY KEY (`idlevel`),
-  KEY `idLevelItens_fk_idx` (`id_level_itens`),user
-  CONSTRAINT `idLevelItens_fk` FOREIGN KEY (`id_level_itens`) REFERENCES `level_itens` (`idlevel_itens`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `garagem`.`opcionais` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `descricao` VARCHAR(45) NOT NULL,
+  `itens` INT NOT NULL,
+  `status` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+COMMENT = 'Tabela de Opcionais';
 
-CREATE TABLE `level_itens` (
-  `idlevel_itens` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` int(11) NOT NULL,
-  `descricao` varchar(150) NOT NULL,
-  `status` int(1) NOT NULL,
-  PRIMARY KEY (`idlevel_itens`,`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `garagem`.`opcionais_itens` (
+  `id` INT NOT NULL,
+  `codigo` INT NOT NULL,
+  `descricao` VARCHAR(45) NOT NULL,
+  `status` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`, `codigo`))
+COMMENT = 'Tabela de Itens dos Opcionais';
+
+
+ALTER TABLE `garagem`.`opcionais` 
+ADD INDEX `opcionais_itens_fk_idx` (`itens` ASC) ;
+;
+ALTER TABLE `garagem`.`opcionais` 
+ADD CONSTRAINT `opcionais_itens_fk`
+  FOREIGN KEY (`itens`)
+  REFERENCES `garagem`.`opcionais_itens` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+ALTER TABLE `garagem`.`car` 
+ADD INDEX `opcionais_fk_idx` (`opcionais` ASC) ;
+;
+ALTER TABLE `garagem`.`car` 
+ADD CONSTRAINT `opcionais_fk`
+  FOREIGN KEY (`opcionais`)
+  REFERENCES `garagem`.`opcionais` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `garagem`.`level_items` 
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`id`, `codigo`);
+;
+
+INSERT INTO `garagem`.`year` (`ano`) VALUES ('2020');
+INSERT INTO `garagem`.`year` (`ano`) VALUES ('2021');
+INSERT INTO `garagem`.`year` (`ano`) VALUES ('2022');
+INSERT INTO `garagem`.`year` (`ano`) VALUES ('2023');
+INSERT INTO `garagem`.`year` (`ano`) VALUES ('2024');
+INSERT INTO `garagem`.`year` (`ano`) VALUES ('2025');
+INSERT INTO `garagem`.`color` (`cor`) VALUES ('Branca');
+INSERT INTO `garagem`.`color` (`cor`) VALUES ('Preta');
+INSERT INTO `garagem`.`color` (`cor`) VALUES ('Azul');
+INSERT INTO `garagem`.`color` (`cor`) VALUES ('Verde');
+INSERT INTO `garagem`.`color` (`cor`) VALUES ('Cinza');
+INSERT INTO `garagem`.`level_items` (`id`, `codigo`, `descricao`, `status`) VALUES ('1', '1', 'Cadastrar Veículo', '1');
+INSERT INTO `garagem`.`level_items` (`id`, `codigo`, `descricao`, `status`) VALUES ('1', '2', 'Alterar Veículos', '1');
+INSERT INTO `garagem`.`level_items` (`id`, `codigo`, `descricao`, `status`) VALUES ('1', '3', 'Excluir Veículos', '1');
+INSERT INTO `garagem`.`level_items` (`id`, `codigo`, `descricao`, `status`) VALUES ('1', '4', 'Listar Veículos', '1');
+INSERT INTO `garagem`.`level_items` (`id`, `codigo`, `descricao`, `status`) VALUES ('1', '5', 'Imprimir Veículos', '1');
+INSERT INTO `garagem`.`level` (`descricao`, `id_level_items`, `status`) VALUES ('Administrador', '1', '1');
+INSERT INTO `garagem`.`user` (`nome`, `level_id`, `senha`, `email`, `status`) VALUES ('Administrador', '1', '123456', 'admin@localhost', '1');
+
+
+CREATE TABLE `garagem`.`modelo` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `descricao` VARCHAR(45) NOT NULL,
+  `id_manufactory` INT NOT NULL,
+  `status` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+COMMENT = 'Tabela de Modelo de Carro';
+
+
+INSERT INTO `garagem`.`manufactory` (`fabricante`, `status`) VALUES ('Volkswagem', '1');
+INSERT INTO `garagem`.`manufactory` (`fabricante`, `status`) VALUES ('BMW', '1');
+INSERT INTO `garagem`.`manufactory` (`fabricante`, `status`) VALUES ('Mercedes-Benz', '1');
+INSERT INTO `garagem`.`manufactory` (`fabricante`, `status`) VALUES ('Hyundai', '1');
+
+ALTER TABLE `garagem`.`modelo` 
+ADD INDEX `manufactory_fk_idx` (`id_manufactory` ASC) ;
+;
+ALTER TABLE `garagem`.`modelo` 
+ADD CONSTRAINT `manufactory_fk`
+  FOREIGN KEY (`id_manufactory`)
+  REFERENCES `garagem`.`manufactory` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+INSERT INTO `garagem`.`modelo` (`descricao`, `id_manufactory`, `status`) VALUES ('Tiguan', '1', '1');
+INSERT INTO `garagem`.`modelo` (`descricao`, `id_manufactory`, `status`) VALUES ('Gol', '1', '1');
+INSERT INTO `garagem`.`modelo` (`descricao`, `id_manufactory`, `status`) VALUES ('Clio', '2', '1');
+
+
+INSERT INTO `garagem`.`opcionais_itens` (`id`, `codigo`, `descricao`, `status`) VALUES ('1', '1', 'Ar-Condicionado', '1');
+INSERT INTO `garagem`.`opcionais_itens` (`id`, `codigo`, `descricao`, `status`) VALUES ('1', '2', 'Trava-Eletrica', '1');
+INSERT INTO `garagem`.`opcionais_itens` (`id`, `codigo`, `descricao`, `status`) VALUES ('1', '3', 'Direção Hidraulica', '1');
+
+INSERT INTO `garagem`.`opcionais` (`descricao`, `itens`, `status`) VALUES ('Completo', '1', '1');
+
