@@ -1,0 +1,119 @@
+/* -- Geral -- */
+.container{
+    display: flex;
+    height: 100vh;
+    gap: 10px;
+}
+
+.col1, .col2, .col3 {
+    flex: 1;
+    display: flex; 
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 10px;
+    gap: 10px;
+}
+
+.secao{
+    border: 5px;
+    box-sizing: border-box;
+    padding: 10px;
+    gap: 10px;
+}
+
+/* -- 1ª Coluna -- */
+.col1{
+    background-color: rgb(255, 155, 155);
+}
+
+.col1 .secao {
+    height: calc(33.33% - 10px);
+    border-radius: 10px;
+}
+
+.col1 .secao {
+    border: 3px solid red;
+}
+
+/* -- 2ª Coluna -- */
+.col2{
+    background-color: rgb(155, 255, 155);
+}
+
+.col2 .secao {
+    border: 3px solid green;
+}
+
+.col2 .secao {
+    height: calc(50% - 10px);
+    border-radius: 10px;
+}
+
+.col2 .secao:nth-child(1) {
+    border: 3px solid orange;
+}
+
+.col2 .secao:nth-child(2) {
+    border: 3px solid hotpink;
+}
+
+/* -- 3ª Coluna -- */
+.col3{
+    background-color: rgb(155, 155, 255);
+}
+
+.col3 .secao{
+    border: 3px solid blue;
+    height: calc(50% - 10px);
+    border-radius: 5px;
+}
+
+.subcontainer{
+    display: flex;
+    height: calc(50% - 10px);
+    gap: 10px;
+}
+
+.subcol{
+    flex:1;
+    border-radius: 5px;
+    border: 3px solid blue;
+    padding: 10px;
+}
+
+.subcontainer .subcol:nth-child(1){
+    border: 3px solid brown;
+}
+
+.subcontainer .subcol:nth-child(2){
+    border: 3px solid fuchsia
+}
+
+/* -- Botoes -- */
+
+.gridContainer{
+    display: grid;
+    grid-template-columns: repeat(4, 40px);
+    grid-template-rows: repeat(4, 40px);
+    gap: 10px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+.gridItem{
+    width: 40px;
+    height: 40px;
+    border: 2px solid blue;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    display: flex;
+    border-radius: 50%;
+}
+
+.gridItem:hover{
+    border-color: brown;
+    cursor: pointer;
+}
