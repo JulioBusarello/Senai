@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Interação com Checkbox, Radio Buttons e Select</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Exemplo de Interação Formulário</h2>
+        <!-- Checkbox -->
+        <div class="checkbox-group">
+            <label>Escolha seu navegador favorito:</label>
+            <input type="checkbox" id="opera" value="Opera"> Opera
+            <input type="checkbox" id="chrome" value="Google Chrome"> Google Chrome
+            <input type="checkbox" id="firefox" value="Mozilla Firefox"> Mozilla Firefox
+        </div>
+
+        <!-- Radio Buttons -->
+        <div class="radio-group">
+            <label">Escolha seu nível de experiência:</label>
+            <input type="radio" name="experience" id="beginner" value="Iniciante"> Iniciante
+            <input type="radio" name="experience" id="intermediate" value="Intermediário"> Intermediário
+            <input type="radio" name="experience" id="advanced" value="Avançado"> Avançado
+        </div>
+
+        <!-- Select (Combo Box) -->
+        <div class="select-group">
+            <label for="contry">Selecione seu país:</label>
+            <select id="country">
+                <option value="">--Selecione--</option>
+                <option value="Brasil">Brasil</option>
+                <option value="Portugal">Portugal</option>
+                <option value="Estados Unidos">Estados Unidos</option>
+                <option value="Canadá">Canadá</option>
+            </select>
+        </div>
+
+        <button onclick="exibirSelecionados()">Mostrar Seleções</button>
+
+        <div class="output" id="output">
+            <!-- Resultados virão aqui -->
+        </div>
+    </div>
+</body>
+</html>
