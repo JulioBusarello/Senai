@@ -226,7 +226,7 @@ function adicionarTextos(){
     caixaTexto.innerHTML = "<strong>Caixa de Texto:</strong> " + (document.getElementById("inputText").value != '' ? document.getElementById("inputText").value : "Vazio");
 
     const areaTexto = document.getElementById("areaTexto");
-    areaTexto.innerHTML = "<strong>Caixa de Texto:</strong> " + (document.getElementById("textArea").value != '' ? document.getElementById("textArea").value : "Vazio");
+    areaTexto.innerHTML = "<strong>Textarea:</strong> " + (document.getElementById("textArea").value != '' ? document.getElementById("textArea").value : "Vazio");
 
     const selectBox = document.getElementById("selectBox");
     selectBox.innerHTML = "<strong>Checkboxes selecionados:</strong> " + (checkValues.length > 0 ? checkValues.join(", ") : "Nenhum");
