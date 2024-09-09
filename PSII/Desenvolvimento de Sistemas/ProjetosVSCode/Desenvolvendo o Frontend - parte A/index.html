@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Interação com Componentes</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background-color: #F4F4F4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container{
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+        h2, h3{
+            text-align: center;
+            color: #333;
+        }
+        .checkTitle, .radioTitle{
+            color: #333;
+            display: flex;
+            position: absolute;
+            background-color: white;
+            top: -32px;
+        }
+        input[type="text"], input[type="number"], input[type="email"], textarea{
+            width: 97%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            resize: vertical;
+        }
+        .checkBoxes,
+        .radioButtons{
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: flex;
+            justify-content: left;
+            margin-bottom: 20px;
+            position: relative;
+            padding: 7px;
+            gap: 2px;
+            flex-direction: column;
+            font-size: 16px;
+        }
+        .buttons{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button{
+            width: 50%;
+            padding: 8px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            justify-content: center;
+        }
+
+        button:hover{
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: 600;
+        }
+        .showInput{
+            background-color: #ccc;
+            width: 98%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+        
+    </style>
+</head>
+<body>
+    <main class="container">
+        <form id="contentForm">
+            <h2>Atividade de Interação com Componentes</h2>
+            <div class="inputTexts">
+                <label for="inputText">Caixa de Texto:</label>
+                <input type="text" id="inputText" placeholder="Digite algo aqui">
+            </div>
+            <div class="inputTexts"></div>
+                <label for="textArea">Textarea:</label>
+                <textarea id="textArea" placeholder="Digite mais informações aqui..."></textarea>
+            </div>
+            <div class="checkBoxes">
+                <h4 class="checkTitle">Checkboxes:</h4>
+                <div class="checkboxes">
+                    <input type="checkbox" name="checkbox" id="opt1" value="Opção 1">Opção 1
+                </div>
+                <div class="checkboxes">
+                    <input type="checkbox" name="checkbox" id="opt2" value="Opção 2">Opção 2
+                </div>
+                <div class="checkboxes">
+                    <input type="checkbox" name="checkbox" id="opt3" value="Opção 3">Opção 3
+                </div>
+            </div>
+            <div class="radioButtons">
+                <h4 class="radioTitle">Radio Buttons:</h4>
+                <div class="radiobuttons">
+                    <input type="radio" name="radio" id="rad1" value="Radio 1">Radio 1
+                </div>
+                <div class="radiobuttons">
+                    <input type="radio" name="radio" id="rad2" value="Radio 2">Radio 2
+                </div>
+                <div class="radiobuttons">
+                    <input type="radio" name="radio" id="rad3" value="Radio 3">Radio 3
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="button" class="enviar" onclick="adicionarTextos()">Enviar</button>
+            </div>
+        </form>
+
+        <form id="userForm">
+            <h3>Adicionar Linha à Tabela</h2>
+            <div class="inputNome">
+                <label for="inputName">Nome:</label>
+                <input type="text" id="inputName" placeholder="Nome">
+            </div>
+            <div class="inputIdade">
+                <label for="inputAge">Idade:</label>
+                <input type="number" id="inputAge" placeholder="Idade">
+            </div>
+            <div class="inputEmail">
+                <label for="inputMail">Email:</label>
+                <input type="email" id="inputMail" placeholder="Email">
+            </div>
+
+            <div class="buttons">
+                <button type="button" class="Adicionar" onclick="adicionarLinha()">Adicionar Linha</button>
+            </div>
+
+            <table id="userTable">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Júlio</th>
+                        <td>18</th>
+                        <td>julio@exemplo.com</th>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <div class="outputs">
+            <div class="showInput" id="caixaTexto"></div>
+            <div class="showInput" id="areaTexto"></div>
+            <div class="showInput" id="selectBox"></div>
+            <div class="showInput" id="selectRadio"></div>
+        </div>
+    </main>
+</body>
+
+<script>
+function adicionarLinha() {
+    const form = document.getElementById('userForm');
+    const userTableBody = document.querySelector('#userTable tbody');
+
+    const nome = document.getElementById('inputName').value;
+    const idade = document.getElementById('inputAge').value;
+    const email = document.getElementById('inputMail').value;
+
+    if (nome === '' || idade === '' || email === '') {
+        alert('Por favor, preencha todos os campos.');
+        return;
+    }
+
+    const table = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+
+    const newRow = userTableBody.insertRow();
+    [nome, idade, email].forEach((value, index) => newRow.insertCell(index).innerText = value);
+
+    form.reset();
+}
+
+function adicionarTextos(){
+    const form = document.getElementById('contentForm');
+
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked')
+    const checkValues = [];
+    checkboxes.forEach((checkbox) =>  {
+        checkValues.push(checkbox.value);
+    });
+
+    const radioButtons = document.querySelectorAll('input[type="radio"]:checked');
+    const radioValue = radioButtons ? radioButtons[0].value : "Nenhum";
+
+    const caixaTexto = document.getElementById("caixaTexto");
+    caixaTexto.innerHTML = "<strong>Caixa de Texto:</strong> " + (document.getElementById("inputText").value != '' ? document.getElementById("inputText").value : "Vazio");
+
+    const areaTexto = document.getElementById("areaTexto");
+    areaTexto.innerHTML = "<strong>Caixa de Texto:</strong> " + (document.getElementById("textArea").value != '' ? document.getElementById("textArea").value : "Vazio");
+
+    const selectBox = document.getElementById("selectBox");
+    selectBox.innerHTML = "<strong>Checkboxes selecionados:</strong> " + (checkValues.length > 0 ? checkValues.join(", ") : "Nenhum");
+
+    const selectRadio = document.getElementById("selectRadio");
+    selectRadio.innerHTML = "<strong>Radio Selecionado:</strong> " + (radioValue != '' ? radioValue : "Nenhum");
+
+    form.reset();
+}
+</script>
+
+</html>
