@@ -3,7 +3,6 @@ function alterarImagem(imageID) {
     images.forEach(function(img) {
         img.style.display = 'none';
     });
-
     document.getElementById(imageID).style.display = 'block';
 }
 
@@ -42,6 +41,10 @@ function mostrarImagemSelecionada(event) {
         output.src = dataURL;
         output.style.display = 'block';
     };
+
+    document.getElementById("image1").style.display = 'none';
+    document.getElementById("image2").style.display = 'none';
+    document.getElementById("image3").style.display = 'none';
 
     if(input.files && input.files[0]) {
         reader.readAsDataURL(input.files[0]);
