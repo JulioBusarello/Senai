@@ -93,6 +93,11 @@ public class ConversorB extends javax.swing.JFrame {
         jtaDestino.setEditable(false);
         jtaDestino.setColumns(20);
         jtaDestino.setRows(5);
+        jtaDestino.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtaDestinoKeyReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(jtaDestino);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,19 +166,25 @@ public class ConversorB extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnVoltarActionPerformed
 
     private void jtaOrigemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtaOrigemKeyReleased
-        String numeroConvertido = "";
+        String valorConvertido = "";
+        String valorEntrada = jtaOrigem.getText();
+        
         jtaDestino.setText("");
         if(jrBtnBinario2.isSelected()){
-            numeroConvertido = Integer.toBinaryString(Integer.parseInt(jtaOrigem.getText()));
+            valorConvertido = Integer.toBinaryString(Integer.parseInt(valorEntrada));
         }else if(jrBtnHexa2.isSelected()){
-            numeroConvertido = Integer.toHexString(Integer.parseInt(jtaOrigem.getText()));
+            valorConvertido = Integer.toHexString(Integer.parseInt(valorEntrada));
         }else if(jrBtnOctal2.isSelected()){
-            numeroConvertido = Integer.toOctalString(Integer.parseInt(jtaOrigem.getText()));
+            valorConvertido = Integer.toOctalString(Integer.parseInt(valorEntrada));
         }else if(jrBtnDecimal2.isSelected()){
-            numeroConvertido = Double.toString(Double.parseDouble(jtaOrigem.getText()));
+            valorConvertido = Double.toString(Double.parseDouble(valorEntrada));
         }
-        jtaDestino.setText(numeroConvertido);
+        jtaDestino.setText(valorConvertido);
     }//GEN-LAST:event_jtaOrigemKeyReleased
+
+    private void jtaDestinoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtaDestinoKeyReleased
+        
+    }//GEN-LAST:event_jtaDestinoKeyReleased
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
