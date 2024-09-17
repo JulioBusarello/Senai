@@ -1,12 +1,6 @@
-
 import javax.swing.JOptionPane;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 /**
- *
  * @author julio_busarello
  */
 public class TelaPrincipal extends javax.swing.JFrame {
@@ -47,9 +41,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbtnZero = new javax.swing.JButton();
         jmbPrincipal = new javax.swing.JMenuBar();
         jmiConversorVelocidade = new javax.swing.JMenu();
-        jmbConversorConversor = new javax.swing.JMenuItem();
+        jmiConversorBase = new javax.swing.JMenuItem();
         jmiSair = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmiSairSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculadora");
@@ -220,25 +214,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jmiConversorVelocidade.setText("Conversor");
 
-        jmbConversorConversor.setText("Base Numérica");
-        jmbConversorConversor.addActionListener(new java.awt.event.ActionListener() {
+        jmiConversorBase.setText("Base Numérica");
+        jmiConversorBase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmbConversorConversorActionPerformed(evt);
+                jmiConversorBaseActionPerformed(evt);
             }
         });
-        jmiConversorVelocidade.add(jmbConversorConversor);
+        jmiConversorVelocidade.add(jmiConversorBase);
 
         jmbPrincipal.add(jmiConversorVelocidade);
 
         jmiSair.setText("Sair");
 
-        jMenuItem1.setText("Sair");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jmiSairSair.setText("Sair");
+        jmiSairSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jmiSairSairActionPerformed(evt);
             }
         });
-        jmiSair.add(jMenuItem1);
+        jmiSair.add(jmiSairSair);
 
         jmbPrincipal.add(jmiSair);
 
@@ -341,11 +335,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmbConversorConversorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmbConversorConversorActionPerformed
+    private void jmiConversorBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConversorBaseActionPerformed
         dispose();
         ConversorB tela = new ConversorB();
         tela.setVisible(true);
-    }//GEN-LAST:event_jmbConversorConversorActionPerformed
+    }//GEN-LAST:event_jmiConversorBaseActionPerformed
 
     private void jtfVisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfVisorActionPerformed
         // TODO add your handling code here:
@@ -488,39 +482,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         operador = '%';
     }//GEN-LAST:event_jbtnPorcActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jmiSairSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSairSairActionPerformed
         JOptionPane.showMessageDialog(null, "Você escolheu sair!");
         System.exit(0);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jmiSairSairActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaPrincipal().setVisible(true);
@@ -529,7 +496,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JButton jbtnAddMem;
     private javax.swing.JButton jbtnBackspace;
     private javax.swing.JButton jbtnCinco;
@@ -549,10 +515,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jbtnTres;
     private javax.swing.JButton jbtnUm;
     private javax.swing.JButton jbtnZero;
-    private javax.swing.JMenuItem jmbConversorConversor;
     private javax.swing.JMenuBar jmbPrincipal;
+    private javax.swing.JMenuItem jmiConversorBase;
     private javax.swing.JMenu jmiConversorVelocidade;
     private javax.swing.JMenu jmiSair;
+    private javax.swing.JMenuItem jmiSairSair;
     private javax.swing.JButton jtbDiv;
     private javax.swing.JButton jtbnClear;
     private javax.swing.JTextField jtfVisor;
