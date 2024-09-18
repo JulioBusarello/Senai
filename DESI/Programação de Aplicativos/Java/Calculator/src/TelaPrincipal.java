@@ -5,12 +5,14 @@ import javax.swing.JOptionPane;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
+    // Define as variáveis
     String memoria;
     double numero1, numero2;
     char operador;
 
+    // Construtor da classe
     public TelaPrincipal() {
-        initComponents();
+        initComponents(); // Inicia os componentes
     }
 
     @SuppressWarnings("unchecked")
@@ -336,67 +338,72 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiConversorBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConversorBaseActionPerformed
-        dispose();
-        ConversorB tela = new ConversorB();
-        tela.setVisible(true);
+        dispose(); // Fecha a janela
+        ConversorB tela = new ConversorB(); // Instancia a tela
+        tela.setVisible(true); // Mostra a tela
     }//GEN-LAST:event_jmiConversorBaseActionPerformed
 
     private void jtfVisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfVisorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfVisorActionPerformed
 
+    // Função Clear
     private void jtbnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbnClearActionPerformed
-        jtfVisor.setText("");
+        jtfVisor.setText(""); // Reseta o Visor
     }//GEN-LAST:event_jtbnClearActionPerformed
 
+    // Função Backspace
     private void jbtnBackspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBackspaceActionPerformed
-        if (jtfVisor.getText().length() > 0) {
-            jtfVisor.setText(jtfVisor.getText().substring(0, jtfVisor.getText().length() - 1));
+        if (jtfVisor.getText().length() > 0) { // Se o visor não estiver vazio
+            jtfVisor.setText(jtfVisor.getText().substring(0, jtfVisor.getText().length() - 1)); // Separa os itens do visor e apaga a ultima posição
         }
     }//GEN-LAST:event_jbtnBackspaceActionPerformed
 
+    // Função carregar memória
     private void jbtnAddMemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddMemActionPerformed
-        if(memoria != null){
-            jtfVisor.setText(memoria);
+        if(memoria != null){ // Se memória não estiver vazia
+            jtfVisor.setText(memoria); // Mostra o que está armazenado na memória no visor
         }else{
-            JOptionPane.showMessageDialog(null, "Não há nenhum número na memória!");
+            JOptionPane.showMessageDialog(null, "Não há nenhum número na memória!"); // Mensagem de erro
         }
     }//GEN-LAST:event_jbtnAddMemActionPerformed
 
+    // Função ponto
     private void jbtnPontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPontoActionPerformed
         if (jtfVisor.getText().contains(".") || jtfVisor.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Você já inseriu um ponto ou o campo está vazio!");
+            JOptionPane.showMessageDialog(null, "Você já inseriu um ponto ou o campo está vazio!"); // Mensagem de erro
         } else {
-            jtfVisor.setText(jtfVisor.getText() + ".");
+            jtfVisor.setText(jtfVisor.getText() + "."); // Adiciona um Ponto no visor
         }
     }//GEN-LAST:event_jbtnPontoActionPerformed
 
+    // Função Igual
     private void jbtnIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIgualActionPerformed
         if (jtfVisor.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "O campo não pode estar vázio!");
+            JOptionPane.showMessageDialog(null, "O campo não pode estar vázio!"); // Mensagem de erro se estiver vazio
         } else {
-            switch (operador) {
-                case '+':
+            switch (operador) { // Verifica o operador
+                case '+':   // Realiza adição
                     numero2 = Double.parseDouble(jtfVisor.getText());
                     jtfVisor.setText(String.valueOf(numero1 + numero2));
                     break;
-                case '-':
+                case '-': // Realiza subtração
                     numero2 = Double.parseDouble(jtfVisor.getText());
                     jtfVisor.setText(String.valueOf(numero1 - numero2));
                     break;
-                case '/':
+                case '/': // Realiza divisão
                     numero2 = Double.parseDouble(jtfVisor.getText());
-                    if (numero2 != 0) {
+                    if (numero2 != 0) { // Se não for divisão por 0
                         jtfVisor.setText(String.valueOf(numero1 / numero2));
                     }else{
-                        JOptionPane.showMessageDialog(null, "Não é possível realizar divisão por 0!");
+                        JOptionPane.showMessageDialog(null, "Não é possível realizar divisão por 0!"); // Mensagem de erro divisão por 0
                     }
                     break;
-                case '*':
+                case '*': // Realiza multiplicação
                     numero2 = Double.parseDouble(jtfVisor.getText());
                     jtfVisor.setText(String.valueOf(numero1 * numero2));
                     break;
-                case '%':
+                case '%': // Realiza porcentagem
                     numero2 = Double.parseDouble(jtfVisor.getText());
                     jtfVisor.setText(String.valueOf((numero1 * numero2) / 100));
                     break;
@@ -405,86 +412,93 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnIgualActionPerformed
 
     private void jbtnSeteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSeteActionPerformed
-        jtfVisor.setText(jtfVisor.getText() + "7");
+        jtfVisor.setText(jtfVisor.getText() + "7"); // Adiciona o 7 ao visor
     }//GEN-LAST:event_jbtnSeteActionPerformed
 
     private void jbtnOitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnOitoActionPerformed
-        jtfVisor.setText(jtfVisor.getText() + "8");
+        jtfVisor.setText(jtfVisor.getText() + "8"); // Adiciona o 8 ao visor
     }//GEN-LAST:event_jbtnOitoActionPerformed
 
     private void jbtnNoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNoveActionPerformed
-        jtfVisor.setText(jtfVisor.getText() + "9");
+        jtfVisor.setText(jtfVisor.getText() + "9"); // Adiciona o 9 ao visor
     }//GEN-LAST:event_jbtnNoveActionPerformed
 
     private void jbtnSeisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSeisActionPerformed
-        jtfVisor.setText(jtfVisor.getText() + "6");
+        jtfVisor.setText(jtfVisor.getText() + "6"); // Adiciona o 6 ao visor
     }//GEN-LAST:event_jbtnSeisActionPerformed
 
     private void jbtnCincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCincoActionPerformed
-        jtfVisor.setText(jtfVisor.getText() + "5");
+        jtfVisor.setText(jtfVisor.getText() + "5"); // Adiciona o 5 ao visor
     }//GEN-LAST:event_jbtnCincoActionPerformed
 
     private void jbtnQuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnQuatroActionPerformed
-        jtfVisor.setText(jtfVisor.getText() + "4");
+        jtfVisor.setText(jtfVisor.getText() + "4"); // Adiciona o 4 ao visor
     }//GEN-LAST:event_jbtnQuatroActionPerformed
 
     private void jbtnZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnZeroActionPerformed
-        jtfVisor.setText(jtfVisor.getText() + "0");
+        jtfVisor.setText(jtfVisor.getText() + "0"); // Adiciona o 0 ao visor
     }//GEN-LAST:event_jbtnZeroActionPerformed
 
     private void jbtnTresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTresActionPerformed
-        jtfVisor.setText(jtfVisor.getText() + "3");
+        jtfVisor.setText(jtfVisor.getText() + "3"); // Adiciona o 3 ao visor
     }//GEN-LAST:event_jbtnTresActionPerformed
 
     private void jbtnDoisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDoisActionPerformed
-        jtfVisor.setText(jtfVisor.getText() + "2");
+        jtfVisor.setText(jtfVisor.getText() + "2"); // Adiciona o 2 ao visor
     }//GEN-LAST:event_jbtnDoisActionPerformed
 
     private void jbtnUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUmActionPerformed
-        jtfVisor.setText(jtfVisor.getText() + "1");
+        jtfVisor.setText(jtfVisor.getText() + "1"); // Adiciona o 1 ao visor
     }//GEN-LAST:event_jbtnUmActionPerformed
 
+    // Função salvar na memória
     private void jbtnMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMemoriaActionPerformed
-        if(jtfVisor.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Não há nenhum número para salvar!");
+        if(jtfVisor.getText().isEmpty()){ // Se o visor estiver vazio
+            JOptionPane.showMessageDialog(null, "Não há nenhum número para salvar!"); // Mensagem de erro visor vazio
         }else{
-            memoria = jtfVisor.getText();
+            memoria = jtfVisor.getText(); // Salva o texto na memória
         }
     }//GEN-LAST:event_jbtnMemoriaActionPerformed
 
+    // Função Adição
     private void jbtnMaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMaisActionPerformed
-        numero1 = Double.parseDouble(jtfVisor.getText());
-        jtfVisor.setText("");
-        operador = '+';
+        numero1 = Double.parseDouble(jtfVisor.getText()); // Salva o valor no visor
+        jtfVisor.setText(""); // Limpa o visor
+        operador = '+'; // Define operador como +
     }//GEN-LAST:event_jbtnMaisActionPerformed
 
+    // Função Subtração
     private void jbtnSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSubActionPerformed
-        numero1 = Double.parseDouble(jtfVisor.getText());
-        jtfVisor.setText("");
-        operador = '-';
+        numero1 = Double.parseDouble(jtfVisor.getText()); // Salva o valor no visor
+        jtfVisor.setText(""); // Limpa o visor
+        operador = '-'; // Define operador como -
     }//GEN-LAST:event_jbtnSubActionPerformed
 
+    // Função Divisão
     private void jtbDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbDivActionPerformed
-        numero1 = Double.parseDouble(jtfVisor.getText());
-        jtfVisor.setText("");
-        operador = '/';
+        numero1 = Double.parseDouble(jtfVisor.getText()); // Salva o valor no visor
+        jtfVisor.setText(""); // Limpa o visor
+        operador = '/'; // Define operador como /
     }//GEN-LAST:event_jtbDivActionPerformed
 
+    // Função Multiplicação
     private void jbtnMultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMultActionPerformed
-        numero1 = Double.parseDouble(jtfVisor.getText());
-        jtfVisor.setText("");
-        operador = '*';
+        numero1 = Double.parseDouble(jtfVisor.getText()); // Salva o valor no visor
+        jtfVisor.setText(""); // Limpa o visor
+        operador = '*'; // Define operador como *
     }//GEN-LAST:event_jbtnMultActionPerformed
 
+    // Função Porcentagem
     private void jbtnPorcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPorcActionPerformed
-        numero1 = Double.parseDouble(jtfVisor.getText());
-        jtfVisor.setText("");
-        operador = '%';
+        numero1 = Double.parseDouble(jtfVisor.getText()); // Salva o valor no visor
+        jtfVisor.setText(""); // Limpa o visor
+        operador = '%'; // Define operador como %
     }//GEN-LAST:event_jbtnPorcActionPerformed
 
+    // Função sair
     private void jmiSairSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSairSairActionPerformed
-        JOptionPane.showMessageDialog(null, "Você escolheu sair!");
-        System.exit(0);
+        JOptionPane.showMessageDialog(null, "Você escolheu sair!"); // Avisa o usuário
+        System.exit(0); // Para a aplicação
     }//GEN-LAST:event_jmiSairSairActionPerformed
 
     public static void main(String args[]) {

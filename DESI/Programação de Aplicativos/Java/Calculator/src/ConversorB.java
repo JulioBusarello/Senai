@@ -5,8 +5,11 @@ import javax.swing.JOptionPane;
  */
 public class ConversorB extends javax.swing.JFrame {
 
+    // Construtor da Classe
     public ConversorB() {
-        initComponents();
+        initComponents(); // Inicia os Componentes
+        
+        // Adiciona os radio buttons aos seus grupos
         bgOrigem.add(jrBtnBinario1);
         bgOrigem.add(jrBtnDecimal1);
         bgOrigem.add(jrBtnHexa1);
@@ -17,10 +20,12 @@ public class ConversorB extends javax.swing.JFrame {
         bgDestino.add(jrBtnHexa2);
         bgDestino.add(jrBtnOctal2);
 
+        // Definindo os padrão de iniciaização
         jtaOrigem.setText("0");
         jrBtnDecimal1.setSelected(true);
         jrBtnDecimal2.setSelected(true);
         
+        // Adicionando ActionListener a cada botão
         jrBtnBinario1.addActionListener(e -> verificarAtulizacao());
         jrBtnDecimal1.addActionListener(e -> verificarAtulizacao());
         jrBtnHexa1.addActionListener(e -> verificarAtulizacao());
@@ -158,13 +163,14 @@ public class ConversorB extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnVoltarActionPerformed
-        dispose();
-        TelaPrincipal tela = new TelaPrincipal();
-        tela.setVisible(true);
+        // Configurando botão de voltar para calculadora
+        dispose(); // Fecha a janela
+        TelaPrincipal tela = new TelaPrincipal(); // Instancia a tela
+        tela.setVisible(true); // Define a tela como visivel
     }//GEN-LAST:event_jbtnVoltarActionPerformed
 
     private void jtaOrigemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtaOrigemKeyReleased
-        verificarAtulizacao();
+        verificarAtulizacao(); // Chama o método
     }//GEN-LAST:event_jtaOrigemKeyReleased
 
     private void jtaDestinoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtaDestinoKeyReleased
@@ -172,55 +178,59 @@ public class ConversorB extends javax.swing.JFrame {
     }//GEN-LAST:event_jtaDestinoKeyReleased
     
     public void verificarAtulizacao(){
+        // Define as variáveis
         String valorConvertido = "";
         String valorEntrada = jtaOrigem.getText();
         int valorVerify;
 
+        // Verifica qual botao está selecionado
         if (jrBtnBinario1.isSelected()) {
-            try {
+            try { // Verificando se o valor de entrada é Binário
                 valorVerify = Integer.parseInt(valorEntrada, 2);
-            } catch (NumberFormatException e) {
-                erroVerify();
+            } catch (NumberFormatException e) { // Caso não seja
+                erroVerify(); // Método mensagem padrão
                 return;
             }
         } else if (jrBtnHexa1.isSelected()) {
-            try {
+            try { // Verificando se o valor de entrada é Hexadecimal
                 valorVerify = Integer.parseInt(valorEntrada, 16);
-            } catch (NumberFormatException e) {
-                erroVerify();
+            } catch (NumberFormatException e) { // Caso não seja
+                erroVerify(); // Método mensagem padrão
                 return;
             }
         } else if (jrBtnOctal1.isSelected()) {
-            try {
+            try { // Verificando se o valor de entrada é Octal
                 valorVerify = Integer.parseInt(valorEntrada, 8);
-            } catch (NumberFormatException e) {
-                erroVerify();
+            } catch (NumberFormatException e) { // Caso não seja
+                erroVerify(); // Método mensagem padrão
                 return;
             }
         } else {
-            try {
+            try { // Verificando se o valor de entrada é Decimal
                 valorVerify = Integer.parseInt(valorEntrada);
-            } catch (NumberFormatException e) {
-                erroVerify();
+            } catch (NumberFormatException e) { // Caso não seja
+                erroVerify(); // Método mensagem padrão
                 return;
             }
         }
 
+        // Verificando qual botao é selecionado
         if (jrBtnBinario2.isSelected()) {
-            valorConvertido = Integer.toBinaryString(valorVerify);
+            valorConvertido = Integer.toBinaryString(valorVerify); // Converte o valor para Binário
         } else if (jrBtnHexa2.isSelected()) {
-            valorConvertido = Integer.toHexString(valorVerify);
+            valorConvertido = Integer.toHexString(valorVerify); // Converte o valor para Hexadecimal
         } else if (jrBtnOctal2.isSelected()) {
-            valorConvertido = Integer.toOctalString(valorVerify);
+            valorConvertido = Integer.toOctalString(valorVerify); // Converte o valor para Octal
         } else if (jrBtnDecimal2.isSelected()) {
-            valorConvertido = Double.toString(valorVerify);
+            valorConvertido = Double.toString(valorVerify); // Converte o valor para Decimal
         }
-        jtaDestino.setText(valorConvertido);
+        jtaDestino.setText(valorConvertido); // Define o valor convertido na caixa de texto de destino
     }
     
+    // Função padrão de erro
     public void erroVerify(){
-        JOptionPane.showMessageDialog(null, "Valor inserido inválido!");
-        jtaOrigem.setText("0");
+        JOptionPane.showMessageDialog(null, "Valor inserido inválido!"); // Avisa o usuário
+        jtaOrigem.setText("0"); // Reseta a caixa de entrada
     }
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
