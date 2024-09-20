@@ -1,3 +1,4 @@
+
 import javax.swing.JOptionPane;
 
 /**
@@ -20,27 +21,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jtfVisor = new javax.swing.JTextField();
-        jbtnBackspace = new javax.swing.JButton();
-        jtbnClear = new javax.swing.JButton();
-        jbtnAddMem = new javax.swing.JButton();
-        jbtnMult = new javax.swing.JButton();
-        jbtnPorc = new javax.swing.JButton();
-        jtbDiv = new javax.swing.JButton();
-        jbtnMais = new javax.swing.JButton();
-        jbtnPonto = new javax.swing.JButton();
-        jbtnSub = new javax.swing.JButton();
-        jbtnIgual = new javax.swing.JButton();
-        jbtnMemoria = new javax.swing.JButton();
-        jbtnNove = new javax.swing.JButton();
-        jbtnOito = new javax.swing.JButton();
-        jbtnSete = new javax.swing.JButton();
-        jbtnSeis = new javax.swing.JButton();
-        jbtnCinco = new javax.swing.JButton();
-        jbtnQuatro = new javax.swing.JButton();
-        jbtnTres = new javax.swing.JButton();
-        jbtnDois = new javax.swing.JButton();
-        jbtnUm = new javax.swing.JButton();
-        jbtnZero = new javax.swing.JButton();
+        jBtnBackspace = new javax.swing.JButton();
+        jBtnClear = new javax.swing.JButton();
+        jBtnAddMem = new javax.swing.JButton();
+        jBtnMult = new javax.swing.JButton();
+        jBtnPorc = new javax.swing.JButton();
+        jBtnDiv = new javax.swing.JButton();
+        jBtnMais = new javax.swing.JButton();
+        jBtnPonto = new javax.swing.JButton();
+        jBtnSub = new javax.swing.JButton();
+        jBtnIgual = new javax.swing.JButton();
+        jBtnMemoria = new javax.swing.JButton();
+        jBtnNove = new javax.swing.JButton();
+        jBtnOito = new javax.swing.JButton();
+        jBtnSete = new javax.swing.JButton();
+        jBtnSeis = new javax.swing.JButton();
+        jBtnCinco = new javax.swing.JButton();
+        jBtnQuatro = new javax.swing.JButton();
+        jBtnTres = new javax.swing.JButton();
+        jBtnDois = new javax.swing.JButton();
+        jBtnUm = new javax.swing.JButton();
+        jBtnZero = new javax.swing.JButton();
         jmbPrincipal = new javax.swing.JMenuBar();
         jmiConversorVelocidade = new javax.swing.JMenu();
         jmiConversorBase = new javax.swing.JMenuItem();
@@ -57,160 +58,160 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jbtnBackspace.setText("<");
-        jbtnBackspace.addActionListener(new java.awt.event.ActionListener() {
+        jBtnBackspace.setText("<");
+        jBtnBackspace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnBackspaceActionPerformed(evt);
+                jBtnBackspaceActionPerformed(evt);
             }
         });
 
-        jtbnClear.setText("CE");
-        jtbnClear.addActionListener(new java.awt.event.ActionListener() {
+        jBtnClear.setText("CE");
+        jBtnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtbnClearActionPerformed(evt);
+                jBtnClearActionPerformed(evt);
             }
         });
 
-        jbtnAddMem.setText("M+");
-        jbtnAddMem.addActionListener(new java.awt.event.ActionListener() {
+        jBtnAddMem.setText("M+");
+        jBtnAddMem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnAddMemActionPerformed(evt);
+                jBtnAddMemActionPerformed(evt);
             }
         });
 
-        jbtnMult.setText("X");
-        jbtnMult.addActionListener(new java.awt.event.ActionListener() {
+        jBtnMult.setText("X");
+        jBtnMult.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnMultActionPerformed(evt);
+                jBtnMultActionPerformed(evt);
             }
         });
 
-        jbtnPorc.setText("%");
-        jbtnPorc.addActionListener(new java.awt.event.ActionListener() {
+        jBtnPorc.setText("%");
+        jBtnPorc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnPorcActionPerformed(evt);
+                jBtnPorcActionPerformed(evt);
             }
         });
 
-        jtbDiv.setText("/");
-        jtbDiv.addActionListener(new java.awt.event.ActionListener() {
+        jBtnDiv.setText("/");
+        jBtnDiv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtbDivActionPerformed(evt);
+                jBtnDivActionPerformed(evt);
             }
         });
 
-        jbtnMais.setText("+");
-        jbtnMais.addActionListener(new java.awt.event.ActionListener() {
+        jBtnMais.setText("+");
+        jBtnMais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnMaisActionPerformed(evt);
+                jBtnMaisActionPerformed(evt);
             }
         });
 
-        jbtnPonto.setText(".");
-        jbtnPonto.addActionListener(new java.awt.event.ActionListener() {
+        jBtnPonto.setText(".");
+        jBtnPonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnPontoActionPerformed(evt);
+                jBtnPontoActionPerformed(evt);
             }
         });
 
-        jbtnSub.setText("-");
-        jbtnSub.addActionListener(new java.awt.event.ActionListener() {
+        jBtnSub.setText("-");
+        jBtnSub.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSubActionPerformed(evt);
+                jBtnSubActionPerformed(evt);
             }
         });
 
-        jbtnIgual.setText("=");
-        jbtnIgual.addActionListener(new java.awt.event.ActionListener() {
+        jBtnIgual.setText("=");
+        jBtnIgual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnIgualActionPerformed(evt);
+                jBtnIgualActionPerformed(evt);
             }
         });
 
-        jbtnMemoria.setText("Memória");
-        jbtnMemoria.addActionListener(new java.awt.event.ActionListener() {
+        jBtnMemoria.setText("Memória");
+        jBtnMemoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnMemoriaActionPerformed(evt);
+                jBtnMemoriaActionPerformed(evt);
             }
         });
 
-        jbtnNove.setBackground(new java.awt.Color(153, 153, 153));
-        jbtnNove.setText("9");
-        jbtnNove.addActionListener(new java.awt.event.ActionListener() {
+        jBtnNove.setBackground(new java.awt.Color(153, 153, 153));
+        jBtnNove.setText("9");
+        jBtnNove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnNoveActionPerformed(evt);
+                jBtnNoveActionPerformed(evt);
             }
         });
 
-        jbtnOito.setBackground(new java.awt.Color(153, 153, 153));
-        jbtnOito.setText("8");
-        jbtnOito.addActionListener(new java.awt.event.ActionListener() {
+        jBtnOito.setBackground(new java.awt.Color(153, 153, 153));
+        jBtnOito.setText("8");
+        jBtnOito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnOitoActionPerformed(evt);
+                jBtnOitoActionPerformed(evt);
             }
         });
 
-        jbtnSete.setBackground(new java.awt.Color(153, 153, 153));
-        jbtnSete.setText("7");
-        jbtnSete.addActionListener(new java.awt.event.ActionListener() {
+        jBtnSete.setBackground(new java.awt.Color(153, 153, 153));
+        jBtnSete.setText("7");
+        jBtnSete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSeteActionPerformed(evt);
+                jBtnSeteActionPerformed(evt);
             }
         });
 
-        jbtnSeis.setBackground(new java.awt.Color(153, 153, 153));
-        jbtnSeis.setText("6");
-        jbtnSeis.addActionListener(new java.awt.event.ActionListener() {
+        jBtnSeis.setBackground(new java.awt.Color(153, 153, 153));
+        jBtnSeis.setText("6");
+        jBtnSeis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSeisActionPerformed(evt);
+                jBtnSeisActionPerformed(evt);
             }
         });
 
-        jbtnCinco.setBackground(new java.awt.Color(153, 153, 153));
-        jbtnCinco.setText("5");
-        jbtnCinco.addActionListener(new java.awt.event.ActionListener() {
+        jBtnCinco.setBackground(new java.awt.Color(153, 153, 153));
+        jBtnCinco.setText("5");
+        jBtnCinco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnCincoActionPerformed(evt);
+                jBtnCincoActionPerformed(evt);
             }
         });
 
-        jbtnQuatro.setBackground(new java.awt.Color(153, 153, 153));
-        jbtnQuatro.setText("4");
-        jbtnQuatro.addActionListener(new java.awt.event.ActionListener() {
+        jBtnQuatro.setBackground(new java.awt.Color(153, 153, 153));
+        jBtnQuatro.setText("4");
+        jBtnQuatro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnQuatroActionPerformed(evt);
+                jBtnQuatroActionPerformed(evt);
             }
         });
 
-        jbtnTres.setBackground(new java.awt.Color(153, 153, 153));
-        jbtnTres.setText("3");
-        jbtnTres.addActionListener(new java.awt.event.ActionListener() {
+        jBtnTres.setBackground(new java.awt.Color(153, 153, 153));
+        jBtnTres.setText("3");
+        jBtnTres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnTresActionPerformed(evt);
+                jBtnTresActionPerformed(evt);
             }
         });
 
-        jbtnDois.setBackground(new java.awt.Color(153, 153, 153));
-        jbtnDois.setText("2");
-        jbtnDois.addActionListener(new java.awt.event.ActionListener() {
+        jBtnDois.setBackground(new java.awt.Color(153, 153, 153));
+        jBtnDois.setText("2");
+        jBtnDois.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnDoisActionPerformed(evt);
+                jBtnDoisActionPerformed(evt);
             }
         });
 
-        jbtnUm.setBackground(new java.awt.Color(153, 153, 153));
-        jbtnUm.setText("1");
-        jbtnUm.addActionListener(new java.awt.event.ActionListener() {
+        jBtnUm.setBackground(new java.awt.Color(153, 153, 153));
+        jBtnUm.setText("1");
+        jBtnUm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnUmActionPerformed(evt);
+                jBtnUmActionPerformed(evt);
             }
         });
 
-        jbtnZero.setBackground(new java.awt.Color(153, 153, 153));
-        jbtnZero.setText("0");
-        jbtnZero.addActionListener(new java.awt.event.ActionListener() {
+        jBtnZero.setBackground(new java.awt.Color(153, 153, 153));
+        jBtnZero.setText("0");
+        jBtnZero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnZeroActionPerformed(evt);
+                jBtnZeroActionPerformed(evt);
             }
         });
 
@@ -248,50 +249,50 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbtnMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jbtnIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jBtnIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbtnSeis, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBtnSeis, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jbtnCinco, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBtnCinco, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jbtnQuatro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBtnQuatro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jbtnZero, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jBtnZero, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbtnTres, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBtnTres, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jbtnDois, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBtnDois, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jbtnUm, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBtnUm, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jbtnSub, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jBtnSub, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbtnPonto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbtnMais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jBtnPonto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBtnMais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbtnNove, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnNove, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jbtnOito, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnOito, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jbtnSete, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnSete, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jbtnMult, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnMult, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)
-                        .addComponent(jtbDiv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jBtnDiv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jtfVisor)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtbnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jbtnBackspace, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnBackspace, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnAddMem, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnAddMem, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jbtnPorc, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jBtnPorc, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -301,35 +302,35 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(jtfVisor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnBackspace)
-                    .addComponent(jtbnClear)
-                    .addComponent(jbtnAddMem)
-                    .addComponent(jbtnPorc))
+                    .addComponent(jBtnBackspace)
+                    .addComponent(jBtnClear)
+                    .addComponent(jBtnAddMem)
+                    .addComponent(jBtnPorc))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtbDiv)
-                    .addComponent(jbtnMult)
-                    .addComponent(jbtnNove)
-                    .addComponent(jbtnOito)
-                    .addComponent(jbtnSete))
+                    .addComponent(jBtnDiv)
+                    .addComponent(jBtnMult)
+                    .addComponent(jBtnNove)
+                    .addComponent(jBtnOito)
+                    .addComponent(jBtnSete))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnMais)
-                    .addComponent(jbtnSeis)
-                    .addComponent(jbtnCinco)
-                    .addComponent(jbtnQuatro)
-                    .addComponent(jbtnZero))
+                    .addComponent(jBtnMais)
+                    .addComponent(jBtnSeis)
+                    .addComponent(jBtnCinco)
+                    .addComponent(jBtnQuatro)
+                    .addComponent(jBtnZero))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnPonto)
-                    .addComponent(jbtnTres)
-                    .addComponent(jbtnDois)
-                    .addComponent(jbtnUm)
-                    .addComponent(jbtnSub))
+                    .addComponent(jBtnPonto)
+                    .addComponent(jBtnTres)
+                    .addComponent(jBtnDois)
+                    .addComponent(jBtnUm)
+                    .addComponent(jBtnSub))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnMemoria)
-                    .addComponent(jbtnIgual))
+                    .addComponent(jBtnMemoria)
+                    .addComponent(jBtnIgual))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -348,37 +349,37 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfVisorActionPerformed
 
     // Função Clear
-    private void jtbnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbnClearActionPerformed
+    private void jBtnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnClearActionPerformed
         jtfVisor.setText(""); // Reseta o Visor
-    }//GEN-LAST:event_jtbnClearActionPerformed
+    }//GEN-LAST:event_jBtnClearActionPerformed
 
     // Função Backspace
-    private void jbtnBackspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBackspaceActionPerformed
+    private void jBtnBackspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBackspaceActionPerformed
         if (jtfVisor.getText().length() > 0) { // Se o visor não estiver vazio
             jtfVisor.setText(jtfVisor.getText().substring(0, jtfVisor.getText().length() - 1)); // Separa os itens do visor e apaga a ultima posição
         }
-    }//GEN-LAST:event_jbtnBackspaceActionPerformed
+    }//GEN-LAST:event_jBtnBackspaceActionPerformed
 
     // Função carregar memória
-    private void jbtnAddMemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddMemActionPerformed
-        if(memoria != null){ // Se memória não estiver vazia
+    private void jBtnAddMemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddMemActionPerformed
+        if (memoria != null) { // Se memória não estiver vazia
             jtfVisor.setText(memoria); // Mostra o que está armazenado na memória no visor
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Não há nenhum número na memória!"); // Mensagem de erro
         }
-    }//GEN-LAST:event_jbtnAddMemActionPerformed
+    }//GEN-LAST:event_jBtnAddMemActionPerformed
 
     // Função ponto
-    private void jbtnPontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPontoActionPerformed
+    private void jBtnPontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPontoActionPerformed
         if (jtfVisor.getText().contains(".") || jtfVisor.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Você já inseriu um ponto ou o campo está vazio!"); // Mensagem de erro
         } else {
             jtfVisor.setText(jtfVisor.getText() + "."); // Adiciona um Ponto no visor
         }
-    }//GEN-LAST:event_jbtnPontoActionPerformed
+    }//GEN-LAST:event_jBtnPontoActionPerformed
 
     // Função Igual
-    private void jbtnIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIgualActionPerformed
+    private void jBtnIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIgualActionPerformed
         if (jtfVisor.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "O campo não pode estar vázio!"); // Mensagem de erro se estiver vazio
         } else {
@@ -395,7 +396,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     numero2 = Double.parseDouble(jtfVisor.getText());
                     if (numero2 != 0) { // Se não for divisão por 0
                         jtfVisor.setText(String.valueOf(numero1 / numero2));
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(null, "Não é possível realizar divisão por 0!"); // Mensagem de erro divisão por 0
                     }
                     break;
@@ -409,91 +410,91 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     break;
             }
         }
-    }//GEN-LAST:event_jbtnIgualActionPerformed
+    }//GEN-LAST:event_jBtnIgualActionPerformed
 
-    private void jbtnSeteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSeteActionPerformed
+    private void jBtnSeteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSeteActionPerformed
         jtfVisor.setText(jtfVisor.getText() + "7"); // Adiciona o 7 ao visor
-    }//GEN-LAST:event_jbtnSeteActionPerformed
+    }//GEN-LAST:event_jBtnSeteActionPerformed
 
-    private void jbtnOitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnOitoActionPerformed
+    private void jBtnOitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOitoActionPerformed
         jtfVisor.setText(jtfVisor.getText() + "8"); // Adiciona o 8 ao visor
-    }//GEN-LAST:event_jbtnOitoActionPerformed
+    }//GEN-LAST:event_jBtnOitoActionPerformed
 
-    private void jbtnNoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNoveActionPerformed
+    private void jBtnNoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNoveActionPerformed
         jtfVisor.setText(jtfVisor.getText() + "9"); // Adiciona o 9 ao visor
-    }//GEN-LAST:event_jbtnNoveActionPerformed
+    }//GEN-LAST:event_jBtnNoveActionPerformed
 
-    private void jbtnSeisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSeisActionPerformed
+    private void jBtnSeisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSeisActionPerformed
         jtfVisor.setText(jtfVisor.getText() + "6"); // Adiciona o 6 ao visor
-    }//GEN-LAST:event_jbtnSeisActionPerformed
+    }//GEN-LAST:event_jBtnSeisActionPerformed
 
-    private void jbtnCincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCincoActionPerformed
+    private void jBtnCincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCincoActionPerformed
         jtfVisor.setText(jtfVisor.getText() + "5"); // Adiciona o 5 ao visor
-    }//GEN-LAST:event_jbtnCincoActionPerformed
+    }//GEN-LAST:event_jBtnCincoActionPerformed
 
-    private void jbtnQuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnQuatroActionPerformed
+    private void jBtnQuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnQuatroActionPerformed
         jtfVisor.setText(jtfVisor.getText() + "4"); // Adiciona o 4 ao visor
-    }//GEN-LAST:event_jbtnQuatroActionPerformed
+    }//GEN-LAST:event_jBtnQuatroActionPerformed
 
-    private void jbtnZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnZeroActionPerformed
+    private void jBtnZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnZeroActionPerformed
         jtfVisor.setText(jtfVisor.getText() + "0"); // Adiciona o 0 ao visor
-    }//GEN-LAST:event_jbtnZeroActionPerformed
+    }//GEN-LAST:event_jBtnZeroActionPerformed
 
-    private void jbtnTresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTresActionPerformed
+    private void jBtnTresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTresActionPerformed
         jtfVisor.setText(jtfVisor.getText() + "3"); // Adiciona o 3 ao visor
-    }//GEN-LAST:event_jbtnTresActionPerformed
+    }//GEN-LAST:event_jBtnTresActionPerformed
 
-    private void jbtnDoisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDoisActionPerformed
+    private void jBtnDoisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDoisActionPerformed
         jtfVisor.setText(jtfVisor.getText() + "2"); // Adiciona o 2 ao visor
-    }//GEN-LAST:event_jbtnDoisActionPerformed
+    }//GEN-LAST:event_jBtnDoisActionPerformed
 
-    private void jbtnUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUmActionPerformed
+    private void jBtnUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnUmActionPerformed
         jtfVisor.setText(jtfVisor.getText() + "1"); // Adiciona o 1 ao visor
-    }//GEN-LAST:event_jbtnUmActionPerformed
+    }//GEN-LAST:event_jBtnUmActionPerformed
 
     // Função salvar na memória
-    private void jbtnMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMemoriaActionPerformed
-        if(jtfVisor.getText().isEmpty()){ // Se o visor estiver vazio
+    private void jBtnMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMemoriaActionPerformed
+        if (jtfVisor.getText().isEmpty()) { // Se o visor estiver vazio
             JOptionPane.showMessageDialog(null, "Não há nenhum número para salvar!"); // Mensagem de erro visor vazio
-        }else{
+        } else {
             memoria = jtfVisor.getText(); // Salva o texto na memória
         }
-    }//GEN-LAST:event_jbtnMemoriaActionPerformed
+    }//GEN-LAST:event_jBtnMemoriaActionPerformed
 
     // Função Adição
-    private void jbtnMaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMaisActionPerformed
+    private void jBtnMaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMaisActionPerformed
         numero1 = Double.parseDouble(jtfVisor.getText()); // Salva o valor no visor
         jtfVisor.setText(""); // Limpa o visor
         operador = '+'; // Define operador como +
-    }//GEN-LAST:event_jbtnMaisActionPerformed
+    }//GEN-LAST:event_jBtnMaisActionPerformed
 
     // Função Subtração
-    private void jbtnSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSubActionPerformed
+    private void jBtnSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSubActionPerformed
         numero1 = Double.parseDouble(jtfVisor.getText()); // Salva o valor no visor
         jtfVisor.setText(""); // Limpa o visor
         operador = '-'; // Define operador como -
-    }//GEN-LAST:event_jbtnSubActionPerformed
+    }//GEN-LAST:event_jBtnSubActionPerformed
 
     // Função Divisão
-    private void jtbDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbDivActionPerformed
+    private void jBtnDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDivActionPerformed
         numero1 = Double.parseDouble(jtfVisor.getText()); // Salva o valor no visor
         jtfVisor.setText(""); // Limpa o visor
         operador = '/'; // Define operador como /
-    }//GEN-LAST:event_jtbDivActionPerformed
+    }//GEN-LAST:event_jBtnDivActionPerformed
 
     // Função Multiplicação
-    private void jbtnMultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMultActionPerformed
+    private void jBtnMultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMultActionPerformed
         numero1 = Double.parseDouble(jtfVisor.getText()); // Salva o valor no visor
         jtfVisor.setText(""); // Limpa o visor
         operador = '*'; // Define operador como *
-    }//GEN-LAST:event_jbtnMultActionPerformed
+    }//GEN-LAST:event_jBtnMultActionPerformed
 
     // Função Porcentagem
-    private void jbtnPorcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPorcActionPerformed
+    private void jBtnPorcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPorcActionPerformed
         numero1 = Double.parseDouble(jtfVisor.getText()); // Salva o valor no visor
         jtfVisor.setText(""); // Limpa o visor
         operador = '%'; // Define operador como %
-    }//GEN-LAST:event_jbtnPorcActionPerformed
+    }//GEN-LAST:event_jBtnPorcActionPerformed
 
     // Função sair
     private void jmiSairSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSairSairActionPerformed
@@ -510,32 +511,32 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jbtnAddMem;
-    private javax.swing.JButton jbtnBackspace;
-    private javax.swing.JButton jbtnCinco;
-    private javax.swing.JButton jbtnDois;
-    private javax.swing.JButton jbtnIgual;
-    private javax.swing.JButton jbtnMais;
-    private javax.swing.JButton jbtnMemoria;
-    private javax.swing.JButton jbtnMult;
-    private javax.swing.JButton jbtnNove;
-    private javax.swing.JButton jbtnOito;
-    private javax.swing.JButton jbtnPonto;
-    private javax.swing.JButton jbtnPorc;
-    private javax.swing.JButton jbtnQuatro;
-    private javax.swing.JButton jbtnSeis;
-    private javax.swing.JButton jbtnSete;
-    private javax.swing.JButton jbtnSub;
-    private javax.swing.JButton jbtnTres;
-    private javax.swing.JButton jbtnUm;
-    private javax.swing.JButton jbtnZero;
+    private javax.swing.JButton jBtnAddMem;
+    private javax.swing.JButton jBtnBackspace;
+    private javax.swing.JButton jBtnCinco;
+    private javax.swing.JButton jBtnClear;
+    private javax.swing.JButton jBtnDiv;
+    private javax.swing.JButton jBtnDois;
+    private javax.swing.JButton jBtnIgual;
+    private javax.swing.JButton jBtnMais;
+    private javax.swing.JButton jBtnMemoria;
+    private javax.swing.JButton jBtnMult;
+    private javax.swing.JButton jBtnNove;
+    private javax.swing.JButton jBtnOito;
+    private javax.swing.JButton jBtnPonto;
+    private javax.swing.JButton jBtnPorc;
+    private javax.swing.JButton jBtnQuatro;
+    private javax.swing.JButton jBtnSeis;
+    private javax.swing.JButton jBtnSete;
+    private javax.swing.JButton jBtnSub;
+    private javax.swing.JButton jBtnTres;
+    private javax.swing.JButton jBtnUm;
+    private javax.swing.JButton jBtnZero;
     private javax.swing.JMenuBar jmbPrincipal;
     private javax.swing.JMenuItem jmiConversorBase;
     private javax.swing.JMenu jmiConversorVelocidade;
     private javax.swing.JMenu jmiSair;
     private javax.swing.JMenuItem jmiSairSair;
-    private javax.swing.JButton jtbDiv;
-    private javax.swing.JButton jtbnClear;
     private javax.swing.JTextField jtfVisor;
     // End of variables declaration//GEN-END:variables
 }

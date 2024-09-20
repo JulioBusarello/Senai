@@ -1,3 +1,4 @@
+
 import javax.swing.JOptionPane;
 
 /**
@@ -8,7 +9,7 @@ public class ConversorB extends javax.swing.JFrame {
     // Construtor da Classe
     public ConversorB() {
         initComponents(); // Inicia os Componentes
-        
+
         // Adiciona os radio buttons aos seus grupos
         bgOrigem.add(jrBtnBinario1);
         bgOrigem.add(jrBtnDecimal1);
@@ -24,13 +25,13 @@ public class ConversorB extends javax.swing.JFrame {
         jtaOrigem.setText("0");
         jrBtnDecimal1.setSelected(true);
         jrBtnDecimal2.setSelected(true);
-        
+
         // Adicionando ActionListener a cada botão
         jrBtnBinario1.addActionListener(e -> verificarAtulizacao());
         jrBtnDecimal1.addActionListener(e -> verificarAtulizacao());
         jrBtnHexa1.addActionListener(e -> verificarAtulizacao());
         jrBtnOctal1.addActionListener(e -> verificarAtulizacao());
-        
+
         jrBtnBinario2.addActionListener(e -> verificarAtulizacao());
         jrBtnDecimal2.addActionListener(e -> verificarAtulizacao());
         jrBtnHexa2.addActionListener(e -> verificarAtulizacao());
@@ -176,8 +177,8 @@ public class ConversorB extends javax.swing.JFrame {
     private void jtaDestinoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtaDestinoKeyReleased
 
     }//GEN-LAST:event_jtaDestinoKeyReleased
-    
-    public void verificarAtulizacao(){
+
+    public void verificarAtulizacao() {
         // Define as variáveis
         String valorConvertido = "";
         String valorEntrada = jtaOrigem.getText();
@@ -226,12 +227,13 @@ public class ConversorB extends javax.swing.JFrame {
         }
         jtaDestino.setText(valorConvertido); // Define o valor convertido na caixa de texto de destino
     }
-    
+
     // Função padrão de erro
-    public void erroVerify(){
+    public void erroVerify() {
         JOptionPane.showMessageDialog(null, "Valor inserido inválido!"); // Avisa o usuário
         jtaOrigem.setText("0"); // Reseta a caixa de entrada
     }
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
