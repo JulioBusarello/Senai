@@ -15,7 +15,7 @@ public class Arquivo {
         String conteudo = "";
         try {
             FileReader arquivo = new FileReader(caminho);
-            BufferedReader leitura = new BufferedReader(aquivo);
+            BufferedReader leitura = new BufferedReader(arquivo);
             String linha = "";
             try {
                 linha = leitura.readLine();
