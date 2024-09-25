@@ -13,7 +13,16 @@ public class FormPrincipal extends javax.swing.JFrame {
     public static ArrayList<Produto> listaProduto;
 
     public FormPrincipal() {
+        listaCliente = new ArrayList<>();
+        listaProduto = new ArrayList<>();
+        listaFornecedor = new ArrayList<>();
+        loadCli();
+        loadFor();
+        loadPro();
         initComponents();
+        tblCliente();
+        tblFornecedor();
+        tblProduto();
     }
 
     public void tblCliente() {
@@ -54,7 +63,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public static void loadCli() {
+    public void loadCli() {
         String fileCli = "cliente.db";
         String conteudo = Arquivo.read(fileCli);
 
@@ -90,11 +99,11 @@ public class FormPrincipal extends javax.swing.JFrame {
             modeloPro.addRow(linhaPro);
         }
         jTbPro.setModel(modeloPro);
-        jTbPro.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jTbPro.getColumnModel().getColumn(0).setPreferredWidth(250);
         jTbPro.getColumnModel().getColumn(1).setPreferredWidth(250);
-        jTbPro.getColumnModel().getColumn(2).setPreferredWidth(80);
-        jTbPro.getColumnModel().getColumn(3).setPreferredWidth(80);
-        jTbPro.getColumnModel().getColumn(4).setPreferredWidth(80);
+        jTbPro.getColumnModel().getColumn(2).setPreferredWidth(250);
+        jTbPro.getColumnModel().getColumn(3).setPreferredWidth(250);
+        jTbPro.getColumnModel().getColumn(4).setPreferredWidth(250);
     }
 
     public void savePro() {
@@ -131,7 +140,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                 pro.setCodigo(Integer.parseInt(dadosPro[0]));
                 pro.setDescricao(dadosPro[1]);
                 pro.setUnidade(dadosPro[2]);
-                pro.setQtd(Double.parseDouble(dadosPro[3]));
+                pro.setQtd(Integer.parseInt(dadosPro[3]));
                 pro.setPreco(Double.parseDouble(dadosPro[4]));
                 listaProduto.add(pro);
             }
@@ -188,12 +197,12 @@ public class FormPrincipal extends javax.swing.JFrame {
 
             for (int i = 0; i < linhaFor.length; i++) {
                 dadosFor = linhaFor[i].split(";");
-                Produto forn = new Produto();
+                Fornecedor forn = new Fornecedor();
                 forn.setCodigo(Integer.parseInt(dadosFor[0]));
-                forn.setDescricao(dadosFor[1]);
-                forn.setUnidade(dadosFor[2]);
-                forn.setQtd(Double.parseDouble(dadosFor[3]));
-                forn.setPreco(Double.parseDouble(dadosFor[4]));
+                forn.setContato(dadosFor[1]);
+                forn.setTelefone(dadosFor[2]);
+                forn.setEmail(dadosFor[3]);
+                forn.setEmpresa(dadosFor[4]);
                 listaFornecedor.add(forn);
             }
         }
@@ -209,7 +218,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTbCli = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTfMatriculaCli = new javax.swing.JTextField();
+        jTfCodigoCli = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTfTelefoneCli = new javax.swing.JTextField();
         jtfNomeCli = new javax.swing.JLabel();
@@ -220,7 +229,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jBtnSalvarCli = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jtaEndereco = new javax.swing.JTextArea();
+        jTaEnderecoCli = new javax.swing.JTextArea();
         jBtnEditarCli = new javax.swing.JButton();
         jBtnExcluirCli = new javax.swing.JButton();
         jBtnCancelarCli = new javax.swing.JButton();
@@ -277,14 +286,14 @@ public class FormPrincipal extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Matricula", "Nome", "Telefone", "Email"
+                "Codigo", "Nome", "Telefone", "Email"
             }
         ));
         jScrollPane2.setViewportView(jTbCli);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel1.setText("Matricula:");
+        jLabel1.setText("Código:");
 
         jLabel2.setText("Telefone:");
 
@@ -295,13 +304,18 @@ public class FormPrincipal extends javax.swing.JFrame {
         jBtnNovoCli.setText("Novo");
 
         jBtnSalvarCli.setText("Salvar");
+        jBtnSalvarCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSalvarCliActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Endereço:");
 
-        jtaEndereco.setColumns(20);
-        jtaEndereco.setLineWrap(true);
-        jtaEndereco.setRows(5);
-        jScrollPane3.setViewportView(jtaEndereco);
+        jTaEnderecoCli.setColumns(20);
+        jTaEnderecoCli.setLineWrap(true);
+        jTaEnderecoCli.setRows(5);
+        jScrollPane3.setViewportView(jTaEnderecoCli);
 
         jBtnEditarCli.setText("Editar");
 
@@ -317,15 +331,13 @@ public class FormPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTfMatriculaCli))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTfTelefoneCli, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTfCodigoCli)
+                            .addComponent(jTfTelefoneCli, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
@@ -339,8 +351,8 @@ public class FormPrincipal extends javax.swing.JFrame {
                             .addComponent(jTfEmailCli)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -349,7 +361,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                     .addComponent(jBtnEditarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnExcluirCli, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnCancelarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,7 +386,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1)
-                                    .addComponent(jTfMatriculaCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTfCodigoCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -434,6 +446,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         jBtnCancelarPro.setText("Cancelar");
 
         jBtnSalvarPro.setText("Salvar");
+        jBtnSalvarPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSalvarProActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -555,7 +572,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Código", "Nome", "Contato", "Telefone", "Email"
+                "Código", "Contato", "Telefone", "Email", "Empresa"
             }
         ));
         jScrollPane1.setViewportView(jTbFor);
@@ -581,6 +598,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         jBtnCancelarFor.setText("Cancelar");
 
         jBtnSalvarFor.setText("Salvar");
+        jBtnSalvarFor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSalvarForActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -595,8 +617,8 @@ public class FormPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTfCodigoFor)
-                            .addComponent(jTfTelefoneFor, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTfTelefoneFor, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                            .addComponent(jTfCodigoFor))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -617,7 +639,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                     .addComponent(jBtnEditarFor, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnExluirFor, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnCancelarFor, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -704,6 +726,78 @@ public class FormPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBtnSalvarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarCliActionPerformed
+        int cod = Integer.parseInt(jTfCodigoCli.getText());
+        String nome = jTfNomeCli.getText();
+        String telefone = jTfTelefoneCli.getText();
+        String email = jTfEmailCli.getText();
+        String endereco = jTaEnderecoCli.getText();
+
+        int a = JOptionPane.showConfirmDialog(null, "Deseha realmente salvar estas informações?\n\n"
+                + "Código: " + cod
+                + "\nNome: " + nome
+                + "\nTelefone: " + telefone
+                + "\nEmail: " + email
+                + "\nEndereço: " + endereco,
+                "confirmar", JOptionPane.YES_NO_OPTION);
+        if(a == JOptionPane.YES_NO_OPTION) {
+            Cliente cliente = new Cliente(nome, telefone);
+            cliente.setCodigo(cod);
+            cliente.setEmail(email);
+            cliente.setEndereco(endereco);
+            
+            listaCliente.add(cliente);
+            tblCliente();
+            saveCli();
+        }
+    }//GEN-LAST:event_jBtnSalvarCliActionPerformed
+
+    private void jBtnSalvarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarProActionPerformed
+        int codigo = Integer.parseInt(jTfCodigoPro.getText());
+        String descricao = jTfDescricaoPro.getText();
+        String unidade = jTfUnidadePro.getText();
+        int quantidade = Integer.parseInt(jTfQuantidadePro.getText());
+        double preco = Double.parseDouble(jTfPrecoPro.getText());
+
+        int a = JOptionPane.showConfirmDialog(null, "Deseha realmente salvar estas informações?\n\n"
+                + "Código: " + codigo
+                + "\nDescrição: " + descricao
+                + "\nUnidade: " + unidade
+                + "\nQuantidade: " + quantidade
+                + "\nPreço: " + preco,
+                "confirmar", JOptionPane.YES_NO_OPTION);
+        if(a == JOptionPane.YES_NO_OPTION) {
+            Produto produto = new Produto(codigo, descricao, unidade, quantidade, preco);
+            
+            listaProduto.add(produto);
+            tblProduto();
+            savePro();
+        }
+    }//GEN-LAST:event_jBtnSalvarProActionPerformed
+
+    private void jBtnSalvarForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarForActionPerformed
+        int codigo = Integer.parseInt(jTfCodigoFor.getText());
+        String contato = jTfContatoFor.getText();
+        String telefone = jTfTelefoneFor.getText();
+        String email = jTfEmailFor.getText();
+        String empresa = jTfEmpresaFor.getText();
+
+        int a = JOptionPane.showConfirmDialog(null, "Deseha realmente salvar estas informações?\n\n"
+                + "Código: " + codigo
+                + "\nContato: " + contato
+                + "\nTelefone: " + telefone
+                + "\nEmail: " + email
+                + "\nEmpresa: " + empresa,
+                "confirmar", JOptionPane.YES_NO_OPTION);
+        if(a == JOptionPane.YES_NO_OPTION) {
+            Fornecedor fornecedor = new Fornecedor(codigo, contato, telefone, email, empresa);
+            
+            listaFornecedor.add(fornecedor);
+            tblFornecedor();
+            saveFor();
+        }
+    }//GEN-LAST:event_jBtnSalvarForActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -776,10 +870,12 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextArea jTaEnderecoCli;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTbCli;
     private javax.swing.JTable jTbFor;
     private javax.swing.JTable jTbPro;
+    private javax.swing.JTextField jTfCodigoCli;
     private javax.swing.JTextField jTfCodigoFor;
     private javax.swing.JTextField jTfCodigoPro;
     private javax.swing.JTextField jTfContatoFor;
@@ -787,14 +883,12 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTfEmailCli;
     private javax.swing.JTextField jTfEmailFor;
     private javax.swing.JTextField jTfEmpresaFor;
-    private javax.swing.JTextField jTfMatriculaCli;
     private javax.swing.JTextField jTfNomeCli;
     private javax.swing.JTextField jTfPrecoPro;
     private javax.swing.JTextField jTfQuantidadePro;
     private javax.swing.JTextField jTfTelefoneCli;
     private javax.swing.JTextField jTfTelefoneFor;
     private javax.swing.JTextField jTfUnidadePro;
-    private javax.swing.JTextArea jtaEndereco;
     private javax.swing.JLabel jtfNomeCli;
     // End of variables declaration//GEN-END:variables
 }

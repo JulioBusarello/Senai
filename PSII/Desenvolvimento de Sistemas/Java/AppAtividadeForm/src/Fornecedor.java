@@ -3,20 +3,20 @@
  */
 public class Fornecedor {
     private int codigo;
-    private String empresa;
     private String contato;
     private String telefone;
     private String email;
+    private String empresa;
     
     public Fornecedor(){
     }
     
-    public Fornecedor(int codigo, String empresa, String contato, String telefone, String email) {
+    public Fornecedor(int codigo, String contato, String telefone, String email, String empresa) {
         this.codigo = codigo;
-        this.empresa = empresa;
         this.contato = contato;
         this.telefone = telefone;
         this.email = email;
+        this.empresa = empresa;
     }
 
     public int getCodigo() {

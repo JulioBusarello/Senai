@@ -5,13 +5,13 @@ public class Produto {
     private int codigo;
     private String descricao;
     private String unidade;
-    private double qtd;
+    private int qtd;
     private double preco;
     
     public Produto() {
     }
     
-    public Produto(int codigo, String descricao, String unidade, double qtd, double preco) {
+    public Produto(int codigo, String descricao, String unidade, int qtd, double preco) {
         this.codigo = codigo;
         this.descricao = descricao;
         this.unidade = unidade;
@@ -43,11 +43,11 @@ public class Produto {
         this.unidade = unidade;
     }
 
-    public double getQtd() {
+    public int getQtd() {
         return qtd;
     }
 
-    public void setQtd(double qtd) {
+    public void setQtd(int qtd) {
         this.qtd = qtd;
     }
 
