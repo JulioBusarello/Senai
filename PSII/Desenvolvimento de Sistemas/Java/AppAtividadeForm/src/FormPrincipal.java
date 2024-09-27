@@ -12,6 +12,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     public static ArrayList<Fornecedor> listaFornecedor;
     public static ArrayList<Produto> listaProduto;
 
+    // Construtor
     public FormPrincipal() {
         listaCliente = new ArrayList<>();
         listaProduto = new ArrayList<>();
@@ -23,9 +24,12 @@ public class FormPrincipal extends javax.swing.JFrame {
         tblCliente();
         tblFornecedor();
         tblProduto();
+
+        desativarCli();
     }
 
-    public void tblCliente() {
+    // Carregar Tabelas Clientes
+    public final void tblCliente() {
         DefaultTableModel modeloCli = new DefaultTableModel(new Object[]{
             "Código", "Nome", "Telefone", "Email", "Endereço"}, 0);
         for (int i = 0; i < listaCliente.size(); i++) {
@@ -45,6 +49,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTbCli.getColumnModel().getColumn(4).setPreferredWidth(80);
     }
 
+    // Salvar Dados Clientes
     public void saveCli() {
         String fileCli = "cliente.db";
         String linhaCli = "";
@@ -63,7 +68,8 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public void loadCli() {
+    // Carregar Dados Clientes
+    public final void loadCli() {
         String fileCli = "cliente.db";
         String conteudo = Arquivo.read(fileCli);
 
@@ -86,7 +92,8 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public void tblProduto() {
+    // Carregar Tabela Produto
+    public final void tblProduto() {
         DefaultTableModel modeloPro = new DefaultTableModel(new Object[]{
             "Código", "Descrição", "Unidade", "Quantidade", "Preço"}, 0);
         for (int i = 0; i < listaProduto.size(); i++) {
@@ -106,6 +113,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTbPro.getColumnModel().getColumn(4).setPreferredWidth(250);
     }
 
+    // Salvar Dados Produto
     public void savePro() {
         String filePro = "produto.db";
         String linhaPro = "";
@@ -124,6 +132,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }
 
+    // Carregar Dados Fornecedor
     public static void loadPro() {
         String filePro = "produto.db";
         String conteudo = Arquivo.read(filePro);
@@ -147,7 +156,8 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public void tblFornecedor() {
+    // Carregar Tabela Fornecedor
+    public final void tblFornecedor() {
         DefaultTableModel modeloFor = new DefaultTableModel(new Object[]{
             "Código", "Contato", "Telefone", "Email", "Empresa"}, 0);
         for (int i = 0; i < listaFornecedor.size(); i++) {
@@ -167,6 +177,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTbFor.getColumnModel().getColumn(4).setPreferredWidth(80);
     }
 
+    // Salvar Dados Fornecedor
     public void saveFor() {
         String fileFor = "fornecedor.db";
         String linhaFor = "";
@@ -185,6 +196,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }
 
+    // Carregar Dados Fornecedor
     public static void loadFor() {
         String fileFor = "fornecedor.db";
         String conteudo = Arquivo.read(fileFor);
@@ -208,6 +220,31 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }
 
+    // Desativar Botões Cliente
+    public void desativarCli() {
+        jTfCodigoCli.setEnabled(false);
+        jTfNomeCli.setEnabled(false);
+        jTfTelefoneCli.setEnabled(false);
+        jTfEmailCli.setEnabled(false);
+        jTaEnderecoCli.setEnabled(false);
+
+        jBtnEditarCli.setEnabled(false);
+        jBtnExcluirCli.setEnabled(false);
+        jBtnSalvarCli.setEnabled(false);
+        jBtnCancelarCli.setEnabled(false);
+
+        jBtnNovoCli.setEnabled(true);
+    }
+
+    // Ativar Botões Cliente
+    public void ativarCli() {
+        jTfCodigoCli.setEnabled(true);
+        jTfNomeCli.setEnabled(true);
+        jTfTelefoneCli.setEnabled(true);
+        jTfEmailCli.setEnabled(true);
+        jTaEnderecoCli.setEnabled(true);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -221,7 +258,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTfCodigoCli = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTfTelefoneCli = new javax.swing.JTextField();
-        jtfNomeCli = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jTfNomeCli = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTfEmailCli = new javax.swing.JTextField();
@@ -300,13 +337,42 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("Código:");
 
+        jTfCodigoCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfCodigoCliKeyReleased(evt);
+            }
+        });
+
         jLabel2.setText("Telefone:");
 
-        jtfNomeCli.setText("Nome:");
+        jTfTelefoneCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfTelefoneCliKeyReleased(evt);
+            }
+        });
+
+        jLabel5.setText("Nome:");
+
+        jTfNomeCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfNomeCliKeyReleased(evt);
+            }
+        });
 
         jLabel4.setText("Email:");
 
+        jTfEmailCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfEmailCliKeyReleased(evt);
+            }
+        });
+
         jBtnNovoCli.setText("Novo");
+        jBtnNovoCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoCliActionPerformed(evt);
+            }
+        });
 
         jBtnSalvarCli.setText("Salvar");
         jBtnSalvarCli.addActionListener(new java.awt.event.ActionListener() {
@@ -320,13 +386,33 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTaEnderecoCli.setColumns(20);
         jTaEnderecoCli.setLineWrap(true);
         jTaEnderecoCli.setRows(5);
+        jTaEnderecoCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTaEnderecoCliKeyReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTaEnderecoCli);
 
         jBtnEditarCli.setText("Editar");
+        jBtnEditarCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarCliActionPerformed(evt);
+            }
+        });
 
         jBtnExcluirCli.setText("Excluir");
+        jBtnExcluirCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirCliActionPerformed(evt);
+            }
+        });
 
         jBtnCancelarCli.setText("Cancelar");
+        jBtnCancelarCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarCliActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -346,7 +432,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jtfNomeCli)
+                                .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
@@ -386,7 +472,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jtfNomeCli)
+                                .addComponent(jLabel5)
                                 .addComponent(jTfNomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -747,6 +833,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    // Botão Salvar Cliente
     private void jBtnSalvarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarCliActionPerformed
         int cod = Integer.parseInt(jTfCodigoCli.getText());
         String nome = jTfNomeCli.getText();
@@ -762,10 +849,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                 + "\nEndereço: " + endereco,
                 "confirmar", JOptionPane.YES_NO_OPTION);
         if (a == JOptionPane.YES_NO_OPTION) {
-            Cliente cliente = new Cliente(nome, telefone);
-            cliente.setCodigo(cod);
-            cliente.setEmail(email);
-            cliente.setEndereco(endereco);
+            Cliente cliente = new Cliente(cod, nome, telefone, email, endereco);
 
             listaCliente.add(cliente);
             tblCliente();
@@ -773,6 +857,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnSalvarCliActionPerformed
 
+    // Botão Salvar Produto
     private void jBtnSalvarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarProActionPerformed
         int codigo = Integer.parseInt(jTfCodigoPro.getText());
         String descricao = jTfDescricaoPro.getText();
@@ -796,6 +881,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnSalvarProActionPerformed
 
+    // Botão Salvar Fornecedor
     private void jBtnSalvarForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarForActionPerformed
         int codigo = Integer.parseInt(jTfCodigoFor.getText());
         String contato = jTfContatoFor.getText();
@@ -822,6 +908,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
     }//GEN-LAST:event_jScrollPane1MouseClicked
 
+    // Tabela Selecionada Cliente
     private void jTbCliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbCliMouseClicked
         int linhaSelect = jTbCli.getSelectedRow();
 
@@ -831,9 +918,15 @@ public class FormPrincipal extends javax.swing.JFrame {
             jTfTelefoneCli.setText(jTbCli.getValueAt(linhaSelect, 2).toString());
             jTfEmailCli.setText(jTbCli.getValueAt(linhaSelect, 3).toString());
             jTaEnderecoCli.setText(jTbCli.getValueAt(linhaSelect, 4).toString());
+
+            jBtnEditarCli.setEnabled(true);
+            jBtnExcluirCli.setEnabled(true);
+
+            ativarCli();
         }
     }//GEN-LAST:event_jTbCliMouseClicked
 
+    // Tabela Selecionada Produto
     private void jTbProMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbProMouseClicked
         int linhaSelect = jTbPro.getSelectedRow();
 
@@ -846,6 +939,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTbProMouseClicked
 
+    // Tabela Selecionada Fornecedor
     private void jTbForMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbForMouseClicked
         int linhaSelect = jTbFor.getSelectedRow();
 
@@ -858,6 +952,106 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTbForMouseClicked
 
+    // Botão Novo Cliente
+    private void jBtnNovoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoCliActionPerformed
+        jTfCodigoCli.setText("");
+        jTfEmailCli.setText("");
+        jTfNomeCli.setText("");
+        jTfTelefoneCli.setText("");
+        jTaEnderecoCli.setText("");
+
+        jTbCli.clearSelection();
+
+        ativarCli();
+
+        jBtnCancelarCli.setEnabled(true);
+        jBtnNovoCli.setEnabled(false);
+    }//GEN-LAST:event_jBtnNovoCliActionPerformed
+
+    // Botão Excluir Cliente
+    private void jBtnExcluirCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirCliActionPerformed
+        int selectedCli = jTbCli.getSelectedRow();
+        listaCliente.remove(selectedCli);
+        saveCli();
+        tblCliente();
+    }//GEN-LAST:event_jBtnExcluirCliActionPerformed
+
+    // Botão Cancelar Cliente
+    private void jBtnCancelarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCliActionPerformed
+        desativarCli();
+    }//GEN-LAST:event_jBtnCancelarCliActionPerformed
+
+    // Verificar o texto dos campos
+    private void jTfCodigoCliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfCodigoCliKeyReleased
+        if (!jTfCodigoCli.getText().isEmpty() && !jTfNomeCli.getText().isEmpty() && !jTfTelefoneCli.getText().isEmpty() && !jTfEmailCli.getText().isEmpty() && !jTaEnderecoCli.getText().isEmpty()) {
+            jBtnSalvarCli.setEnabled(true);
+        } else {
+            jBtnSalvarCli.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfCodigoCliKeyReleased
+
+    private void jTfNomeCliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfNomeCliKeyReleased
+        if (!jTfCodigoCli.getText().isEmpty() && !jTfNomeCli.getText().isEmpty() && !jTfTelefoneCli.getText().isEmpty() && !jTfEmailCli.getText().isEmpty() && !jTaEnderecoCli.getText().isEmpty()) {
+            jBtnSalvarCli.setEnabled(true);
+        } else {
+            jBtnSalvarCli.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfNomeCliKeyReleased
+
+    private void jTfTelefoneCliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfTelefoneCliKeyReleased
+        if (!jTfCodigoCli.getText().isEmpty() && !jTfNomeCli.getText().isEmpty() && !jTfTelefoneCli.getText().isEmpty() && !jTfEmailCli.getText().isEmpty() && !jTaEnderecoCli.getText().isEmpty()) {
+            jBtnSalvarCli.setEnabled(true);
+        } else {
+            jBtnSalvarCli.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfTelefoneCliKeyReleased
+
+    private void jTfEmailCliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfEmailCliKeyReleased
+        if (!jTfCodigoCli.getText().isEmpty() && !jTfNomeCli.getText().isEmpty() && !jTfTelefoneCli.getText().isEmpty() && !jTfEmailCli.getText().isEmpty() && !jTaEnderecoCli.getText().isEmpty()) {
+            jBtnSalvarCli.setEnabled(true);
+        } else {
+            jBtnSalvarCli.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfEmailCliKeyReleased
+
+    private void jTaEnderecoCliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTaEnderecoCliKeyReleased
+        if (!jTfCodigoCli.getText().isEmpty() && !jTfNomeCli.getText().isEmpty() && !jTfTelefoneCli.getText().isEmpty() && !jTfEmailCli.getText().isEmpty() && !jTaEnderecoCli.getText().isEmpty()) {
+            jBtnSalvarCli.setEnabled(true);
+        } else {
+            jBtnSalvarCli.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTaEnderecoCliKeyReleased
+
+    // Botão Editar Cliente
+    private void jBtnEditarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarCliActionPerformed
+        int selectedCli = jTbCli.getSelectedRow();
+        int codigo = Integer.parseInt(jTfCodigoCli.getText());
+        String nome = jTfNomeCli.getText();
+        String telefone = jTfTelefoneCli.getText();
+        String email = jTfEmailCli.getText();
+        String endereco = jTaEnderecoCli.getText();
+
+        int opt = JOptionPane.showConfirmDialog(null,
+                "Deseja realmente editar essas informações?\n\n"
+                + "Código: " + codigo
+                + "\nNome: " + nome
+                + "\nTelefone: " + telefone
+                + "\nEmail: " + email
+                + "\nEndereço: " + endereco,
+                "Confirmar",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (opt == JOptionPane.YES_OPTION) {
+            Cliente cliente = new Cliente(codigo, nome, telefone, email, endereco);
+
+            listaCliente.add(selectedCli, cliente);
+            listaCliente.remove(selectedCli + 1);
+            tblCliente();
+            saveCli();
+        }
+    }//GEN-LAST:event_jBtnEditarCliActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -869,16 +1063,24 @@ public class FormPrincipal extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -919,6 +1121,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -949,6 +1152,5 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTfTelefoneCli;
     private javax.swing.JTextField jTfTelefoneFor;
     private javax.swing.JTextField jTfUnidadePro;
-    private javax.swing.JLabel jtfNomeCli;
     // End of variables declaration//GEN-END:variables
 }

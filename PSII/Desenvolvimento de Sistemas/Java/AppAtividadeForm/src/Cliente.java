@@ -11,9 +11,12 @@ public class Cliente {
     public Cliente() {
     }
     
-    public Cliente(String nome, String telefone) {
+    public Cliente(int codigo, String nome, String telefone, String email, String endereco) {
+        this.codigo = codigo;
         this.nome = nome;
         this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
     }
 
     public int getCodigo() {
