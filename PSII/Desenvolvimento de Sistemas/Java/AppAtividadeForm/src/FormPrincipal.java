@@ -12,6 +12,8 @@ public class FormPrincipal extends javax.swing.JFrame {
     public static ArrayList<Fornecedor> listaFornecedor;
     public static ArrayList<Produto> listaProduto;
 
+    // <editor-fold defaultstate="collapsed" desc="Criados">
+    // <editor-fold defaultstate="collapsed" desc="Construtor">
     public FormPrincipal() {
         listaCliente = new ArrayList<>();
         listaProduto = new ArrayList<>();
@@ -23,9 +25,15 @@ public class FormPrincipal extends javax.swing.JFrame {
         tblCliente();
         tblFornecedor();
         tblProduto();
-    }
 
-    public void tblCliente() {
+        ativadoPro(false, false);
+        ativadoCli(false, false);
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Base Cliente">
+    // Carregar Tabelas Clientes
+    public final void tblCliente() {
         DefaultTableModel modeloCli = new DefaultTableModel(new Object[]{
             "Código", "Nome", "Telefone", "Email", "Endereço"}, 0);
         for (int i = 0; i < listaCliente.size(); i++) {
@@ -45,6 +53,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTbCli.getColumnModel().getColumn(4).setPreferredWidth(80);
     }
 
+    // Salvar Dados Clientes
     public void saveCli() {
         String fileCli = "cliente.db";
         String linhaCli = "";
@@ -63,7 +72,8 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public void loadCli() {
+    // Carregar Dados Clientes
+    public final void loadCli() {
         String fileCli = "cliente.db";
         String conteudo = Arquivo.read(fileCli);
 
@@ -85,8 +95,11 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         }
     }
+    // </editor-fold>
 
-    public void tblProduto() {
+    // <editor-fold defaultstate="collapsed" desc="Base Produto">
+    // Carregar Tabela Produto
+    public final void tblProduto() {
         DefaultTableModel modeloPro = new DefaultTableModel(new Object[]{
             "Código", "Descrição", "Unidade", "Quantidade", "Preço"}, 0);
         for (int i = 0; i < listaProduto.size(); i++) {
@@ -106,6 +119,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTbPro.getColumnModel().getColumn(4).setPreferredWidth(250);
     }
 
+    // Salvar Dados Produto
     public void savePro() {
         String filePro = "produto.db";
         String linhaPro = "";
@@ -124,6 +138,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }
 
+    // Carregar Dados Fornecedor
     public static void loadPro() {
         String filePro = "produto.db";
         String conteudo = Arquivo.read(filePro);
@@ -146,8 +161,11 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         }
     }
-
-    public void tblFornecedor() {
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Base Fornecedor">
+    // Carregar Tabela Fornecedor
+    public final void tblFornecedor() {
         DefaultTableModel modeloFor = new DefaultTableModel(new Object[]{
             "Código", "Contato", "Telefone", "Email", "Empresa"}, 0);
         for (int i = 0; i < listaFornecedor.size(); i++) {
@@ -167,6 +185,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTbFor.getColumnModel().getColumn(4).setPreferredWidth(80);
     }
 
+    // Salvar Dados Fornecedor
     public void saveFor() {
         String fileFor = "fornecedor.db";
         String linhaFor = "";
@@ -185,6 +204,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }
 
+    // Carregar Dados Fornecedor
     public static void loadFor() {
         String fileFor = "fornecedor.db";
         String conteudo = Arquivo.read(fileFor);
@@ -207,7 +227,56 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         }
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Ativado Interfaces">
+    // Ativar e Desativar Botões Cliente
+    public void ativadoCli(boolean campos, boolean selecao) {
+        jTfCodigoCli.setEnabled(campos);
+        jTfNomeCli.setEnabled(campos);
+        jTfTelefoneCli.setEnabled(campos);
+        jTfEmailCli.setEnabled(campos);
+        jTaEnderecoCli.setEnabled(campos);
 
+        jBtnEditarCli.setEnabled(selecao);
+        jBtnExcluirCli.setEnabled(selecao);
+        jBtnSalvarCli.setEnabled(false);
+        jBtnCancelarCli.setEnabled(false);
+        jBtnNovoCli.setEnabled(true);
+    }
+
+    //  Ativar e Desativar Botões Produto
+    public void ativadoPro(boolean campos, boolean selecao) {
+        jTfCodigoPro.setEnabled(campos);
+        jTfUnidadePro.setEnabled(campos);
+        jTfQuantidadePro.setEnabled(campos);
+        jTfPrecoPro.setEnabled(campos);
+        jTfDescricaoPro.setEnabled(campos);
+
+        jBtnEditarPro.setEnabled(selecao);
+        jBtnExcluirPro.setEnabled(selecao);
+        jBtnSalvarPro.setEnabled(false);
+        jBtnCancelarPro.setEnabled(false);
+        jBtnNovoPro.setEnabled(true);
+    }
+
+    //  Ativar e Desativar Botões Produto
+    public void ativadoFor(boolean campos, boolean selecao) {
+        jTfCodigoFor.setEnabled(campos);
+        jTfContatoFor.setEnabled(campos);
+        jTfTelefoneFor.setEnabled(campos);
+        jTfEmailFor.setEnabled(campos);
+        jTfEmpresaFor.setEnabled(campos);
+
+        jBtnEditarFor.setEnabled(selecao);
+        jBtnExluirFor.setEnabled(selecao);
+        jBtnSalvarFor.setEnabled(false);
+        jBtnCancelarFor.setEnabled(false);
+        jBtnNovoFor.setEnabled(true);
+    }
+    // </editor-fold>
+    // </editor-fold>
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -221,7 +290,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTfCodigoCli = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTfTelefoneCli = new javax.swing.JTextField();
-        jtfNomeCli = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jTfNomeCli = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTfEmailCli = new javax.swing.JTextField();
@@ -300,13 +369,42 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("Código:");
 
+        jTfCodigoCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfCodigoCliKeyReleased(evt);
+            }
+        });
+
         jLabel2.setText("Telefone:");
 
-        jtfNomeCli.setText("Nome:");
+        jTfTelefoneCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfTelefoneCliKeyReleased(evt);
+            }
+        });
+
+        jLabel5.setText("Nome:");
+
+        jTfNomeCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfNomeCliKeyReleased(evt);
+            }
+        });
 
         jLabel4.setText("Email:");
 
+        jTfEmailCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfEmailCliKeyReleased(evt);
+            }
+        });
+
         jBtnNovoCli.setText("Novo");
+        jBtnNovoCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoCliActionPerformed(evt);
+            }
+        });
 
         jBtnSalvarCli.setText("Salvar");
         jBtnSalvarCli.addActionListener(new java.awt.event.ActionListener() {
@@ -320,13 +418,33 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTaEnderecoCli.setColumns(20);
         jTaEnderecoCli.setLineWrap(true);
         jTaEnderecoCli.setRows(5);
+        jTaEnderecoCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTaEnderecoCliKeyReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTaEnderecoCli);
 
         jBtnEditarCli.setText("Editar");
+        jBtnEditarCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarCliActionPerformed(evt);
+            }
+        });
 
         jBtnExcluirCli.setText("Excluir");
+        jBtnExcluirCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirCliActionPerformed(evt);
+            }
+        });
 
         jBtnCancelarCli.setText("Cancelar");
+        jBtnCancelarCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarCliActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -346,7 +464,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jtfNomeCli)
+                                .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
@@ -386,7 +504,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jtfNomeCli)
+                                .addComponent(jLabel5)
                                 .addComponent(jTfNomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -434,21 +552,71 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jLabel9.setText("Código:");
 
+        jTfCodigoPro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfCodigoProKeyReleased(evt);
+            }
+        });
+
         jLabel10.setText("Quantidade:");
+
+        jTfQuantidadePro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfQuantidadeProKeyReleased(evt);
+            }
+        });
 
         jLabel11.setText("Unidade:");
 
+        jTfUnidadePro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfUnidadeProKeyReleased(evt);
+            }
+        });
+
         jLabel12.setText("Preço:");
+
+        jTfPrecoPro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfPrecoProKeyReleased(evt);
+            }
+        });
 
         jLabel13.setText("Descrição:");
 
+        jTfDescricaoPro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfDescricaoProKeyReleased(evt);
+            }
+        });
+
         jBtnNovoPro.setText("Novo");
+        jBtnNovoPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoProActionPerformed(evt);
+            }
+        });
 
         jBtnEditarPro.setText("Editar");
+        jBtnEditarPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarProActionPerformed(evt);
+            }
+        });
 
         jBtnExcluirPro.setText("Excluir");
+        jBtnExcluirPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirProActionPerformed(evt);
+            }
+        });
 
         jBtnCancelarPro.setText("Cancelar");
+        jBtnCancelarPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarProActionPerformed(evt);
+            }
+        });
 
         jBtnSalvarPro.setText("Salvar");
         jBtnSalvarPro.addActionListener(new java.awt.event.ActionListener() {
@@ -574,12 +742,6 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Produto", jPanel2);
 
-        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jScrollPane1MouseClicked(evt);
-            }
-        });
-
         jTbFor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -602,21 +764,71 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jLabel19.setText("Código:");
 
+        jTfCodigoFor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfCodigoForKeyReleased(evt);
+            }
+        });
+
         jLabel20.setText("Telefone:");
+
+        jTfTelefoneFor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfTelefoneForKeyReleased(evt);
+            }
+        });
 
         jLabel21.setText("Contato:");
 
+        jTfContatoFor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfContatoForKeyReleased(evt);
+            }
+        });
+
         jLabel22.setText("Email:");
+
+        jTfEmailFor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfEmailForKeyReleased(evt);
+            }
+        });
 
         jLabel23.setText("Empresa:");
 
+        jTfEmpresaFor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTfEmpresaForKeyReleased(evt);
+            }
+        });
+
         jBtnNovoFor.setText("Novo");
+        jBtnNovoFor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoForActionPerformed(evt);
+            }
+        });
 
         jBtnEditarFor.setText("Editar");
+        jBtnEditarFor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarForActionPerformed(evt);
+            }
+        });
 
         jBtnExluirFor.setText("Excluir");
+        jBtnExluirFor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExluirForActionPerformed(evt);
+            }
+        });
 
         jBtnCancelarFor.setText("Cancelar");
+        jBtnCancelarFor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarForActionPerformed(evt);
+            }
+        });
 
         jBtnSalvarFor.setText("Salvar");
         jBtnSalvarFor.addActionListener(new java.awt.event.ActionListener() {
@@ -747,6 +959,10 @@ public class FormPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    // --- Funções do Design
+    // <editor-fold defaultstate="collapsed" desc="Gerados">
+    // <editor-fold defaultstate="collapsed" desc="Botões Salvar">
+    // Botão Salvar Cliente
     private void jBtnSalvarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarCliActionPerformed
         int cod = Integer.parseInt(jTfCodigoCli.getText());
         String nome = jTfNomeCli.getText();
@@ -762,10 +978,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                 + "\nEndereço: " + endereco,
                 "confirmar", JOptionPane.YES_NO_OPTION);
         if (a == JOptionPane.YES_NO_OPTION) {
-            Cliente cliente = new Cliente(nome, telefone);
-            cliente.setCodigo(cod);
-            cliente.setEmail(email);
-            cliente.setEndereco(endereco);
+            Cliente cliente = new Cliente(cod, nome, telefone, email, endereco);
 
             listaCliente.add(cliente);
             tblCliente();
@@ -773,6 +986,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnSalvarCliActionPerformed
 
+    // Botão Salvar Produto
     private void jBtnSalvarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarProActionPerformed
         int codigo = Integer.parseInt(jTfCodigoPro.getText());
         String descricao = jTfDescricaoPro.getText();
@@ -796,6 +1010,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnSalvarProActionPerformed
 
+    // Botão Salvar Fornecedor
     private void jBtnSalvarForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarForActionPerformed
         int codigo = Integer.parseInt(jTfCodigoFor.getText());
         String contato = jTfContatoFor.getText();
@@ -818,10 +1033,10 @@ public class FormPrincipal extends javax.swing.JFrame {
             saveFor();
         }
     }//GEN-LAST:event_jBtnSalvarForActionPerformed
-
-    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
-    }//GEN-LAST:event_jScrollPane1MouseClicked
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Clicar nas Tabelas">
+    // Tabela Selecionada Cliente
     private void jTbCliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbCliMouseClicked
         int linhaSelect = jTbCli.getSelectedRow();
 
@@ -831,9 +1046,12 @@ public class FormPrincipal extends javax.swing.JFrame {
             jTfTelefoneCli.setText(jTbCli.getValueAt(linhaSelect, 2).toString());
             jTfEmailCli.setText(jTbCli.getValueAt(linhaSelect, 3).toString());
             jTaEnderecoCli.setText(jTbCli.getValueAt(linhaSelect, 4).toString());
+
+            ativadoCli(true, true);
         }
     }//GEN-LAST:event_jTbCliMouseClicked
 
+    // Tabela Selecionada Produto
     private void jTbProMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbProMouseClicked
         int linhaSelect = jTbPro.getSelectedRow();
 
@@ -843,9 +1061,12 @@ public class FormPrincipal extends javax.swing.JFrame {
             jTfUnidadePro.setText(jTbPro.getValueAt(linhaSelect, 2).toString());
             jTfQuantidadePro.setText(jTbPro.getValueAt(linhaSelect, 3).toString());
             jTfPrecoPro.setText(jTbPro.getValueAt(linhaSelect, 4).toString());
+
+            ativadoPro(true, true);
         }
     }//GEN-LAST:event_jTbProMouseClicked
 
+    // Tabela Selecionada Fornecedor
     private void jTbForMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbForMouseClicked
         int linhaSelect = jTbFor.getSelectedRow();
 
@@ -857,7 +1078,312 @@ public class FormPrincipal extends javax.swing.JFrame {
             jTfEmpresaFor.setText(jTbFor.getValueAt(linhaSelect, 4).toString());
         }
     }//GEN-LAST:event_jTbForMouseClicked
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Botões Cliente">
+    // Botão Novo Cliente
+    private void jBtnNovoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoCliActionPerformed
+        jTfCodigoCli.setText("");
+        jTfEmailCli.setText("");
+        jTfNomeCli.setText("");
+        jTfTelefoneCli.setText("");
+        jTaEnderecoCli.setText("");
 
+        jTbCli.clearSelection();
+
+        ativadoCli(true, false);
+
+        jBtnCancelarCli.setEnabled(true);
+        jBtnNovoCli.setEnabled(false);
+    }//GEN-LAST:event_jBtnNovoCliActionPerformed
+
+    // Botão Excluir Cliente
+    private void jBtnExcluirCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirCliActionPerformed
+        int selectedCli = jTbCli.getSelectedRow();
+        listaCliente.remove(selectedCli);
+        saveCli();
+        tblCliente();
+        ativadoCli(false, false);
+    }//GEN-LAST:event_jBtnExcluirCliActionPerformed
+
+    // Botão Cancelar Cliente
+    private void jBtnCancelarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCliActionPerformed
+        ativadoCli(false, false);
+    }//GEN-LAST:event_jBtnCancelarCliActionPerformed
+
+    // Verificar o texto dos campos
+    private void jTfCodigoCliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfCodigoCliKeyReleased
+        if (!jTfCodigoCli.getText().isEmpty() && !jTfNomeCli.getText().isEmpty() && !jTfTelefoneCli.getText().isEmpty() && !jTfEmailCli.getText().isEmpty() && !jTaEnderecoCli.getText().isEmpty()) {
+            jBtnSalvarCli.setEnabled(true);
+        } else {
+            jBtnSalvarCli.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfCodigoCliKeyReleased
+
+    private void jTfNomeCliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfNomeCliKeyReleased
+        if (!jTfCodigoCli.getText().isEmpty() && !jTfNomeCli.getText().isEmpty() && !jTfTelefoneCli.getText().isEmpty() && !jTfEmailCli.getText().isEmpty() && !jTaEnderecoCli.getText().isEmpty()) {
+            jBtnSalvarCli.setEnabled(true);
+        } else {
+            jBtnSalvarCli.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfNomeCliKeyReleased
+
+    private void jTfTelefoneCliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfTelefoneCliKeyReleased
+        if (!jTfCodigoCli.getText().isEmpty() && !jTfNomeCli.getText().isEmpty() && !jTfTelefoneCli.getText().isEmpty() && !jTfEmailCli.getText().isEmpty() && !jTaEnderecoCli.getText().isEmpty()) {
+            jBtnSalvarCli.setEnabled(true);
+        } else {
+            jBtnSalvarCli.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfTelefoneCliKeyReleased
+
+    private void jTfEmailCliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfEmailCliKeyReleased
+        if (!jTfCodigoCli.getText().isEmpty() && !jTfNomeCli.getText().isEmpty() && !jTfTelefoneCli.getText().isEmpty() && !jTfEmailCli.getText().isEmpty() && !jTaEnderecoCli.getText().isEmpty()) {
+            jBtnSalvarCli.setEnabled(true);
+        } else {
+            jBtnSalvarCli.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfEmailCliKeyReleased
+
+    private void jTaEnderecoCliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTaEnderecoCliKeyReleased
+        if (!jTfCodigoCli.getText().isEmpty() && !jTfNomeCli.getText().isEmpty() && !jTfTelefoneCli.getText().isEmpty() && !jTfEmailCli.getText().isEmpty() && !jTaEnderecoCli.getText().isEmpty()) {
+            jBtnSalvarCli.setEnabled(true);
+        } else {
+            jBtnSalvarCli.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTaEnderecoCliKeyReleased
+
+    // Botão Editar Cliente
+    private void jBtnEditarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarCliActionPerformed
+        int selectedCli = jTbCli.getSelectedRow();
+        int codigo = Integer.parseInt(jTfCodigoCli.getText());
+        String nome = jTfNomeCli.getText();
+        String telefone = jTfTelefoneCli.getText();
+        String email = jTfEmailCli.getText();
+        String endereco = jTaEnderecoCli.getText();
+
+        int opt = JOptionPane.showConfirmDialog(null,
+                "Deseja realmente editar essas informações?\n\n"
+                + "Código: " + codigo
+                + "\nNome: " + nome
+                + "\nTelefone: " + telefone
+                + "\nEmail: " + email
+                + "\nEndereço: " + endereco,
+                "Confirmar",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (opt == JOptionPane.YES_OPTION) {
+            Cliente cliente = new Cliente(codigo, nome, telefone, email, endereco);
+
+            listaCliente.add(selectedCli, cliente);
+            listaCliente.remove(selectedCli + 1);
+            tblCliente();
+            saveCli();
+        }
+    }//GEN-LAST:event_jBtnEditarCliActionPerformed
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Botões Produto">
+    // Botão Novo Produto
+    private void jBtnNovoProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoProActionPerformed
+        jTfCodigoPro.setText("");
+        jTfUnidadePro.setText("");
+        jTfQuantidadePro.setText("");
+        jTfPrecoPro.setText("");
+        jTfDescricaoPro.setText("");
+
+        jTbPro.clearSelection();
+
+        ativadoPro(true, false);
+
+        jBtnCancelarPro.setEnabled(true);
+        jBtnNovoPro.setEnabled(false);
+    }//GEN-LAST:event_jBtnNovoProActionPerformed
+
+    // Botão Cancelar Produto
+    private void jBtnCancelarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarProActionPerformed
+        ativadoPro(false, false);
+    }//GEN-LAST:event_jBtnCancelarProActionPerformed
+
+    // Botão Excluir Produto
+    private void jBtnExcluirProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProActionPerformed
+        int selectedPro = jTbPro.getSelectedRow();
+        listaProduto.remove(selectedPro);
+        savePro();
+        tblProduto();
+        ativadoPro(false, false);
+    }//GEN-LAST:event_jBtnExcluirProActionPerformed
+
+    // Botão Editar Produto
+    private void jBtnEditarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarProActionPerformed
+        int selectedPro = jTbPro.getSelectedRow();
+        int codigo = Integer.parseInt(jTfCodigoPro.getText());
+        String descricao = jTfDescricaoPro.getText();
+        String unidade = jTfUnidadePro.getText();
+        int quantidade = Integer.parseInt(jTfQuantidadePro.getText());
+        double preco = Double.parseDouble(jTfPrecoPro.getText());
+
+        int opt = JOptionPane.showConfirmDialog(null, "Deseja realmente salvar estas informações?\n\n"
+                + "Código: " + codigo
+                + "\nDescrição: " + descricao
+                + "\nUnidade: " + unidade
+                + "\nQuantidade: " + quantidade
+                + "\nPreço: " + preco,
+                "confirmar", JOptionPane.YES_NO_OPTION);
+
+        if (opt == JOptionPane.YES_OPTION) {
+            Produto produto = new Produto(codigo, descricao, unidade, quantidade, preco);
+
+            listaProduto.add(selectedPro, produto);
+            listaProduto.remove(selectedPro + 1);
+            tblProduto();
+            savePro();
+        }
+    }//GEN-LAST:event_jBtnEditarProActionPerformed
+
+    // Verificar o texto dos campos 
+    private void jTfCodigoProKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfCodigoProKeyReleased
+        if (!jTfCodigoPro.getText().isEmpty() && !jTfUnidadePro.getText().isEmpty() && !jTfQuantidadePro.getText().isEmpty() && !jTfPrecoPro.getText().isEmpty() && !jTfDescricaoPro.getText().isEmpty()) {
+            jBtnSalvarPro.setEnabled(true);
+        } else {
+            jBtnSalvarPro.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfCodigoProKeyReleased
+
+    private void jTfUnidadeProKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfUnidadeProKeyReleased
+        if (!jTfCodigoPro.getText().isEmpty() && !jTfUnidadePro.getText().isEmpty() && !jTfQuantidadePro.getText().isEmpty() && !jTfPrecoPro.getText().isEmpty() && !jTfDescricaoPro.getText().isEmpty()) {
+            jBtnSalvarPro.setEnabled(true);
+        } else {
+            jBtnSalvarPro.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfUnidadeProKeyReleased
+
+    private void jTfQuantidadeProKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfQuantidadeProKeyReleased
+        if (!jTfCodigoPro.getText().isEmpty() && !jTfUnidadePro.getText().isEmpty() && !jTfQuantidadePro.getText().isEmpty() && !jTfPrecoPro.getText().isEmpty() && !jTfDescricaoPro.getText().isEmpty()) {
+            jBtnSalvarPro.setEnabled(true);
+        } else {
+            jBtnSalvarPro.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfQuantidadeProKeyReleased
+
+    private void jTfPrecoProKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfPrecoProKeyReleased
+        if (!jTfCodigoPro.getText().isEmpty() && !jTfUnidadePro.getText().isEmpty() && !jTfQuantidadePro.getText().isEmpty() && !jTfPrecoPro.getText().isEmpty() && !jTfDescricaoPro.getText().isEmpty()) {
+            jBtnSalvarPro.setEnabled(true);
+        } else {
+            jBtnSalvarPro.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfPrecoProKeyReleased
+
+    private void jTfDescricaoProKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfDescricaoProKeyReleased
+        if (!jTfCodigoPro.getText().isEmpty() && !jTfUnidadePro.getText().isEmpty() && !jTfQuantidadePro.getText().isEmpty() && !jTfPrecoPro.getText().isEmpty() && !jTfDescricaoPro.getText().isEmpty()) {
+            jBtnSalvarPro.setEnabled(true);
+        } else {
+            jBtnSalvarPro.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfDescricaoProKeyReleased
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Botões Fornecedor">
+    // Botão Novo Fornecedor
+    private void jBtnNovoForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoForActionPerformed
+        jTfCodigoFor.setText("");
+        jTfContatoFor.setText("");
+        jTfTelefoneFor.setText("");
+        jTfEmailFor.setText("");
+        jTfEmpresaFor.setText("");
+
+        jTbFor.clearSelection();
+
+        ativadoFor(true, false);
+
+        jBtnCancelarFor.setEnabled(true);
+        jBtnNovoFor.setEnabled(false);
+    }//GEN-LAST:event_jBtnNovoForActionPerformed
+
+    // Botão Editar Fornecedor
+    private void jBtnEditarForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarForActionPerformed
+        int selectedFor = jTbPro.getSelectedRow();
+        int codigo = Integer.parseInt(jTfCodigoFor.getText());
+        String contato = jTfContatoFor.getText();
+        String telefone = jTfTelefoneFor.getText();
+        String email = jTfEmailFor.getText();
+        String empresa = jTfEmpresaFor.getText();
+
+        int a = JOptionPane.showConfirmDialog(null, "Deseja realmente salvar estas informações?\n\n"
+                + "Código: " + codigo
+                + "\nContato: " + contato
+                + "\nTelefone: " + telefone
+                + "\nEmail: " + email
+                + "\nEmpresa: " + empresa,
+                "confirmar", JOptionPane.YES_NO_OPTION);
+        if (a == JOptionPane.YES_NO_OPTION) {
+            Fornecedor fornecedor = new Fornecedor(codigo, contato, telefone, email, empresa);
+
+            listaFornecedor.add(selectedFor, fornecedor);
+            listaFornecedor.remove(selectedFor + 1);
+            tblFornecedor();
+            saveFor();
+        }
+        
+    }//GEN-LAST:event_jBtnEditarForActionPerformed
+
+    // Botão Excluir Fornecedor
+    private void jBtnExluirForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExluirForActionPerformed
+        int selectedFor = jTbFor.getSelectedRow();
+        listaFornecedor.remove(selectedFor);
+        saveFor();
+        tblFornecedor();
+        ativadoFor(false, false);
+    }//GEN-LAST:event_jBtnExluirForActionPerformed
+
+    // Botão Cancelar Fornecedor
+    private void jBtnCancelarForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarForActionPerformed
+        ativadoFor(false, false);
+    }//GEN-LAST:event_jBtnCancelarForActionPerformed
+
+    // Verificar o texto dos campos
+    private void jTfCodigoForKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfCodigoForKeyReleased
+        if (!jTfCodigoFor.getText().isEmpty() && !jTfContatoFor.getText().isEmpty() && !jTfTelefoneFor.getText().isEmpty() && !jTfEmailFor.getText().isEmpty() && !jTfEmpresaFor.getText().isEmpty()) {
+            jBtnSalvarFor.setEnabled(true);
+        } else {
+            jBtnSalvarFor.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfCodigoForKeyReleased
+
+    private void jTfContatoForKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfContatoForKeyReleased
+        if (!jTfCodigoFor.getText().isEmpty() && !jTfContatoFor.getText().isEmpty() && !jTfTelefoneFor.getText().isEmpty() && !jTfEmailFor.getText().isEmpty() && !jTfEmpresaFor.getText().isEmpty()) {
+            jBtnSalvarFor.setEnabled(true);
+        } else {
+            jBtnSalvarFor.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfContatoForKeyReleased
+
+    private void jTfTelefoneForKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfTelefoneForKeyReleased
+        if (!jTfCodigoFor.getText().isEmpty() && !jTfContatoFor.getText().isEmpty() && !jTfTelefoneFor.getText().isEmpty() && !jTfEmailFor.getText().isEmpty() && !jTfEmpresaFor.getText().isEmpty()) {
+            jBtnSalvarFor.setEnabled(true);
+        } else {
+            jBtnSalvarFor.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfTelefoneForKeyReleased
+
+    private void jTfEmailForKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfEmailForKeyReleased
+        if (!jTfCodigoFor.getText().isEmpty() && !jTfContatoFor.getText().isEmpty() && !jTfTelefoneFor.getText().isEmpty() && !jTfEmailFor.getText().isEmpty() && !jTfEmpresaFor.getText().isEmpty()) {
+            jBtnSalvarFor.setEnabled(true);
+        } else {
+            jBtnSalvarFor.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfEmailForKeyReleased
+
+    private void jTfEmpresaForKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTfEmpresaForKeyReleased
+        if (!jTfCodigoFor.getText().isEmpty() && !jTfContatoFor.getText().isEmpty() && !jTfTelefoneFor.getText().isEmpty() && !jTfEmailFor.getText().isEmpty() && !jTfEmpresaFor.getText().isEmpty()) {
+            jBtnSalvarFor.setEnabled(true);
+        } else {
+            jBtnSalvarFor.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTfEmpresaForKeyReleased
+    // </editor-fold>
+    // </editor-fold>
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -869,16 +1395,24 @@ public class FormPrincipal extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -889,7 +1423,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
     }
-
+    // <editor-fold defaultstate="collapsed" desc="Variáveis">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCancelarCli;
     private javax.swing.JButton jBtnCancelarFor;
@@ -919,6 +1453,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -949,6 +1484,6 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTfTelefoneCli;
     private javax.swing.JTextField jTfTelefoneFor;
     private javax.swing.JTextField jTfUnidadePro;
-    private javax.swing.JLabel jtfNomeCli;
     // End of variables declaration//GEN-END:variables
+// </editor-fold>
 }
