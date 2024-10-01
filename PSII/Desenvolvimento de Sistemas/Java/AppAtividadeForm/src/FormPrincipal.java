@@ -1076,6 +1076,8 @@ public class FormPrincipal extends javax.swing.JFrame {
             jTfTelefoneFor.setText(jTbFor.getValueAt(linhaSelect, 2).toString());
             jTfEmailFor.setText(jTbFor.getValueAt(linhaSelect, 3).toString());
             jTfEmpresaFor.setText(jTbFor.getValueAt(linhaSelect, 4).toString());
+            
+            ativadoFor(true, true);
         }
     }//GEN-LAST:event_jTbForMouseClicked
     // </editor-fold>
