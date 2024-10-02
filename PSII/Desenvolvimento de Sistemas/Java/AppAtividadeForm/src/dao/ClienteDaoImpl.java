@@ -1,0 +1,108 @@
+package dao;
+
+/**
+ * @author julio_busarello
+ */
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Cliente;
+
+public class ClienteDaoImpl implements ClienteDao {
+    
+    private Connection connection;
+
+    public ClienteDaoImpl() {
+        try {
+            String url = "jdbc:mysql://localhost:3306/db_cliente";
+            String user = "root";
+            String password = "";
+            connection = DriverManager.getConnection(url, user, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addCliente(Cliente cliente) {
+        try {
+            String query = "INSERT INTO cliente (nome, telefone, email, endereco) VALUES (?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, cliente.getNome());
+            statement.setString(2, cliente.getTelefone());
+            statement.setString(3, cliente.getEmail());
+            statement.setString(4, cliente.getEndereco());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Cliente getCliente(int id) {
+        Cliente cliente = null;
+        try {
+            String query = "SELECT * FROM cliente WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                cliente = new Cliente(resultSet.getInt("codigo"), resultSet.getString("nome"), resultSet.getString("telefone"), resultSet.getString("email"), resultSet.getString("endereco"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cliente;
+    }
+
+    @Override
+    public List<Cliente> getAllClientes() {
+        List<Cliente> clientes = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM cliente";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                clientes.add(new Cliente(resultSet.getInt("codigo"), resultSet.getString("nome"), resultSet.getString("telefone"), resultSet.getString("email"), resultSet.getString("endereco")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clientes;
+    }
+
+    @Override
+    public void updateCliente(Cliente cliente) {
+        try {
+            String query = "UPDATE cliente SET nome = ?, telefone = ?, email = ?, endereco = ? WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, cliente.getNome());
+            statement.setString(2, cliente.getTelefone());
+            statement.setString(3, cliente.getEmail());
+            statement.setString(4, cliente.getEndereco());
+            statement.setInt(5, cliente.getCodigo());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteCliente(int id) {
+        try {
+            String query = "DELETE FROM cliente WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

@@ -1,4 +1,9 @@
+package View;
 
+
+import model.Produto;
+import model.Fornecedor;
+import model.Cliente;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -28,6 +33,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         ativadoPro(false, false);
         ativadoCli(false, false);
+        ativadoFor(false, false);
     }
     // </editor-fold>
 
@@ -78,7 +84,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         String conteudo = Arquivo.read(fileCli);
 
         if (conteudo.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Erro de leitura do arquivo");
+            JOptionPane.showMessageDialog(null, "Erro de leitura do arquivo cliente.db");
         } else {
             String[] linhaCli = conteudo.split("\n");
             String[] dadosCli;
@@ -144,7 +150,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         String conteudo = Arquivo.read(filePro);
 
         if (conteudo.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Erro de leitura do arquivo");
+            JOptionPane.showMessageDialog(null, "Erro de leitura do arquivo produto.db");
         } else {
             String[] linhaPro = conteudo.split("\n");
             String[] dadosPro;
@@ -162,7 +168,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Base Fornecedor">
     // Carregar Tabela Fornecedor
     public final void tblFornecedor() {
@@ -210,7 +216,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         String conteudo = Arquivo.read(fileFor);
 
         if (conteudo.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Erro de leitura do arquivo");
+            JOptionPane.showMessageDialog(null, "Erro de leitura do arquivo fornecedor.db");
         } else {
             String[] linhaFor = conteudo.split("\n");
             String[] dadosFor;
@@ -228,10 +234,18 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Ativado Interfaces">
     // Ativar e Desativar Botões Cliente
     public void ativadoCli(boolean campos, boolean selecao) {
+        if (campos == false) {
+            jTfCodigoCli.setText("");
+            jTfNomeCli.setText("");
+            jTfTelefoneCli.setText("");
+            jTfEmailCli.setText("");
+            jTaEnderecoCli.setText("");
+        }
+
         jTfCodigoCli.setEnabled(campos);
         jTfNomeCli.setEnabled(campos);
         jTfTelefoneCli.setEnabled(campos);
@@ -247,6 +261,14 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     //  Ativar e Desativar Botões Produto
     public void ativadoPro(boolean campos, boolean selecao) {
+        if (campos == false) {
+            jTfCodigoPro.setText("");
+            jTfUnidadePro.setText("");
+            jTfQuantidadePro.setText("");
+            jTfPrecoPro.setText("");
+            jTfDescricaoPro.setText("");
+        }
+
         jTfCodigoPro.setEnabled(campos);
         jTfUnidadePro.setEnabled(campos);
         jTfQuantidadePro.setEnabled(campos);
@@ -262,6 +284,14 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     //  Ativar e Desativar Botões Produto
     public void ativadoFor(boolean campos, boolean selecao) {
+        if (campos == false) {
+            jTfCodigoFor.setText("");
+            jTfContatoFor.setText("");
+            jTfTelefoneFor.setText("");
+            jTfEmailFor.setText("");
+            jTfEmpresaFor.setText("");
+        }
+
         jTfCodigoFor.setEnabled(campos);
         jTfContatoFor.setEnabled(campos);
         jTfTelefoneFor.setEnabled(campos);
@@ -276,7 +306,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     }
     // </editor-fold>
     // </editor-fold>
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1034,7 +1064,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnSalvarForActionPerformed
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Clicar nas Tabelas">
     // Tabela Selecionada Cliente
     private void jTbCliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbCliMouseClicked
@@ -1076,12 +1106,12 @@ public class FormPrincipal extends javax.swing.JFrame {
             jTfTelefoneFor.setText(jTbFor.getValueAt(linhaSelect, 2).toString());
             jTfEmailFor.setText(jTbFor.getValueAt(linhaSelect, 3).toString());
             jTfEmpresaFor.setText(jTbFor.getValueAt(linhaSelect, 4).toString());
-            
+
             ativadoFor(true, true);
         }
     }//GEN-LAST:event_jTbForMouseClicked
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Botões Cliente">
     // Botão Novo Cliente
     private void jBtnNovoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoCliActionPerformed
@@ -1181,10 +1211,11 @@ public class FormPrincipal extends javax.swing.JFrame {
             listaCliente.remove(selectedCli + 1);
             tblCliente();
             saveCli();
+            ativadoCli(false, false);
         }
     }//GEN-LAST:event_jBtnEditarCliActionPerformed
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Botões Produto">
     // Botão Novo Produto
     private void jBtnNovoProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoProActionPerformed
@@ -1240,6 +1271,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             listaProduto.remove(selectedPro + 1);
             tblProduto();
             savePro();
+            ativadoPro(false, false);
         }
     }//GEN-LAST:event_jBtnEditarProActionPerformed
 
@@ -1284,7 +1316,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTfDescricaoProKeyReleased
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Botões Fornecedor">
     // Botão Novo Fornecedor
     private void jBtnNovoForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoForActionPerformed
@@ -1325,8 +1357,9 @@ public class FormPrincipal extends javax.swing.JFrame {
             listaFornecedor.remove(selectedFor + 1);
             tblFornecedor();
             saveFor();
+            ativadoFor(false, false);
         }
-        
+
     }//GEN-LAST:event_jBtnEditarForActionPerformed
 
     // Botão Excluir Fornecedor
@@ -1385,7 +1418,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTfEmpresaForKeyReleased
     // </editor-fold>
     // </editor-fold>
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
