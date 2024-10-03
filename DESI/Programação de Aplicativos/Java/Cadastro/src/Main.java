@@ -1,4 +1,3 @@
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -179,19 +178,39 @@ public class Main extends JFrame {
 
         btnAtualizar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                listaFuncionarios.clear();
+                for(int i = 0; i < modeloTabela.getRowCount(); i++){
+                    String nome = (String) modeloTabela.getValueAt(i,0);
+                    String cpf = (String) modeloTabela.getValueAt(i,1);
+                    String endereco = (String) modeloTabela.getValueAt(i,2);
+                    String telefone = (String) modeloTabela.getValueAt(i,3);
+                    String cargo = (String) modeloTabela.getValueAt(i,4);
 
+                    Funcionario func = new Funcionario(nome, cpf, endereco, telefone, cargo);
+                    listaFuncionarios.add(func);
+                    func.exportarParaTXT(listaFuncionarios);
+                }
+                JOptionPane.showMessageDialog(null, "A lista foi atualizada com sucesso!");
             }
         });
 
         btnExcluir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                int linhaSelecionada = tabelaFuncionarios.getSelectedRow();
+                if(linhaSelecionada != -1){
+                    listaFuncionarios.remove(linhaSelecionada);
+                    modeloTabela.removeRow(linhaSelecionada);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Selecione um funcionário para excluir!");
+                }
             }
         });
 
         btnCargo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                dispose();
+                Cargo tela = new Cargo();
+                tela.setVisible(true);
             }
         });
 
