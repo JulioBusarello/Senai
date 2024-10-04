@@ -55,7 +55,7 @@ public class FormProduto extends javax.swing.JInternalFrame {
         jBtnEditarPro.setEnabled(selecao);
         jBtnExcluirPro.setEnabled(selecao);
         jBtnSalvarPro.setEnabled(false);
-        jBtnCancelarPro.setEnabled(false);
+        jBtnCancelarPro.setEnabled(selecao);
         jBtnNovoPro.setEnabled(true);
         
         if(!selecao){

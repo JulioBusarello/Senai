@@ -61,7 +61,7 @@ public class FormCliente extends javax.swing.JInternalFrame {
         jBtnEditarCli.setEnabled(selecao);
         jBtnExcluirCli.setEnabled(selecao);
         jBtnSalvarCli.setEnabled(false);
-        jBtnCancelarCli.setEnabled(false);
+        jBtnCancelarCli.setEnabled(selecao);
         jBtnNovoCli.setEnabled(true);
         
         if(!selecao){

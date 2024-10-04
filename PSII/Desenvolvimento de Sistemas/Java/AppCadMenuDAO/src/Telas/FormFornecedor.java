@@ -61,7 +61,7 @@ public class FormFornecedor extends javax.swing.JInternalFrame {
         jBtnEditarFor.setEnabled(selecao);
         jBtnExcluirFor.setEnabled(selecao);
         jBtnSalvarFor.setEnabled(false);
-        jBtnCancelarFor.setEnabled(false);
+        jBtnCancelarFor.setEnabled(selecao);
         jBtnNovoFor.setEnabled(true);
         
         if(!selecao){
