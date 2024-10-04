@@ -1,5 +1,7 @@
 package model;
 
+
+
 /**
  * @author julio_busarello
  */
@@ -13,7 +15,7 @@ public class Produto {
     public Produto() {
     }
     
-    public Produto(int codigo, String descricao, String unidade, int qtd, double preco) {
+    public Produto(int codigo, double preco, String unidade, int qtd, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
         this.unidade = unidade;

@@ -21,7 +21,7 @@ public class ClienteDaoImpl implements ClienteDao {
 
     public ClienteDaoImpl() {
         try {
-            String url = "jdbc:mysql://localhost:3306/db_cliente";
+            String url = "jdbc:mysql://localhost:3306/db_cad";
             String user = "root";
             String password = "";
             connection = DriverManager.getConnection(url, user, password);
@@ -33,12 +33,13 @@ public class ClienteDaoImpl implements ClienteDao {
     @Override
     public void addCliente(Cliente cliente) {
         try {
-            String query = "INSERT INTO cliente (nome, telefone, email, endereco) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO cliente (id, nome, telefone, email, endereco) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, cliente.getNome());
-            statement.setString(2, cliente.getTelefone());
-            statement.setString(3, cliente.getEmail());
-            statement.setString(4, cliente.getEndereco());
+            statement.setInt(1, cliente.getCodigo());
+            statement.setString(2, cliente.getNome());
+            statement.setString(3, cliente.getTelefone());
+            statement.setString(4, cliente.getEmail());
+            statement.setString(5, cliente.getEndereco());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,7 +55,12 @@ public class ClienteDaoImpl implements ClienteDao {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                cliente = new Cliente(resultSet.getInt("codigo"), resultSet.getString("nome"), resultSet.getString("telefone"), resultSet.getString("email"), resultSet.getString("endereco"));
+                cliente = new Cliente(
+                        resultSet.getInt("id"), 
+                        resultSet.getString("nome"), 
+                        resultSet.getString("telefone"), 
+                        resultSet.getString("email"), 
+                        resultSet.getString("endereco"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,7 +76,12 @@ public class ClienteDaoImpl implements ClienteDao {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                clientes.add(new Cliente(resultSet.getInt("codigo"), resultSet.getString("nome"), resultSet.getString("telefone"), resultSet.getString("email"), resultSet.getString("endereco")));
+                clientes.add(new Cliente(
+                        resultSet.getInt("id"), 
+                        resultSet.getString("nome"), 
+                        resultSet.getString("telefone"), 
+                        resultSet.getString("email"), 
+                        resultSet.getString("endereco")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

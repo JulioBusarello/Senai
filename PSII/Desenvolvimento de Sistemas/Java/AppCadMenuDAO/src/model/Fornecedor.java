@@ -1,24 +1,26 @@
 package model;
 
+
+
 /**
  * @author julio_busarello
  */
-public class Cliente {
+public class Fornecedor {
     private int codigo;
-    private String nome;
+    private String contato;
     private String telefone;
     private String email;
-    private String endereco;
+    private String empresa;
     
-    public Cliente() {
+    public Fornecedor(){
     }
     
-    public Cliente(int codigo, String nome, String telefone, String email, String endereco) {
+    public Fornecedor(int codigo, String contato, String telefone, String email, String empresa) {
         this.codigo = codigo;
-        this.nome = nome;
+        this.contato = contato;
         this.telefone = telefone;
         this.email = email;
-        this.endereco = endereco;
+        this.empresa = empresa;
     }
 
     public int getCodigo() {
@@ -29,12 +31,20 @@ public class Cliente {
         this.codigo = codigo;
     }
 
-    public String getNome() {
-        return nome;
+    public String getEmpresa() {
+        return empresa;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
+    public String getContato() {
+        return contato;
+    }
+
+    public void setContato(String contato) {
+        this.contato = contato;
     }
 
     public String getTelefone() {
@@ -52,12 +62,4 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    } 
 }

@@ -1,9 +1,3 @@
-package View;
-
-
-import model.Produto;
-import model.Fornecedor;
-import model.Cliente;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +10,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     public static ArrayList<Cliente> listaCliente;
     public static ArrayList<Fornecedor> listaFornecedor;
     public static ArrayList<Produto> listaProduto;
+    
 
     // <editor-fold defaultstate="collapsed" desc="Criados">
     // <editor-fold defaultstate="collapsed" desc="Construtor">

@@ -1,24 +1,24 @@
-package model;
+
 
 /**
  * @author julio_busarello
  */
-public class Fornecedor {
+public class Cliente {
     private int codigo;
-    private String contato;
+    private String nome;
     private String telefone;
     private String email;
-    private String empresa;
+    private String endereco;
     
-    public Fornecedor(){
+    public Cliente() {
     }
     
-    public Fornecedor(int codigo, String contato, String telefone, String email, String empresa) {
+    public Cliente(int codigo, String nome, String telefone, String email, String endereco) {
         this.codigo = codigo;
-        this.contato = contato;
+        this.nome = nome;
         this.telefone = telefone;
         this.email = email;
-        this.empresa = empresa;
+        this.endereco = endereco;
     }
 
     public int getCodigo() {
@@ -29,20 +29,12 @@ public class Fornecedor {
         this.codigo = codigo;
     }
 
-    public String getEmpresa() {
-        return empresa;
+    public String getNome() {
+        return nome;
     }
 
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
-    }
-
-    public String getContato() {
-        return contato;
-    }
-
-    public void setContato(String contato) {
-        this.contato = contato;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getTelefone() {
@@ -60,4 +52,12 @@ public class Fornecedor {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    } 
 }
