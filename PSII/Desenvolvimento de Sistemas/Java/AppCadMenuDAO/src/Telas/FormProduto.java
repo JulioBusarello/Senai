@@ -63,6 +63,7 @@ public class FormProduto extends javax.swing.JInternalFrame {
         }
         if(editar){
             jTfCodigoPro.setEnabled(false);
+            jBtnCancelarPro.setEnabled(true);
         }
     }
     
@@ -340,6 +341,7 @@ public class FormProduto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtnExcluirProActionPerformed
 
     private void jBtnCancelarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarProActionPerformed
+        editar = false;
         ativadoPro(false, false, false);
     }//GEN-LAST:event_jBtnCancelarProActionPerformed
 

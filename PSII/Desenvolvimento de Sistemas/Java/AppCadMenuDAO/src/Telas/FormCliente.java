@@ -69,6 +69,7 @@ public class FormCliente extends javax.swing.JInternalFrame {
         }
         if(editar){
             jTfCodigoCli.setEnabled(false);
+            jBtnCancelarCli.setEnabled(true);
         }
     }
 
@@ -338,6 +339,7 @@ public class FormCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtnExcluirCliActionPerformed
 
     private void jBtnCancelarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarCliActionPerformed
+        editar = false;
         ativadoCli(false, false, false);
     }//GEN-LAST:event_jBtnCancelarCliActionPerformed
 

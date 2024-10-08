@@ -69,6 +69,7 @@ public class FormFornecedor extends javax.swing.JInternalFrame {
         }
         if(editar){
             jTfCodigoFor.setEnabled(false);
+            jBtnCancelarFor.setEnabled(true);
         }
     }
     
@@ -337,6 +338,7 @@ public class FormFornecedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtnExcluirForActionPerformed
 
     private void jBtnCancelarForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarForActionPerformed
+        editar = false;
         ativadoFor(false, false, false);
     }//GEN-LAST:event_jBtnCancelarForActionPerformed
 
