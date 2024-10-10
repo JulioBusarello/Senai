@@ -1,6 +1,6 @@
 -- drop database if exists db_cad;
 
-create database db_cad;
+create database if not exists db_cad;
 
 use db_cad;
 
