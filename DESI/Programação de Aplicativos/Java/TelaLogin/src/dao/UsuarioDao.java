@@ -19,8 +19,25 @@ public class UsuarioDao {
         this.con = new ConexaoBanco().getConexao();
     }
     
-    public Usuario logar(String email, String senha){
-        return null;
+    public Usuario logar(String nome, String senha){
+        Usuario usuario = null;
+        String sql = "SELECT * FROM login WHERE nome_login = ? AND password_login = ?";
+        
+        try (Connection connection = new ConexaoBanco().getConexao(); 
+                PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setString(1, nome);
+            stmt.setString(2, senha);
+            try (ResultSet rs = stmt.executeQuery()){
+                if(rs.next()){
+                    usuario = new Usuario();
+                    usuario.setUsuario(rs.getString("nome_login"));
+                    usuario.setPassword(rs.getString("password_login"));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return usuario;
     }
     
     public void cadastrarUsu(Usuario usuario){

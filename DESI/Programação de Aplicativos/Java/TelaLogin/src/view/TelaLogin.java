@@ -41,7 +41,6 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel3.setText("Senha:");
 
         jPfPass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPfPass.setText("jPasswordField1");
 
         jBtnLogin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jBtnLogin.setText("Logar");
@@ -112,7 +111,8 @@ public class TelaLogin extends javax.swing.JFrame {
             TelaPrincipal tela = new TelaPrincipal();
             tela.setVisible(true);
         }else{
-            JOptionPane.showConfirmDialog(null, "Usuário ou Senha inválido!");
+            JOptionPane.showMessageDialog(null, "Usuário ou Senha inválido!");
+            dispose();
             TelaLogin telaLogin = new TelaLogin();
             telaLogin.setVisible(true);
         }
