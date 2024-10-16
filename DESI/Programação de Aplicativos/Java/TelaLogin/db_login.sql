@@ -1,5 +1,4 @@
 create database if not exists db_login;
-
 use db_login;
 
 create table Login(
@@ -9,5 +8,4 @@ create table Login(
     nome_login varchar(50) not null
 );
 
-insert into Login (user_login, password_login, nome_Login) values ("julio", "teste1234", "juliobusarello");
-INSERT INTO Login (id, user_login, password_login, nome_login) VALUES (2, "teste", "123", "teste");
+INSERT INTO Login (id, user_login, password_login, nome_login) VALUES (1, "admin", "admin123", "admin");

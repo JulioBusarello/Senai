@@ -4,32 +4,38 @@ package view;
  * @author julio_busarello
  */
 public class Usuario {
-    private String nome, usuario, password;
+    private String name, user, password;
     private Integer cod;
     
     public Usuario(){
     }
     
-    public Usuario(Integer cod, String nome, String usuario, String password){
-        this.nome = nome;
-        this.usuario = usuario;
+    public Usuario(String name, String user, String password){
+        this.name = name;
+        this.user = user;
+        this.password = password;
+    }
+    
+    public Usuario(Integer cod, String name, String user, String password){
+        this.name = name;
+        this.user = user;
         this.password = password;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String nome) {
+        this.name = nome;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUser() {
+        return user;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getPassword() {

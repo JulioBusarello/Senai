@@ -104,9 +104,8 @@ public class TelaLogin extends javax.swing.JFrame {
         UsuarioDao usuarioDao = new UsuarioDao();
         String user = jTfUser.getText().trim();
         String pass = new String(jPfPass.getPassword());
-        Usuario usuario = usuarioDao.logar(user, pass);
+        Usuario usuario = usuarioDao.login(user, pass);
         if(usuario != null){
-            JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
             dispose();
             TelaPrincipal tela = new TelaPrincipal();
             tela.setVisible(true);
@@ -118,9 +117,6 @@ public class TelaLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnLoginActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

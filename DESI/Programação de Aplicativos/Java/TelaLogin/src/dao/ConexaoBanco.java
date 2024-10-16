@@ -12,7 +12,7 @@ public class ConexaoBanco {
         try {
             return DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/db_login","root","");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Não foi possível realizar a conexão com o Banco de Dados!");
+            JOptionPane.showMessageDialog(null, "Não foi possível realizar a conexão com o Banco de Dados!" +e.getMessage());
             return null;
         }
     }
