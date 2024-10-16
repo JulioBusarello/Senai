@@ -18,14 +18,16 @@ public class ProdutoController {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    @GetMapping("/produto")
+    @GetMapping("/produto/")
     public String showForm(Model model) {
+        model.addAttribute("produtos", produtoRepository.findAll());
+
         model.addAttribute("produto", new Produto());
         return "index.html";
     }
 
-    @PostMapping("/saveProduto")
-    public String saveProduct(@ModelAttribute Produto produto){
+    @PostMapping("/produto/salvar")
+    public String salvarProduto(@ModelAttribute Produto produto){
         produtoRepository.save(produto);
         return "redirect:/index.html";
     }

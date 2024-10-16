@@ -17,14 +17,16 @@ public class PedidoController {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    @GetMapping("/pedido")
+    @GetMapping("/pedido/")
     public String showForm(Model model) {
+        model.addAttribute("pedidos", pedidoRepository.findAll());
+
         model.addAttribute("pedido", new Pedido());
         return "index.html";
     }
 
-    @PostMapping("/savePedido")
-    public String saveProduct(@ModelAttribute Pedido pedido){
+    @PostMapping("/pedido/salvar")
+    public String salvarPedido(@ModelAttribute Pedido pedido){
         pedidoRepository.save(pedido);
         return "redirect:/index.html";
     }

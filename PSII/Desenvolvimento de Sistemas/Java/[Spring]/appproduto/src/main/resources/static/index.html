@@ -18,6 +18,11 @@
         text-align: center;
     }
 
+    h3{
+        color: #333;
+        text-align: center;
+    }
+
     form{
         background-color: #fff;
         padding: 20px;
@@ -34,7 +39,7 @@
     }
 
     input[type="text"],
-    input[type="number"] 
+    input[type="number"],
     input[type="date"] {
         width: calc(100% - 20px);
         padding: 10px;
@@ -44,6 +49,7 @@
     }
 
     input[type="submit"]{
+        width: 100%;
         background-color: #4cAF50;
         color: white;
         padding: 10px 15px;
@@ -56,11 +62,26 @@
         background-color: #4cA049;
     }
 
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    table, th, td{
+        border: 1px solid #CCC;
+    }
+
+    th, td{
+        padding: 10px;
+        text-align: left;
+    }
+
 </style>
 <body>
     <div class="Produto">
-        <h2>Cadastro de Produto</h2>
-        <form action="/saveProduto" method="post">
+        <form action="/produto/salvar" method="post">
+            <h2>Cadastro de Produto</h2>
             <label for="descricao">Descrição:</label>
             <input type="text" id="descricao" name="descricao" required><br>
 
@@ -69,10 +90,23 @@
 
             <input type="submit" value="Cadastrar Produto">
         </form>
+        <h3>Produtos Cadastrados</h3>
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
     </div>
     <div class="Pedido">
-        <h2>Cadastro de Pedido</h2>
-        <form action="/savePedido" method="post">
+        <form action="/pedido/salvar" method="post">
+            <h2>Cadastro de Pedido</h2>
             <label for="dataPedido">Data do Pedido:</label>
             <input type="date" id="dataPedido" name="dataPedido" required><br>
 
