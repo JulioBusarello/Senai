@@ -59,12 +59,15 @@ public class UsuarioDao {
         return usuario;
     }
 
-    public void cadastrarUsu(Usuario usuario) {
-
-    }
-
-    public void removerUsu(int idLogin) throws SQLException {
-
+    public void removeUsu(int idLogin) throws SQLException {
+        String sql = "DELETE FROM login WHERE id = ?";
+        try(Connection connection = new ConexaoBanco().getConexao(); PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, idLogin);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "O usuário foi excluído com sucesso!");
+        } catch (java.sql.SQLIntegrityConstraintViolationException e) {
+            throw new SQLException ("Erro: Não foi possível excluir o Usuário!" + e);
+        }
     }
 
     public ArrayList<Usuario> getAllUsuarios() {

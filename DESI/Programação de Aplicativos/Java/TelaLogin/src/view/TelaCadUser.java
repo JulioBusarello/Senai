@@ -42,6 +42,11 @@ public class TelaCadUser extends javax.swing.JFrame {
         });
 
         jBtnListar.setText("Listar");
+        jBtnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnListarActionPerformed(evt);
+            }
+        });
 
         jBtnAdicionar.setText("Adicionar");
         jBtnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +134,7 @@ public class TelaCadUser extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAdicionarActionPerformed
@@ -154,6 +160,12 @@ public class TelaCadUser extends javax.swing.JFrame {
         TelaPrincipal tela = new TelaPrincipal();
         tela.setVisible(true);
     }//GEN-LAST:event_jLaVoltarMouseClicked
+
+    private void jBtnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnListarActionPerformed
+        dispose();
+        TelaListaUser tela = new TelaListaUser();
+        tela.setVisible(true);
+    }//GEN-LAST:event_jBtnListarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
