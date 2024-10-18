@@ -1,25 +1,23 @@
 package com.psii.app_prod_ped.model;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
 
 @Entity
 public class Produto {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String descricao;
-    private Double preco;
+    long id;
+    String descricao;
+    Double preco;
 
-    // --- Getters and Setters
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -38,4 +36,5 @@ public class Produto {
     public void setPreco(Double preco) {
         this.preco = preco;
     }
+
 }

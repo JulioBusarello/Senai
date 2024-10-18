@@ -22,16 +22,14 @@ public class PedidoController {
     private ProdutoRepository produtoRepository;
 
     @GetMapping
-    public String listarPedidos(Model model){
+    public String listarPedidos(Model model) {
         model.addAttribute("pedidos", pedidoRepository.findAll());
         model.addAttribute("produtos", produtoRepository.findAll());
-
-        //model.addAttibute("novoPedido", new Pedido());
-        return "index"; // Caminho para o JSP
+        return "index";
     }
 
     @PostMapping
-    public String salvarPedido (@ModelAttribute Pedido pedido){
+    public String salvarPedido(@ModelAttribute Pedido pedido) {
         pedidoRepository.save(pedido);
         return "redirect:/pedido";
     }
