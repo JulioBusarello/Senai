@@ -1,7 +1,7 @@
 package view;
 
 import dao.UsuarioDao;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -11,6 +11,11 @@ public class TelaListaUser extends javax.swing.JFrame {
 
     public TelaListaUser() {
         initComponents();
+        
+        String[] titulos  = {"Código","Nome","Usuário","Senha"};
+        for(int i = 0; i < titulos.length; i++){
+            jTbDados.getColumnModel().getColumn(i).setHeaderValue(titulos[i]);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -36,7 +41,8 @@ public class TelaListaUser extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Visualização de Dados");
 
         jLabel2.setText("Código:");
@@ -75,20 +81,16 @@ public class TelaListaUser extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 79, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(119, 119, 119))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jBtnVisualizar)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBtnVisualizar)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnExcluir)
-                        .addGap(73, 73, 73))))
+                        .addComponent(jTfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnExcluir)
+                .addGap(73, 73, 73))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,7 +106,7 @@ public class TelaListaUser extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jBtnVisualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
         );
 
         pack();
@@ -128,9 +130,21 @@ public class TelaListaUser extends javax.swing.JFrame {
 
     private void jBtnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVisualizarActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTbDados.getModel();
-        
         model.setRowCount(0);
         
+        UsuarioDao usu = new UsuarioDao();
+        ArrayList<Usuario> listUsu = new ArrayList<>();
+        listUsu = usu.getAllUsuarios();
+        
+        for(Usuario usuario : listUsu){
+            Object[] linha = {
+                usuario.getCod(),
+                usuario.getName(),
+                usuario.getPassword(),
+                usuario.getUser()
+            };
+            model.addRow(linha);
+        }
     }//GEN-LAST:event_jBtnVisualizarActionPerformed
 
     public static void main(String args[]) {

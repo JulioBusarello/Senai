@@ -8,4 +8,4 @@ create table Login(
     nome_login varchar(50) not null
 );
 
-INSERT INTO Login (id, user_login, password_login, nome_login) VALUES (1, "admin", "admin123", "admin");
+INSERT INTO Login (id, user_login, password_login, nome_login) VALUES (1, "1", "1", "1");

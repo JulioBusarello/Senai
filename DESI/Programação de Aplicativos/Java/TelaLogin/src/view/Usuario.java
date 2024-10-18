@@ -26,8 +26,8 @@ public class Usuario {
         return name;
     }
 
-    public void setName(String nome) {
-        this.name = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUser() {
@@ -48,6 +48,10 @@ public class Usuario {
 
     public Integer getCod() {
         return cod;
-    } 
+    }
+
+    public void setCod(Integer cod) {
+        this.cod = cod;
+    }
     
 }

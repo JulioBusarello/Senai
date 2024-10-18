@@ -1,5 +1,7 @@
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  * @author julio_busarello
  */
@@ -13,10 +15,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu3 = new javax.swing.JMenu();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMiCadUsuario = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMeSair = new javax.swing.JMenu();
+
+        jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -32,8 +37,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Sair");
-        jMenuBar1.add(jMenu2);
+        jMeSair.setText("Sair");
+        jMeSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMeSairMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMeSair);
 
         setJMenuBar(jMenuBar1);
 
@@ -58,9 +68,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tela.setVisible(true);
     }//GEN-LAST:event_jMiCadUsuarioActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jMeSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMeSairMouseClicked
+        JOptionPane.showMessageDialog(null, "Você escolheu sair!");
+        System.exit(0);
+    }//GEN-LAST:event_jMeSairMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -94,8 +106,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMeSair;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMiCadUsuario;
     // End of variables declaration//GEN-END:variables
