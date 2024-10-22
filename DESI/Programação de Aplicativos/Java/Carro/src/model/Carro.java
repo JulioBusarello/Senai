@@ -15,6 +15,12 @@ public class Carro {
     public Carro(){
     }
     
+    public Carro(int cod, String descricao, int potencia, String cor){
+        this.des_carro = descricao;
+        this.pot_carro = potencia;
+        this.cor_carro = cor;
+    }
+    
     public Carro(String descricao, int potencia, String cor){
         this.des_carro = descricao;
         this.pot_carro = potencia;
