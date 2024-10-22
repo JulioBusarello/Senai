@@ -25,11 +25,11 @@ public class CarroView extends javax.swing.JFrame {
 
     public CarroView() {
         initComponents();
-        loadCli();
+        loadCar();
         visual(true, false, false);
     }
 
-    public void loadCli() {
+    public void loadCar() {
         DefaultTableModel defaultCar = new DefaultTableModel(new Object[]{
             "Código",
             "Descrição",
@@ -72,6 +72,7 @@ public class CarroView extends javax.swing.JFrame {
         jBtnVisualizar.setEnabled(true);
 
         jBtnVisualizar.setText("Visualizar");
+        jBtnAdd.setText("Adicionar");
 
         if (selecao == false) {
             jTbCarros.clearSelection();
@@ -92,6 +93,7 @@ public class CarroView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTfCodigo = new javax.swing.JTextField();
@@ -108,6 +110,8 @@ public class CarroView extends javax.swing.JFrame {
         jBtnExcluir = new javax.swing.JButton();
         jBtnEditar = new javax.swing.JButton();
         jBtnVisualizar = new javax.swing.JButton();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -285,7 +289,7 @@ public class CarroView extends javax.swing.JFrame {
                 carroDao.addCarro(carro);
             }
             visual(false, false, false);
-            loadCli();
+            loadCar();
         }
     }//GEN-LAST:event_jBtnAddActionPerformed
 
@@ -344,7 +348,7 @@ public class CarroView extends javax.swing.JFrame {
             } else {
                 visual(true, false, false);
             }
-            loadCli();
+            loadCar();
         } catch (SQLException ex) {
             Logger.getLogger(CarroView.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -359,11 +363,13 @@ public class CarroView extends javax.swing.JFrame {
         jTfCor.setEnabled(true);
 
         jBtnVisualizar.setText("Cancelar");
+        jBtnAdd.setText("Salvar");
         jBtnVisualizar.setEnabled(true);
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVisualizarActionPerformed
         if (jBtnVisualizar.getText().equals("Cancelar")) {
+            editar = false;
             visual(true, false, false);
         } else {
             if (!visualizar) {
@@ -435,6 +441,7 @@ public class CarroView extends javax.swing.JFrame {
     private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnVisualizar;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
