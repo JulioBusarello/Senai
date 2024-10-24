@@ -21,7 +21,7 @@ import com.psii.app_cadpro.service.ProdutoService;
 
 @Controller
 public class ProdutoController {
-    
+
     @Autowired
     private ProdutoService produtoService;
 
@@ -67,7 +67,7 @@ public class ProdutoController {
     @GetMapping("/produto/editar/{id}")
     public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
         Produto produto = produtoService.buscarPorId(id);
-        if (produto!= null) {
+        if (produto != null) {
             model.addAttribute("produto", produto);
             return "editar_produto";
         } else {
