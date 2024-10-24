@@ -1,13 +1,16 @@
-CREATE DATABASE IF NOT EXISTS productdb;
+CREATE SCHEMA IF NOT EXISTS productdb;
 USE productdb;
 
-CREATE TABLE produto(
-	id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) not null,
-    descricao VARCHAR(500),
-    preco DECIMAL(10,2) NOT NULL,
-    quantidade INT NOT NULL,
-    categoria VARCHAR(255),
-    fornecedor VARCHAR(255),
-    imagem LONGBLOB
-);
+CREATE TABLE `produto` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `categoria` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `descricao` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `fornecedor` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `imagem` LONGBLOB,
+  `nome` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `preco` double DEFAULT NULL,
+  `quantidade` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+select * from produto;
