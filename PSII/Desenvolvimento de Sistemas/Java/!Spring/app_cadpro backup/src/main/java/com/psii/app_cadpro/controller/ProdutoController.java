@@ -25,13 +25,13 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    @GetMapping("/produto/cadastrar")
+    @GetMapping("/cadastrar")
     public String mostrarFormularioCadastro(Model model) {
         model.addAttribute("produto", new Produto());
         return "cadastrar";
     }
 
-    @PostMapping("/produto/cadastrar")
+    @PostMapping("/cadastrar")
     public String cadastrarProduto(Produto produto, MultipartFile file) throws IOException {
         if (!file.isEmpty()) {
             produto.setImagemBytes(file.getBytes());
@@ -40,7 +40,7 @@ public class ProdutoController {
         return "redirect:/listar";
     }
 
-    @GetMapping("/produto/listar")
+    @GetMapping("/listar")
     public String listarProdutos(Model model) {
         model.addAttribute("produto", produtoService.listarProdutos());
         return "listar";

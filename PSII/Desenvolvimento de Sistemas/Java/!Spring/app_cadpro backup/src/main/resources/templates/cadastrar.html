@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <!-- 'xmlns:th': Incluindo template thymeleaf no HTML -->
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <link rel="stylesheet" href="/css/style.css">
     <title>Cadastrar Produto</title>
 </head>
-
 <body>
     <h1>Cadastrar Produto</h1>
     <!-- 'th:action': Define a URL de ação para um formulário -->
-    <form th:action="@{/produto/cadastrar}" method="post" enctype="multipart/form-data">
+    <form th:action="@{/cadastrar}" method="post" enctype="multipart/form-data">
         <label>Nome:</label>
         <input type="text" name="nome" required><br>
 
@@ -37,28 +35,8 @@
 
     <br>
     <!-- 'th:href': Vincular URL dinamicamente -->
-    <a th:href="@{/produto/listar}">
+    <a th:href="@{/listar}">
         <button type="button">Listar Produto</button>
     </a>
-    <br>
-
-    <h1>Cadastrar Pedido</h1>
-    <!-- 'th:action': Define a URL de ação para um formulário -->
-    <form th:action="@{/pedido/cadastrar}" method="post" enctype="multipart/form-data">
-        <label for="dataPedido">Data do Pedido:</label>
-        <input type="date" id="dataPedido" name="dataPedido" required><br>
-
-        <label for="idProduto">Id do Produto:</label>
-        <input type="number" name="idProduto" id="idProduto" step="1" required><br>
-
-        <button type="submit">Cadastrar</button>
-    </form>
-
-    <br>
-    <!-- 'th:href': Vincular URL dinamicamente -->
-    <a th:href="@{/pedido/listar}">
-        <button type="button">Listar Pedido</button>
-    </a>
 </body>
-
 </html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- 'xmlns:th': Incluindo template thymeleaf no HTML -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Editar Produto</title>
+</head>
+
+<body>
+    <h1>Editar Pedido</h1>
+    <!-- 'th:action': Define a URL de ação para um formulário -->
+    <form th:action="@{/pedido/salvar}" th:object="${pedido}" method="post" enctype="multipart/form-data">
+        <label for="dataPedido">Data do Pedido:</label>
+        <input type="date" id="dataPedido" name="dataPedido" required><br>
+
+        <label for="idProduto">Id do Produto:</label>
+        <input type="number" name="idProduto" id="idProduto" step="1" required><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <a href="/listar">Cancelar</a>
+</body>
+
+</html>

@@ -35,8 +35,8 @@ public class Produto {
     @Column(name = "imagem")
     private byte[] imagemBytes;
 
+
     // --- Getters and Setters
-    
     public Long getId() {
         return id;
     }
