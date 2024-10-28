@@ -4,31 +4,29 @@ package model;
  * @author julio_busarello
  */
 public class Carro {
+
     private int cod_carro;
     private String des_carro;
     private int pot_carro;
     private String cor_carro;
-    
-    
-    // -- Construtores
-    
-    public Carro(){
-    }
-    
-    public Carro(int cod, String descricao, int potencia, String cor){
-        this.des_carro = descricao;
-        this.pot_carro = potencia;
-        this.cor_carro = cor;
-    }
-    
-    public Carro(String descricao, int potencia, String cor){
-        this.des_carro = descricao;
-        this.pot_carro = potencia;
-        this.cor_carro = cor;
-    }
-    
-    // -- Getters and Setters
 
+    // -- Construtores
+    public Carro() {
+    }
+
+    public Carro(int cod, String descricao, int potencia, String cor) {
+        this.des_carro = descricao;
+        this.pot_carro = potencia;
+        this.cor_carro = cor;
+    }
+
+    public Carro(String descricao, int potencia, String cor) {
+        this.des_carro = descricao;
+        this.pot_carro = potencia;
+        this.cor_carro = cor;
+    }
+
+    // -- Getters and Setters
     public int getCod_carro() {
         return cod_carro;
     }
@@ -60,5 +58,5 @@ public class Carro {
     public void setCor_carro(String cor_carro) {
         this.cor_carro = cor_carro;
     }
-    
+
 }

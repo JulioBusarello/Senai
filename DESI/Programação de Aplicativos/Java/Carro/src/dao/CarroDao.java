@@ -17,6 +17,7 @@ public class CarroDao {
         this.connection = new ConexaoBanco().getConexao();
     }
 
+    // Função Adicionar no banco de dados
     public void addCarro(Carro carro) {
         String sql = "INSERT INTO carro (des_carro, pot_carro, cor_carro) VALUES (?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -33,6 +34,7 @@ public class CarroDao {
         }
     }
 
+    // Função Buscar um carro no banco de dados
     public Carro getCarro(int codigo) {
         Carro carro = null;
         try {
@@ -42,10 +44,10 @@ public class CarroDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 carro = new Carro(
-                        resultSet.getInt("cod_carro"), 
-                        resultSet.getString("des_carro"), 
-                        resultSet.getInt("pot_carro"), 
-                        resultSet.getString("cor_carro")); 
+                        resultSet.getInt("cod_carro"),
+                        resultSet.getString("des_carro"),
+                        resultSet.getInt("pot_carro"),
+                        resultSet.getString("cor_carro"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,6 +55,7 @@ public class CarroDao {
         return carro;
     }
 
+    // Função Buscar todos os carro no banco de dados
     public List<Carro> getAllCarros() {
         String sql = "SELECT * FROM carro";
         ArrayList<Carro> carros = null;
@@ -78,6 +81,7 @@ public class CarroDao {
         return carros;
     }
 
+    // Função Alterar um carro no banco de dados
     public void updateCarro(int codigo, String cor) {
         String sql = "UPDATE carro SET cor_carro = ? WHERE cod_carro = ?";
         try (Connection connection = new ConexaoBanco().getConexao(); PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -92,6 +96,7 @@ public class CarroDao {
         }
     }
 
+    // Função Deletar um carro no banco de dados
     public void deleteCarro(int codigo) throws SQLException {
         String sql = "DELETE FROM carro WHERE cod_carro = ?";
         try (Connection connection = new ConexaoBanco().getConexao(); PreparedStatement ps = connection.prepareStatement(sql)) {
