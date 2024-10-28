@@ -2,6 +2,7 @@ package com.psii.app_cadpro.controller;
 
 import java.io.IOException;
 
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,11 +26,13 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    /*@GetMapping("/produto/cadastrar")
-    public String mostrarFormularioCadastro(Model model) {
-        model.addAttribute("produto", new Produto());
-        return "cadastrar";
-    }*/
+    /*
+     * @GetMapping("/produto/cadastrar")
+     * public String mostrarFormularioCadastro(Model model) {
+     * model.addAttribute("produto", new Produto());
+     * return "cadastrar";
+     * }
+     */
 
     @PostMapping("/produto/cadastrar")
     public String cadastrarProduto(Produto produto, MultipartFile file) throws IOException {
@@ -58,8 +61,13 @@ public class ProdutoController {
     }
 
     @PostMapping("/produto/deletar/{id}")
-    public String deletarProduto(@PathVariable Long id) {
-        produtoService.deletarPorId(id);
+    public String deletarProduto(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        try {
+            produtoService.deletarPorId(id);
+            redirectAttributes.addFlashAttribute("mensagem", "Produto deletado com sucesso!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("mensagemErro", "O produto está cadastrado em um pedido!");
+        }
 
         return "redirect:/produto/listar";
     }

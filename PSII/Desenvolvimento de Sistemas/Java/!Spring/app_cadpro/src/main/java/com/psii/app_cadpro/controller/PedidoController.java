@@ -1,7 +1,6 @@
 package com.psii.app_cadpro.controller;
 
 import java.sql.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,8 +44,7 @@ public class PedidoController {
 
     @GetMapping("/pedido/listar")
     public String listarPedidos(Model model) {
-        List<Pedido> pedidos = pedidoService.listarPedidos();
-        model.addAttribute("pedidos", pedidos);
+        model.addAttribute("pedidos", pedidoService.listarPedidos());
         return "listar_pedido";
     }
 
