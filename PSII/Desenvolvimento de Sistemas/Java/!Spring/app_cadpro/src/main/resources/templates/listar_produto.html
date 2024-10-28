@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- 'xmlns:th': Incluindo template thymeleaf no HTML -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="/css/style.css">
@@ -27,9 +26,7 @@
             <th>Imagem</th>
             <th>Ações</th>
         </tr>
-        <!-- 'th:each': Iterar sobre coleções -->
         <tr th:each="produto : ${produto}">
-            <!-- 'th:text': Você pode usar funções para manipular dados e acessar atributos de objetos -->
             <td th:text="${produto.id}"></td>
             <td th:text="${produto.nome}"></td>
             <td th:text="${produto.descricao}"></td>
@@ -38,25 +35,22 @@
             <td th:text="${produto.categoria}"></td>
             <td th:text="${produto.fornecedor}"></td>
             <td>
-                <!-- 'th:src': Vincular URL dinamicamente -->
                 <img th:src="@{/produto/imagem/{id}(id=${produto.id})}" alt="Imagem do Produto" class="produto-imagem">
             </td>
             <td>
                 <div class="acao">
-                    <!-- 'th:href': Vincular URL dinamicamente -->
                      <a th:href="@{/produto/editar/{id}(id=${produto.id})}">
                         <button type="button" class="edit">Editar</button>
                      </a>
                 </div>
-                <!-- 'th:action': Define a URL de ação para um formulário -->
                 <form th:action="@{/produto/deletar/{id}(id=${produto.id})}" method="post">
                     <button type="submit" onclick="return confirm('Tem certeza que deseja deletar este produto?')" class="del">Deletar</button>
                 </form>
             </td>
         </tr>
     </table>
+    
     <br>
-    <!-- 'th:href': Vincular URL dinamicamente -->
     <a th:href="@{/cadastrar}">
         <button type="button">Cadastrar Novo Produto</button>
     </a>

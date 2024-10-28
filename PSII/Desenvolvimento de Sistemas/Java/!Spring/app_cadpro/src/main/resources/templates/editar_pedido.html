@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- 'xmlns:th': Incluindo template thymeleaf no HTML -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="/css/style.css">
@@ -7,23 +6,18 @@
 </head>
 <body>
     <h1>Editar Pedido</h1>
-    <!-- 'th:action': Define a URL de ação para um formulário 
-         'th:object': passando o valor do objeto do HTML para o controller -->
     <form th:action="@{/pedido/salvar}" th:object="${pedido}" method="post" enctype="multipart/form-data">
         <input type="hidden" th:field="*{id}"/>
 
         <label for="dataPedido">Data do Pedido:</label>
-        <!-- 'th:field': Vincula um campo de entrada ao modelo -->
         <input type="date" th:field="*{dataPedido}" id="dataPedido" required/><br>
 
         <label for="idProduto">Nome do produto:</label>
-        <!-- 'th:field': Vincula um campo de entrada ao modelo -->
         <select id="idProduto" name="idProduto" required>
             <option th:each="produto : ${produtos}" 
                     th:value="${produto.id}" 
                     th:text="${produto.nome}"></option>
         </select><br>
-
 
         <button type="submit">Salvar</button>
     </form>

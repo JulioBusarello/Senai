@@ -17,9 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            <!-- 'th:each': Iterar sobre coleções -->
             <tr th:each="pedido : ${pedidos}">
-                <!-- 'th:text': Acessar atributos de objetos -->
                 <td th:text="${pedido.id}"></td>
                 <td th:text="${pedido.dataPedido}"></td>
                 <td>
@@ -28,12 +26,10 @@
                 </td>
                 <td>
                     <div class="acao">
-                        <!-- 'th:href': Vincular URL dinamicamente -->
                         <a th:href="@{/pedido/editar/{id}(id=${pedido.id})}">
                             <button type="button" class="edit">Editar</button>
                         </a>
                     </div>
-                    <!-- 'th:action': Define a URL de ação para um formulário -->
                     <form th:action="@{/pedido/deletar/{id}(id=${pedido.id})}" method="post">
                         <button type="submit" onclick="return confirm('Tem certeza que deseja deletar este pedido?')" class="del">Deletar</button>
                     </form>
@@ -42,7 +38,6 @@
         </tbody>
     </table>
     <br>
-    <!-- 'th:href': Vincular URL dinamicamente -->
     <a th:href="@{/cadastrar}">
         <button type="button">Cadastrar Novo Pedido</button>
     </a>

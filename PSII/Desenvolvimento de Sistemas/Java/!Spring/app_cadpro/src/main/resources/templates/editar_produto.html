@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- 'xmlns:th': Incluindo template thymeleaf no HTML -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="/css/style.css">
@@ -7,33 +6,25 @@
 </head>
 <body>
     <h1>Editar Produto</h1>
-    <!-- 'th:action': Define a URL de ação para um formulário 
-         'th:object': passando o valor do objeto do HTML para o controller -->
     <form th:action="@{/produto/salvar}" th:object="${produto}" method="post" enctype="multipart/form-data">
         <input type="hidden" th:field="*{id}"/>
 
         <label for="nome">Nome:</label>
-        <!-- 'th:field': Vincula um campo de entrada ao modelo -->
         <input type="text" th:field="*{nome}" id="nome" required/><br>
 
         <label for="descricao">Descrição:</label>
-        <!-- 'th:field': Vincula um campo de entrada ao modelo -->
         <input th:field="*{descricao}" id="descricao" required><br>
 
         <label for="preco">Preço:</label>
-        <!-- 'th:field': Vincula um campo de entrada ao modelo -->
         <input type="number" step="0.01" th:field="*{preco}" id="preco" required><br>
 
         <label for="quantidade">Quantidade:</label>
-        <!-- 'th:field': Vincula um campo de entrada ao modelo -->
         <input type="number" th:field="*{quantidade}" id="quantidade" required><br>
 
         <label for="categoria">Categoria:</label>
-        <!-- 'th:field': Vincula um campo de entrada ao modelo -->
         <input type="text" th:field="*{categoria}" id="categoria" required><br>
 
         <label for="fornecedor">Fornecedor:</label>
-        <!-- 'th:field': Vincula um campo de entrada ao modelo -->
         <input type="text" th:field="*{fornecedor}" id="fornecedor" required><br>
 
         <label for="imagem">Imagem:</label>
