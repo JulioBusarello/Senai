@@ -1,7 +1,6 @@
 package com.psii.app_cadpro.model;
 
 import java.sql.Date;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,11 +17,10 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    Date data_pedido;
+    private Date dataPedido;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id")
-
+    @JoinColumn(name = "id_produto")
     private Produto produto;
 
     // --- Getters and Setters
@@ -35,12 +33,12 @@ public class Pedido {
         this.id = id;
     }
 
-    public Date getData_pedido() {
-        return data_pedido;
+    public Date getDataPedido() { 
+        return dataPedido;
     }
 
-    public void setData_pedido(Date data_pedido) {
-        this.data_pedido = data_pedido;
+    public void setDataPedido(Date dataPedido) {
+        this.dataPedido = dataPedido;
     }
 
     public Produto getProduto() {
@@ -50,5 +48,4 @@ public class Pedido {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-
 }

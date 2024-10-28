@@ -16,8 +16,8 @@ CREATE TABLE `produto` (
 CREATE TABLE pedido (
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
     data_pedido DATE,
-    produto_id BIGINT,
-    CONSTRAINT fk_produto_pedido FOREIGN KEY (produto_id) REFERENCES produto(id)
+    id_produto BIGINT,
+    CONSTRAINT fk_produto_pedido FOREIGN KEY (id_produto) REFERENCES produto(id)
 );
 
 select * from produto;

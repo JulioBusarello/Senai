@@ -1,50 +1,50 @@
 <!DOCTYPE html>
-<!-- 'xmlns:th': Incluindo template thymeleaf no HTML -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="/css/style.css">
-    <title>Lista de Produtos</title>
+    <title>Lista de Pedidos</title>
 </head>
 
 <body>
-    <h1>Lista de Produtos</h1>
+    <h1>Lista de Pedidos</h1>
     <table>
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Preço</th>
-            <th>Quantidade</th>
-            <th>Categoria</th>
-            <th>Fornecedor</th>
-            <th>Imagem</th>
-            <th>Ações</th>
-        </tr>
-        <!-- 'th:each': Iterar sobre coleções -->
-        <tr th:each="pedido : ${pedido}">
-            <!-- 'th:text': Você pode usar funções para manipular dados e acessar atributos de objetos -->
-            <td th:text="${pedido.id}"></td>
-            <td th:text="${pedido.data_pedido}"></td>
-            <td th:text="${pedido.id_produto}"></td>
-            <td>
-                <div class="acao">
-                    <!-- 'th:href': Vincular URL dinamicamente -->
-                     <a th:href="@{/pedido/editar/{id}(id=${pedido.id})}">
-                        <button type="button" class="edit">Editar</button>
-                     </a>
-                </div>
-                <!-- 'th:action': Define a URL de ação para um formulário -->
-                <form th:action="@{/pedido/deletar/{id}(id=${pedido.id})}" method="post">
-                    <button type="submit" onclick="return confirm('Tem certeza que deseja deletar este pedido?')" class="del">Deletar</button>
-                </form>
-            </td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Data do Pedido</th>
+                <th>Produto</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 'th:each': Iterar sobre coleções -->
+            <tr th:each="pedido : ${pedidos}">
+                <!-- 'th:text': Acessar atributos de objetos -->
+                <td th:text="${pedido.id}"></td>
+                <td th:text="${pedido.dataPedido}"></td>
+                <td>
+                    <span th:if="${pedido.produto != null}" th:text="${pedido.produto.nome}"></span>
+                    <span th:if="${pedido.produto == null}">Produto não disponível</span>
+                </td>
+                <td>
+                    <div class="acao">
+                        <!-- 'th:href': Vincular URL dinamicamente -->
+                        <a th:href="@{/pedido/editar/{id}(id=${pedido.id})}">
+                            <button type="button" class="edit">Editar</button>
+                        </a>
+                    </div>
+                    <!-- 'th:action': Define a URL de ação para um formulário -->
+                    <form th:action="@{/pedido/deletar/{id}(id=${pedido.id})}" method="post">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja deletar este pedido?')" class="del">Deletar</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
     </table>
     <br>
     <!-- 'th:href': Vincular URL dinamicamente -->
-    <a th:href="@{/pedido/cadastrar}">
+    <a th:href="@{/cadastrar}">
         <button type="button">Cadastrar Novo Pedido</button>
     </a>
 </body>
-
 </html>

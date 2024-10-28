@@ -25,11 +25,11 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    @GetMapping("/produto/cadastrar")
+    /*@GetMapping("/produto/cadastrar")
     public String mostrarFormularioCadastro(Model model) {
         model.addAttribute("produto", new Produto());
         return "cadastrar";
-    }
+    }*/
 
     @PostMapping("/produto/cadastrar")
     public String cadastrarProduto(Produto produto, MultipartFile file) throws IOException {
@@ -37,13 +37,13 @@ public class ProdutoController {
             produto.setImagemBytes(file.getBytes());
         }
         produtoService.salvarProduto(produto);
-        return "redirect:/listar";
+        return "redirect:/produto/listar";
     }
 
     @GetMapping("/produto/listar")
     public String listarProdutos(Model model) {
         model.addAttribute("produto", produtoService.listarProdutos());
-        return "listar";
+        return "listar_produto";
     }
 
     @GetMapping("/produto/imagem/{id}")
@@ -61,7 +61,7 @@ public class ProdutoController {
     public String deletarProduto(@PathVariable Long id) {
         produtoService.deletarPorId(id);
 
-        return "redirect:/listar";
+        return "redirect:/produto/listar";
     }
 
     @GetMapping("/produto/editar/{id}")
@@ -71,7 +71,7 @@ public class ProdutoController {
             model.addAttribute("produto", produto);
             return "editar_produto";
         } else {
-            return "redirect:/produto/lista";
+            return "redirect:/produto/listar";
 
         }
     }
@@ -79,7 +79,7 @@ public class ProdutoController {
     @PostMapping("/produto/editar")
     public String editarProduto(@ModelAttribute Produto produto) {
         produtoService.salvarProduto(produto);
-        return "redirect:/listar";
+        return "redirect:/produto/listar";
     }
 
     @PostMapping("/produto/salvar")
@@ -88,7 +88,7 @@ public class ProdutoController {
             produto.setImagem(imagem);
         }
         produtoService.salvarProduto(produto);
-        return "redirect:/listar";
+        return "redirect:/produto/listar";
     }
 
 }
