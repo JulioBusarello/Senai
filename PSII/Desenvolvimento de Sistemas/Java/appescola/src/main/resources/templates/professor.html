@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style-professor.css}">
+    <title>Registro Professores</title>
+</head>
+
+<body>
+    <h1>Professores</h1>
+    <form action="#" th:action="@{/professores}" th:object="${professor}" method="post">
+        <input type="text" th:field="*{nome}" placeholder="Nome" required />
+        <input type="text" th:field="*{dataNascimento}" placeholder="Data de Nascimento" required />
+        <input type="text" th:field="*{cpf}" placeholder="CPF" required />
+        <input type="text" th:field="*{salario}" placeholder="Salário" required />
+        <select th:field="*{atividade}" required>
+            <option value="" disabled selected>Selecione a Atividade</option>
+            <option th:each="atividade : ${atividades}" th:value="${atividade.id}" th:text="${atividade.nome}"></option>
+        </select>
+        <button type="submit">Adicionar Álbum</button>
+    </form>
+</body>
+
+</html>

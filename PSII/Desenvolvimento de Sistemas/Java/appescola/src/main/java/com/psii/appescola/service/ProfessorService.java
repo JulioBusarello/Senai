@@ -2,9 +2,12 @@ package com.psii.appescola.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.psii.appescola.model.Professor;
 import com.psii.appescola.repository.ProfessorRepository;
 
+@Service
 public class ProfessorService {
     private final ProfessorRepository professorRepository;
 

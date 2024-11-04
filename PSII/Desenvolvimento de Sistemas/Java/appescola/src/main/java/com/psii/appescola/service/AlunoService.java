@@ -2,9 +2,12 @@ package com.psii.appescola.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.psii.appescola.model.Aluno;
 import com.psii.appescola.repository.AlunoRepository;
 
+@Service
 public class AlunoService {
     private final AlunoRepository alunoRepository;
 

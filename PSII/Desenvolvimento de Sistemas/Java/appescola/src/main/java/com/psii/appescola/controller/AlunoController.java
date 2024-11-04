@@ -8,17 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.psii.appescola.model.Aluno;
 import com.psii.appescola.service.AlunoService;
-import com.psii.appescola.service.AtividadeService;
 
 @Controller
 @RequestMapping("/alunos")
 public class AlunoController {
     private final AlunoService alunoService;
-    private final AtividadeService atividadeService;
 
-    public AlunoController(AlunoService alunoService, AtividadeService atividadeService) {
+    public AlunoController(AlunoService alunoService) {
         this.alunoService = alunoService;
-        this.atividadeService = atividadeService;
     }
 
     @GetMapping
@@ -32,12 +29,5 @@ public class AlunoController {
     public String adicionarAluno(Aluno aluno) {
         alunoService.save(aluno);
         return "redirect:/alunos";
-    }
-    
-    @GetMapping("/{id}/atividades")
-    public String listarAtividadesDoAluno(@PathVariable Long id, Model model) {
-        model.addAttribute("aluno", alunoService.findById(id));
-        model.addAttribute("atividades", atividadeService.findByAlunoId(id));
-        return "atividades-aluno"; // A view para listar atividades do aluno
     }
 }
