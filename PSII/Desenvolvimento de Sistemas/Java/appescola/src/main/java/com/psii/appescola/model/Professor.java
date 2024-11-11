@@ -17,7 +17,7 @@ public class Professor {
 
     private String nome;
     private Date dataNascimento;
-    private String CPF;
+    private String cpf;
     private Double salario;
 
     @OneToMany(mappedBy = "professor")
@@ -49,19 +49,19 @@ public class Professor {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getCPF() {
-        return CPF;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCPF(String cPF) {
-        CPF = cPF;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public double getSalario() {
+    public Double getSalario() {
         return salario;
     }
 
-    public void setSalario(double salario) {
+    public void setSalario(Double salario) {
         this.salario = salario;
     }
 
@@ -72,5 +72,5 @@ public class Professor {
     public void setAtividades(List<Atividade> atividades) {
         this.atividades = atividades;
     }
-    
+
 }

@@ -1,13 +1,11 @@
 package com.psii.appescola.model;
 
 import java.sql.Date;
-import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Aluno {
@@ -17,10 +15,8 @@ public class Aluno {
 
     private String nome;
     private Date dataNascimento;
-    private String CPF;
-
-    @OneToMany(mappedBy = "aluno")
-    private List<Atividade> atividades;
+    private String cpf;
+    private String telefone;
 
     // --- Getters and Setters
 
@@ -48,20 +44,23 @@ public class Aluno {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getCPF() {
-        return CPF;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCPF(String cPF) {
-        CPF = cPF;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public List<Atividade> getAtividades() {
-        return atividades;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setAtividades(List<Atividade> atividades) {
-        this.atividades = atividades;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
+
+    
 
 }
+

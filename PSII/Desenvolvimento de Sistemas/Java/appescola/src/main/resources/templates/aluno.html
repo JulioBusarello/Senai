@@ -3,8 +3,46 @@
 <head>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style-aluno.css}">
     <title>Registro Alunos</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js"></script>
 </head>
 <body>
-    
+    <h1>Registro de Alunos</h1>
+
+    <!-- Formulário de Cadastro de Aluno -->
+    <form action="#" th:action="@{/alunos}" th:object="${aluno}" method="post">
+        <input type="text" th:field="*{nome}" placeholder="Nome" required />
+        <input type="date" th:field="*{dataNascimento}" placeholder="Data de Nascimento" required />
+        <input type="text" th:field="*{cpf}" placeholder="CPF" name="cpf" id="cpf" required />
+        <input type="text" th:field="*{telefone}" placeholder="Telefone" name="telefone" id="telefone" required />
+        <button type="submit">Adicionar Aluno</button>
+    </form>
+
+    <h2>Alunos Cadastrados</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data de Nascimento</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="aluno : ${alunos}">
+                <td th:text="${aluno.nome}"></td>
+                <td th:text="${#dates.format(aluno.dataNascimento, 'dd/MM/yyyy')}"></td>
+                <td th:text="${aluno.cpf}"></td>
+                <td th:text="${aluno.telefone}"></td>
+            </tr>
+        </tbody>
+    </table>
+
 </body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#cpf').mask('000.000.000-00');
+        $('#telefone').mask('(00) 0 0000-0000');
+    });
+</script>
 </html>

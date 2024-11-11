@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToOne;  
 
 @Entity
 public class Atividade {
@@ -13,20 +13,16 @@ public class Atividade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nomeAtividade;
+    private String nome;
     private String descricao;
-    private String tipoAtividade;
+    private String tipo;
     private String localizacao;
-
-    // --- Getters and Setters
 
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;
 
-    @ManyToOne
-    @JoinColumn(name = "aluno_id")
-    private Aluno aluno;
+    // --- Getters and Setters
 
     public Long getId() {
         return id;
@@ -36,12 +32,12 @@ public class Atividade {
         this.id = id;
     }
 
-    public String getNomeAtividade() {
-        return nomeAtividade;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeAtividade(String nomeAtividade) {
-        this.nomeAtividade = nomeAtividade;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {
@@ -52,12 +48,12 @@ public class Atividade {
         this.descricao = descricao;
     }
 
-    public String getTipoAtividade() {
-        return tipoAtividade;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setTipoAtividade(String tipoAtividade) {
-        this.tipoAtividade = tipoAtividade;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getLocalizacao() {
@@ -76,13 +72,7 @@ public class Atividade {
         this.professor = professor;
     }
 
-    public Aluno getAluno() {
-        return aluno;
-    }
-
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
-    }    
 
     
 }
+
