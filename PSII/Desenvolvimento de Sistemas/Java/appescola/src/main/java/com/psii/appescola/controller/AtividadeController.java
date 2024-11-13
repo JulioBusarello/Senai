@@ -14,6 +14,7 @@ import com.psii.appescola.service.ProfessorService;
 @Controller
 @RequestMapping("/atividades")
 public class AtividadeController {
+
     private final AtividadeService atividadeService;
     private final ProfessorService professorService;
 
@@ -37,21 +38,31 @@ public class AtividadeController {
     }
 
     @PostMapping("/deletar/{id}")
-    public String deletarPedido(@PathVariable Long id) {
+    public String deletarAtividade(@PathVariable Long id) {
         atividadeService.deletarPorId(id);
         return "redirect:/atividades";
     }
 
     @GetMapping("/editar/{id}")
-    public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
+    public String editarAtividade(@PathVariable("id") Long id, Model model) {
         Atividade atividade = atividadeService.buscarPorId(id);
-        if (atividade != null) {
-            model.addAttribute("atividade", atividade);
-            model.addAttribute("professores", professorService.findAll());
-            return "atividade";
-        } else {
-            return "redirect:/atividades";
+        model.addAttribute("atividade", atividade);
+        model.addAttribute("professores", professorService.findAll());
+        return "atividade";  // Retorna a página de edição com a atividade
+    }
+
+    @PostMapping("/atualizar/{id}")
+    public String editarAtividade(@PathVariable Long id, Atividade atividade) {
+        Atividade atividadeExistente = atividadeService.buscarPorId(id);
+        if (atividadeExistente != null) {
+            atividadeExistente.setNome(atividade.getNome());
+            atividadeExistente.setLocalizacao(atividade.getLocalizacao());
+            atividadeExistente.setTipo(atividade.getTipo());
+            atividadeExistente.setDescricao(atividade.getDescricao());
+            atividadeExistente.setProfessor(atividade.getProfessor());
+            atividadeService.save(atividadeExistente);
         }
+        return "redirect:/atividades";
     }
 
 }
