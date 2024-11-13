@@ -94,8 +94,8 @@ SELECT e.nm_empregado EMPREGADO, l.nm_empregado LÍDER,
 	date_format(e.data_contratacao, '%d/%m/%Y') 'CONTRATAÇÃO EMPREGADO', 
 	date_format(l.data_contratacao, '%d/%m/%Y') 'CONTRATAÇÃO LÍDER',
     COALESCE(ABS(timestampdiff(year, e.data_contratacao, l.data_contratacao)),0) 'DIFERENÇA EM ANOS',
-    COALESCE(ABS(timestampdiff(month, e.data_contratacao, l.data_contratacao)),0) 'DIFERENÇA EM MESES',
-    COALESCE(ABS(datediff(e.data_contratacao, l.data_contratacao)),0) 'DIFERENÇA EM DIAS'
+    COALESCE(ABS(timestampdiff(month, e.data_contratacao, l.data_contratacao)),0) %12 'DIFERENÇA EM MESES',
+    COALESCE(ABS(datediff(e.data_contratacao, l.data_contratacao)),0) %30 'DIFERENÇA EM DIAS'
 		FROM empregado e LEFT JOIN empregado l
 			ON e.lider = l.id_empregado;
             
@@ -105,3 +105,37 @@ SELECT concat(LEFT(e.nm_empregado, 3), '*') 'EMPREGADO', d.nm_departamento 'DEPA
 	FROM departamento d, empregado e LEFT JOIN  empregado l 
 		ON e.lider = l.id_empregado
 			WHERE e.id_departamento = d.id_departamento;
+            
+#8 Selecionar o nome do empregado, o nome do departamento e a classificação da grade salarial de cada empregado, 
+# substituindo o ID_GRADE_SALARIAL por descrições textuais: 1-ruim, 2-abaixo da média, 3-mediano, 4-acima da média, 5-excelente.
+SELECT e.nm_empregado 'EMPREGADO', d.nm_departamento 'DEPARTAMENTO', concat(g.menor_salario, " - ", g.maior_salario) 'VALOR GRADE SALARIAL',
+	CASE g.id_grade_salarial
+		WHEN 1 THEN "RUIM"
+        WHEN 2 THEN "ABAIXO DA MÉDIA"
+        WHEN 3 THEN "MEDIANO"
+        WHEN 4 THEN "ACIMA DA MÉDIA"
+        WHEN 5 THEN "EXCELENTE"
+	END 'STATUS GRADE SALARIAL'
+	FROM grade_salarial g, empregado e, departamento d 
+		WHERE e.id_departamento = d.id_departamento 
+			AND salario BETWEEN g.menor_salario AND g.maior_salario
+				GROUP BY e.nm_empregado;
+                
+#9 Recuperar o nome de cada departamento e a porcentagem de participação no pagamento total da empresa, 
+# considerando a soma dos salários e comissões dos empregados de cada departamento.
+SELECT d.nm_departamento DEPARTAMENTO, REPLACE(CONCAT(CAST(ROUND(SUM(e.salario + coalesce(e.comissao, 0)) / (
+	SELECT SUM(e2.salario + coalesce(e2.comissao, 0))
+		FROM empregado e2
+        ) * 100, 2) AS CHAR), '%'), '.',',') 'PORCENTAGEM'
+			FROM empregado e RIGHT JOIN departamento d
+				ON e.id_departamento = d.id_departamento
+					GROUP BY d.nm_departamento;
+                    
+#10 Selecionar os empregados que são líderes, juntamente com a quantidade de subordinados, 
+# a data de contratação do líder (no formato dd/mm/yyyy), e a soma dos salários e comissões de todos os seus subordinados,
+# utilizando apelidos nas colunas para identificação
+SELECT l.nm_empregado 'LIDER', l.funcao 'FUNCAO',  COUNT(e.id_empregado) 'QTD LIDERADOS', DATE_FORMAT(l.data_contratacao, '%d/%m/%Y') 'CONTRATACAO', 
+	SUM(e.salario + coalesce(e.comissao,0))
+		FROM empregado e, empregado l
+			WHERE e.lider = l.id_empregado
+				GROUP BY l.id_empregado;
