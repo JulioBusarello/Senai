@@ -93,9 +93,9 @@ SELECT d.nm_departamento DEPARTAMENTO, coalesce(SUM(timestampdiff(day, e.data_co
 SELECT e.nm_empregado EMPREGADO, l.nm_empregado LÍDER, 
 	date_format(e.data_contratacao, '%d/%m/%Y') 'CONTRATAÇÃO EMPREGADO', 
 	date_format(l.data_contratacao, '%d/%m/%Y') 'CONTRATAÇÃO LÍDER',
-    COALESCE(ABS(timestampdiff(year, e.data_contratacao, l.data_contratacao)),0) 'DIFERENÇA EM ANOS',
-    COALESCE(ABS(timestampdiff(month, e.data_contratacao, l.data_contratacao)),0) %12 'DIFERENÇA EM MESES',
-    COALESCE(ABS(datediff(e.data_contratacao, l.data_contratacao)),0) %30 'DIFERENÇA EM DIAS'
+    ABS(timestampdiff(year, e.data_contratacao, l.data_contratacao)) 'DIFERENÇA EM ANOS',
+    ABS(timestampdiff(month, e.data_contratacao, l.data_contratacao)) %12 'DIFERENÇA EM MESES',
+    ABS(datediff(e.data_contratacao, l.data_contratacao)) %30 'DIFERENÇA EM DIAS'
 		FROM empregado e LEFT JOIN empregado l
 			ON e.lider = l.id_empregado;
             
