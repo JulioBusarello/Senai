@@ -1,5 +1,7 @@
 package com.psii.appescola.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,15 +16,13 @@ public class AlunoAtividade {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "professor_id")
-    private Professor professor;
-
-    @ManyToOne
     @JoinColumn(name = "aluno_id")
+    @JsonIgnore
     private Aluno aluno;
 
     @ManyToOne
     @JoinColumn(name = "atividade_id")
+    @JsonIgnore
     private Atividade atividade;
 
     // --- Getters and Setters
@@ -33,14 +33,6 @@ public class AlunoAtividade {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Professor getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
     }
 
     public Aluno getAluno() {

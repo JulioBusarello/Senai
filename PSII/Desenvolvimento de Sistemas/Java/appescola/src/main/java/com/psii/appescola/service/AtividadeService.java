@@ -29,6 +29,10 @@ public class AtividadeService {
         return atividade.orElseThrow(() -> new RuntimeException("Produto não encontrado"));
     }
 
+    public Optional<Atividade> findById(Long id) {
+        return atividadeRepository.findById(id);
+    }
+
     public void deletarPorId(Long id){
         atividadeRepository.deleteById(id);
     }

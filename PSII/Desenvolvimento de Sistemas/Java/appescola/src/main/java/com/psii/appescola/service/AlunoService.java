@@ -24,9 +24,8 @@ public class AlunoService {
         return alunoRepository.save(aluno);
     }
 
-    public Aluno findById(Long id) {
-        Optional<Aluno> aluno = alunoRepository.findById(id);
-        return aluno.orElse(null);
+    public Optional<Aluno> findById(Long id) {
+        return alunoRepository.findById(id);
     }
 
     public void deleteById(Long id) {

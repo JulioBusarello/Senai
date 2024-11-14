@@ -1,13 +1,23 @@
 package com.psii.appescola.controller;
 
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.psii.appescola.model.Aluno;
+import com.psii.appescola.model.AlunoAtividade;
 import com.psii.appescola.model.Atividade;
+import com.psii.appescola.service.AlunoAtividadeService;
+import com.psii.appescola.service.AlunoService;
 import com.psii.appescola.service.AtividadeService;
 import com.psii.appescola.service.ProfessorService;
 
@@ -17,23 +27,47 @@ public class AtividadeController {
 
     private final AtividadeService atividadeService;
     private final ProfessorService professorService;
+    private final AlunoService alunoService;
 
-    public AtividadeController(AtividadeService atividadeService, ProfessorService professorService) {
+    @Autowired
+    private AlunoAtividadeService alunoAtividadeService;
+
+    public AtividadeController(AtividadeService atividadeService, ProfessorService professorService, AlunoService alunoService) {
         this.atividadeService = atividadeService;
         this.professorService = professorService;
+        this.alunoService = alunoService;
     }
 
     @GetMapping
     public String listarAtividades(Model model) {
+        model.addAttribute("alunos", alunoService.findAll());
         model.addAttribute("professores", professorService.findAll());
-        model.addAttribute("atividades", atividadeService.findAll());
         model.addAttribute("atividade", new Atividade());
+        model.addAttribute("atividades", atividadeService.findAll());
         return "atividade";
     }
 
-    @PostMapping
-    public String adicionarAtividade(Atividade atividade) {
+    @PostMapping("/salvar")
+    public String salvarAtividade(Atividade atividade, @RequestParam("alunoIds") Long[] alunoIds, Model model) {
+
+        if (alunoIds == null || alunoIds.length == 0) {
+            model.addAttribute("error", "É necessário selecionar ao menos um aluno.");
+            return "atividade";
+        }
+
         atividadeService.save(atividade);
+
+        for (int i = 0; i < alunoIds.length; i++) {
+            Aluno aluno = alunoService.findById(alunoIds[i])
+                .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+
+            AlunoAtividade alunoAtividade = new AlunoAtividade();
+            alunoAtividade.setAtividade(atividade);
+            alunoAtividade.setAluno(aluno);
+
+            alunoAtividadeService.save(alunoAtividade); // Salvar pedido_produto
+        }
+
         return "redirect:/atividades";
     }
 
@@ -44,24 +78,16 @@ public class AtividadeController {
     }
 
     @GetMapping("/editar/{id}")
-    public String editarAtividade(@PathVariable("id") Long id, Model model) {
-        Atividade atividade = atividadeService.buscarPorId(id);
-        model.addAttribute("atividade", atividade);
-        model.addAttribute("professores", professorService.findAll());
-        return "atividade";  // Retorna a página de edição com a atividade
+    @ResponseBody
+    public ResponseEntity<Atividade> editarAtividade(@PathVariable("id") Long id) {
+        Optional<Atividade> atividadeOpt = atividadeService.findById(id);
+        return atividadeOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/atualizar/{id}")
-    public String editarAtividade(@PathVariable Long id, Atividade atividade) {
-        Atividade atividadeExistente = atividadeService.buscarPorId(id);
-        if (atividadeExistente != null) {
-            atividadeExistente.setNome(atividade.getNome());
-            atividadeExistente.setLocalizacao(atividade.getLocalizacao());
-            atividadeExistente.setTipo(atividade.getTipo());
-            atividadeExistente.setDescricao(atividade.getDescricao());
-            atividadeExistente.setProfessor(atividade.getProfessor());
-            atividadeService.save(atividadeExistente);
-        }
+    public String atualizarAtividade(@PathVariable Long id, Atividade atividade) {
+        atividade.setId(id);
+        atividadeService.save(atividade);
         return "redirect:/atividades";
     }
 

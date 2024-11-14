@@ -1,11 +1,16 @@
 package com.psii.appescola.controller;
 
+import java.util.Optional;
+
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.psii.appescola.model.Aluno;
 import com.psii.appescola.service.AlunoService;
@@ -13,6 +18,7 @@ import com.psii.appescola.service.AlunoService;
 @Controller
 @RequestMapping("/alunos")
 public class AlunoController {
+
     private final AlunoService alunoService;
 
     public AlunoController(AlunoService alunoService) {
@@ -33,10 +39,10 @@ public class AlunoController {
     }
 
     @GetMapping("/editar/{id}")
-    public String editarAluno(@PathVariable Long id, Model model) {
-        Aluno aluno = alunoService.findById(id);
-        model.addAttribute("aluno", aluno);
-        return "editarAlunoModal"; // Página/modal de edição (pode ser o mesmo template)
+    @ResponseBody
+    public ResponseEntity<Aluno> editarAluno(@PathVariable("id") Long id) {
+        Optional<Aluno> alunoOpt = alunoService.findById(id);
+        return alunoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/atualizar/{id}")
@@ -48,7 +54,11 @@ public class AlunoController {
 
     @PostMapping("/deletar/{id}")
     public String deletarAluno(@PathVariable Long id) {
-        alunoService.deleteById(id);
+        try {
+            alunoService.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+        }
         return "redirect:/alunos";
     }
 }

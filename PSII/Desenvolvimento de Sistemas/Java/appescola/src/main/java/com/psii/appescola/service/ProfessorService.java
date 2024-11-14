@@ -16,23 +16,18 @@ public class ProfessorService {
         this.professorRepository = professorRepository;
     }
 
-    // Buscar todos os professores
     public List<Professor> findAll() {
         return professorRepository.findAll();
     }
 
-    // Salvar ou atualizar professor
     public Professor save(Professor professor) {
         return professorRepository.save(professor);
     }
 
-    // Buscar um professor pelo ID
-    public Professor findById(Long id) {
-        Optional<Professor> professor = professorRepository.findById(id);
-        return professor.orElse(null); // Retorna null se o professor não for encontrado
+    public Optional<Professor> findById(Long id) {
+        return professorRepository.findById(id);
     }
 
-    // Excluir um professor pelo ID
     public void delete(Long id) {
         professorRepository.deleteById(id);
     }

@@ -9,7 +9,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/}">Sistema Escolar</a>
+            <a class="navbar-brand" href="/">Sistema Escolar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -33,95 +33,6 @@
     <div class="container mt-5">
         <h1 class="text-center">Registro de Atividades Extracurriculares</h1>
 
-        <!-- Modal de Adicionar Atividade -->
-        <div class="modal fade" id="atividadeModal" tabindex="-1" role="dialog" aria-labelledby="atividadeModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="atividadeModalLabel" th:text="${atividade.id != null ? 'Editar Atividade' : 'Adicionar Atividade'}">
-                            Adicionar Atividade
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Formulário de Cadastro e Edição -->
-                        <form action="#" th:action="@{/atividades}" th:object="${atividade}" method="post">
-                            <div class="form-group">
-                                <label for="nome">Nome da Atividade</label>
-                                <input type="text" th:field="*{nome}" id="nome" class="form-control" placeholder="Nome da Atividade" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="localizacao">Localização</label>
-                                <input type="text" th:field="*{localizacao}" id="localizacao" class="form-control" placeholder="Localização" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="tipo">Tipo de Atividade</label>
-                                <input type="text" th:field="*{tipo}" id="tipo" class="form-control" placeholder="Tipo de Atividade" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="descricao">Descrição</label>
-                                <input type="text" th:field="*{descricao}" id="descricao" class="form-control" placeholder="Descrição" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="professor">Professor(a)</label>
-                                <select th:field="*{professor}" id="professor" class="form-control" required>
-                                    <option value="" disabled selected>Selecione o Professor(a)</option>
-                                    <option th:each="professor : ${professores}" th:value="${professor.id}" th:text="${professor.nome}"
-                                        th:selected="${atividade.professor != null && atividade.professor.id == professor.id}">
-                                    </option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Salvar Atividade</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal de Editar Atividade -->
-        <div class="modal fade" id="atividadeModalEdit" tabindex="-1" role="dialog" aria-labelledby="atividadeModalEditLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <form th:action="@{/atividades/editar/{id}(id=${atividade.id})}" method="post" id="editForm">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="atividadeModalEditLabel" th:text="'Editar Atividade - ' + ${atividade.id}"></h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Formulário de Edição -->
-                            <div class="form-group">
-                                <label for="edit-nome">Nome da Atividade</label>
-                                <input type="text" id="edit-nome" name="edit-nome" class="form-control" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="edit-localizacao">Localização</label>
-                                <input type="text" id="edit-localizacao" name="edit-localizacao" class="form-control" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="edit-tipo">Tipo de Atividade</label>
-                                <input type="text" id="edit-tipo" name="edit-tipo" class="form-control" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="edit-descricao">Descrição</label>
-                                <input type="text" id="edit-descricao" name="edit-descricao" class="form-control" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="edit-professor">Professor(a)</label>
-                                <select id="edit-professor" name="edit-professor" class="form-control" required>
-                                    <option value="" disabled selected>Selecione o Professor(a)</option>
-                                    <option th:each="professor : ${professores}" th:value="${professor.id}" th:text="${professor.nome}"
-                                        th:selected="${atividade.professor != null && atividade.professor.id == professor.id}">
-                                    </option>
-                                </select>
-                            </div>
-                            <br>
-                            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
         <!-- Botão de Adicionar Atividade -->
         <button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#atividadeModal">
             Adicionar Atividade
@@ -137,6 +48,7 @@
                     <th>Tipo</th>
                     <th>Descrição</th>
                     <th>Professor</th>
+                    <th>Alunos</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -152,14 +64,18 @@
                         <span th:if="${atividade.professor == null}">Professor não disponível</span>
                     </td>
                     <td>
+                        <li th:each="alunoAtividade : ${atividade.alunoAtividade}"
+                            th:text="${alunoAtividade.aluno.nome}"></li>
+                    </td>
+                    <td>
                         <div class="d-flex">
-                            <!-- Botão de Editar -->
                             <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal"
-                                data-bs-target="#atividadeModalEdit" th:onclick="'preencherModalEdit(' + ${atividade.id} + ')'">
+                                data-bs-target="#atividadeModalEdit"
+                                th:onclick="'preencherModalEdit(' + ${atividade.id} + ')'">
                                 Editar
                             </button>
-                            <!-- Formulário de Deletar -->
-                            <form th:action="@{/atividades/deletar/{id}(id=${atividade.id})}" method="post" class="d-inline">
+                            <form th:action="@{/atividades/deletar/{id}(id=${atividade.id})}" method="post"
+                                class="d-inline">
                                 <button type="submit" class="btn btn-danger btn-sm"
                                     onclick="return confirm('Tem certeza que deseja deletar esta atividade?')">
                                     Deletar
@@ -170,9 +86,79 @@
                 </tr>
             </tbody>
         </table>
+
+        <!-- Modal de Adicionar Atividade -->
+        <div class="modal fade" id="atividadeModal" tabindex="-1" role="dialog" aria-labelledby="atividadeModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="atividadeModalLabel"
+                            th:text="${atividade.id != null ? 'Editar Atividade' : 'Adicionar Atividade'}">
+                            Adicionar Atividade
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Formulário de Cadastro e Edição -->
+                        <form th:action="@{/atividades/salvar}" th:object="${atividade}" method="post">
+                            <div class="mb-3">
+                                <label for="nome">Nome da Atividade</label>
+                                <input type="text" th:field="*{nome}" id="nome" class="form-control"
+                                    placeholder="Nome da Atividade" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="localizacao">Localização</label>
+                                <input type="text" th:field="*{localizacao}" id="localizacao" class="form-control"
+                                    placeholder="Localização" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="tipo">Tipo de Atividade</label>
+                                <input type="text" th:field="*{tipo}" id="tipo" class="form-control"
+                                    placeholder="Tipo de Atividade" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="descricao">Descrição</label>
+                                <input type="text" th:field="*{descricao}" id="descricao" class="form-control"
+                                    placeholder="Descrição" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="professor">Professor(a)</label>
+                                <select th:field="*{professor}" id="professor" class="form-control" required>
+                                    <option value="" disabled selected>Selecione o Professor(a)</option>
+                                    <option th:each="professor : ${professores}" th:value="${professor.id}"
+                                        th:text="${professor.nome}"
+                                        th:selected="${atividade.professor != null && atividade.professor.id == professor.id}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Alunos</label>
+                                <div th:each="aluno : ${alunos}">
+                                    <div class="input-group mb-1">
+                                        <div class="input-group-text">
+                                            <input class="form-check-input mt-0" type="checkbox" name="alunoIds"
+                                                th:value="${aluno.id}">
+                                        </div>
+                                        <label class="form-control" th:text="${aluno.nome}"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         function preencherModalEdit(id) {
             fetch(`/atividades/editar/${id}`)
@@ -181,16 +167,21 @@
                     // Preencher os campos do modal de edição com os dados da atividade
                     document.getElementById("editForm").action = `/atividades/atualizar/${data.id}`;
 
-                    document.getElementById("edit-nome").value = data.nome;
-                    document.getElementById("edit-localizacao").value = data.localizacao;
-                    document.getElementById("edit-tipo").value = data.tipo;
-                    document.getElementById("edit-descricao").value = data.descricao;
+                    document.getElementById("nome").value = data.nome;
+                    document.getElementById("localizacao").value = data.localizacao;
+                    document.getElementById("tipo").value = data.tipo;
+                    document.getElementById("descricao").value = data.descricao;
 
-                    const professorSelect = document.getElementById("edit-professor");
-                    professorSelect.value = data.professor ? data.professor.id : "";
+                    // Preencher o campo de professor
+                    document.getElementById("edit-professor").value = data.professor ? data.professor.id : "";
 
-                    const modal = new bootstrap.Modal(document.getElementById("atividadeModalEdit"));
-                    modal.show();
+                    // Preencher os checkboxes de alunos
+                    document.querySelectorAll("input[name='alunoIds']").forEach(input => {
+                        input.checked = data.alunoAtividades.some(alunoAtividade => alunoAtividade.aluno.id == input.value);
+                    });
+
+                    // Abrir o modal de edição
+                    new bootstrap.Modal(document.getElementById("atividadeModal")).show();
                 })
                 .catch(error => console.error('Erro ao preencher o modal:', error));
         }
