@@ -33,7 +33,7 @@ public class AtividadeService {
         return atividadeRepository.findById(id);
     }
 
-    public void deletarPorId(Long id){
+    public void delete(Long id){
         atividadeRepository.deleteById(id);
     }
 }

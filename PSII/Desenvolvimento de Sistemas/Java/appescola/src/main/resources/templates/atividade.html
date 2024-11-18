@@ -34,7 +34,8 @@
         <h1 class="text-center">Registro de Atividades Extracurriculares</h1>
 
         <!-- Botão de Adicionar Atividade -->
-        <button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#atividadeModal">
+        <button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#atividadeModal"
+            onclick="limparModalAtividade()">
             Adicionar Atividade
         </button>
 
@@ -69,18 +70,14 @@
                     </td>
                     <td>
                         <div class="d-flex">
-                            <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal"
-                                data-bs-target="#atividadeModalEdit"
+                            <button type="button" class="btn btn-warning btn-sm me-2"
                                 th:onclick="'preencherModalEdit(' + ${atividade.id} + ')'">
                                 Editar
                             </button>
-                            <form th:action="@{/atividades/deletar/{id}(id=${atividade.id})}" method="post"
-                                class="d-inline">
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Tem certeza que deseja deletar esta atividade?')">
-                                    Deletar
-                                </button>
-                            </form>
+                            <a class="btn btn-danger btn-sm" th:href="@{'/atividades/deletar/' + ${atividade.id}}"
+                                onclick="return confirm('Tem certeza que deseja deletar esta atividade?')">
+                                Deletar
+                            </a>
                         </div>
                     </td>
                 </tr>
@@ -93,15 +90,15 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="atividadeModalLabel"
-                            th:text="${atividade.id != null ? 'Editar Atividade' : 'Adicionar Atividade'}">
+                        <h5 class="modal-title" id="atividadeModalLabel">
                             Adicionar Atividade
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <!-- Formulário de Cadastro e Edição -->
-                        <form th:action="@{/atividades/salvar}" th:object="${atividade}" method="post">
+                        <form th:action="@{/atividades/salvar}" th:object="${atividade}" method="post"
+                            id="atividadeForm">
                             <div class="mb-3">
                                 <label for="nome">Nome da Atividade</label>
                                 <input type="text" th:field="*{nome}" id="nome" class="form-control"
@@ -125,10 +122,10 @@
                             <div class="mb-3">
                                 <label for="professor">Professor(a)</label>
                                 <select th:field="*{professor}" id="professor" class="form-control" required>
-                                    <option value="" disabled selected>Selecione o Professor(a)</option>
+                                    <option value="" selected>Selecione o Professor(a)</option>
                                     <option th:each="professor : ${professores}" th:value="${professor.id}"
                                         th:text="${professor.nome}"
-                                        th:selected="${atividade.professor != null && atividade.professor.id == professor.id}">
+                                        th:selected="${atividade.professor != null && atividade.professor.id == professor.id}" id="professorOption">
                                     </option>
                                 </select>
                             </div>
@@ -164,26 +161,37 @@
             fetch(`/atividades/editar/${id}`)
                 .then(response => response.json())
                 .then(data => {
-                    // Preencher os campos do modal de edição com os dados da atividade
-                    document.getElementById("editForm").action = `/atividades/atualizar/${data.id}`;
+                    document.getElementById("atividadeForm").action = `/atividades/atualizar/${data.id}`;
 
                     document.getElementById("nome").value = data.nome;
                     document.getElementById("localizacao").value = data.localizacao;
                     document.getElementById("tipo").value = data.tipo;
                     document.getElementById("descricao").value = data.descricao;
+                    document.getElementById("professorOption").value = data.professor_id;
 
-                    // Preencher o campo de professor
-                    document.getElementById("edit-professor").value = data.professor ? data.professor.id : "";
-
-                    // Preencher os checkboxes de alunos
                     document.querySelectorAll("input[name='alunoIds']").forEach(input => {
-                        input.checked = data.alunoAtividades.some(alunoAtividade => alunoAtividade.aluno.id == input.value);
+                        input.checked = (data.aluno ? true : false);
                     });
 
-                    // Abrir o modal de edição
+                    document.getElementById("atividadeModalLabel").innerText = "Editar Atividade - " + data.id;
+
                     new bootstrap.Modal(document.getElementById("atividadeModal")).show();
                 })
-                .catch(error => console.error('Erro ao preencher o modal:', error));
+        }
+
+
+        function limparModalAtividade() {
+            document.getElementById("nome").value = '';
+            document.getElementById("localizacao").value = '';
+            document.getElementById("tipo").value = '';
+            document.getElementById("descricao").value = '';
+            document.getElementById("professor").value = '';
+
+            document.querySelectorAll("input[name='alunoIds']").forEach(input => {
+                input.checked = false;
+            });
+
+            document.getElementById("atividadeModalLabel").innerText = "Adicionar Atividade";
         }
     </script>
 </body>

@@ -2,8 +2,6 @@ package com.psii.appescola.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,10 +23,11 @@ public class Atividade {
 
     @ManyToOne
     @JoinColumn(name = "professor_id")
+    
     private Professor professor;
 
     @OneToMany(mappedBy = "atividade")
-    @JsonIgnore //fazer o jackson parar de incomodar
+    
     private List<AlunoAtividade> alunoAtividade;
 
     // --- Getters and Setters
@@ -88,10 +87,5 @@ public class Atividade {
     public void setAlunoAtividade(List<AlunoAtividade> alunoAtividade) {
         this.alunoAtividade = alunoAtividade;
     }
-
-
-
-
     
 }
-

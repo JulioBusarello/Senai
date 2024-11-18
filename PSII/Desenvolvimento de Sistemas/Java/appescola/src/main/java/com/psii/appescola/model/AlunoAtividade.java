@@ -50,4 +50,6 @@ public class AlunoAtividade {
     public void setAtividade(Atividade atividade) {
         this.atividade = atividade;
     }
+
+    
 }

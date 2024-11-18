@@ -3,6 +3,8 @@ package com.psii.appescola.model;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +23,7 @@ public class Professor {
     private Double salario;
 
     @OneToMany(mappedBy = "professor")
+    @JsonIgnore
     private List<Atividade> atividades;
 
     // --- Getters and Setters

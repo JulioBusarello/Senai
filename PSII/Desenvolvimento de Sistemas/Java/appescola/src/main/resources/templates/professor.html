@@ -35,7 +35,7 @@
 
         <!-- Botão de Adicionar Professor -->
         <button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#professorModal"
-            onclick="limparModal()">
+            onclick="limparModalProfessor()">
             Adicionar Professor
         </button>
 
@@ -126,7 +126,6 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#cpf').mask('000.000.000-00');
-                $('#edit-cpf').mask('000.000.000-00');
             });
 
             function preencherModalEdit(id) {
@@ -140,16 +139,20 @@
                         document.getElementById("cpf").value = data.cpf;
                         document.getElementById("salario").value = data.salario;
 
+                        document.getElementById("professorModalLabel").innerText = "Editar Professor - " + data.id;
+
                         new bootstrap.Modal(document.getElementById("professorModal")).show();
                     })
                     .catch(error => console.error('Erro ao preencher o modal:', error));
             }
 
-            function limparModal() {
+            function limparModalProfessor() {
                 document.getElementById("nome").value = '';
                 document.getElementById("dataNascimento").value = '';
                 document.getElementById("cpf").value = '';
                 document.getElementById("salario").value = '';
+
+                document.getElementById("professorModalLabel").innerText = "Adicionar Professor";
             }
         </script>
 </body>

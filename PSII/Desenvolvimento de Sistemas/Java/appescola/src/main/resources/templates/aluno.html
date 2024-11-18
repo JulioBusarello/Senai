@@ -37,7 +37,7 @@
 
         <!-- Botão de Adicionar Aluno -->
         <button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#alunoModal"
-            onclick="limparModal()">
+            onclick="limparModalAluno()">
             Adicionar Aluno
         </button>
 
@@ -87,8 +87,7 @@
                 <div class="modal-content">
                     <form id="alunoForm" th:action="@{/alunos}" th:object="${aluno}" method="post">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="alunoModalLabel"
-                                th:text="${aluno.nome != null ? 'Editar Aluno' : 'Adicionar Aluno'}"></h5>
+                            <h5 class="modal-title" id="alunoModalLabel">Adicionar Aluno</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -146,16 +145,20 @@
                     document.getElementById("cpf").value = data.cpf;
                     document.getElementById("telefone").value = data.telefone;
 
+                    document.getElementById("alunoModalLabel").innerText = "Editar Aluno - " + data.id;
+
                     new bootstrap.Modal(document.getElementById("alunoModal")).show();
                 })
                 .catch(error => console.error('Erro ao preencher o modal:', error));
         }
 
-        function limparModal() {
-            document.getElementById("nome").value = data.nome;
-            document.getElementById("dataNascimento").value = data.dataNascimento;
-            document.getElementById("cpf").value = data.cpf;
-            document.getElementById("telefone").value = data.telefone;
+        function limparModalAluno() {
+            document.getElementById("nome").value = '';
+            document.getElementById("dataNascimento").value = '';
+            document.getElementById("cpf").value = '';
+            document.getElementById("telefone").value = '';
+
+            document.getElementById("alunoModalLabel").innerText = "Adicionar Aluno";
         }
     </script>
 </body>

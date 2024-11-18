@@ -1,8 +1,13 @@
 package com.psii.appescola.controller;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,38 +55,60 @@ public class AtividadeController {
     @PostMapping("/salvar")
     public String salvarAtividade(Atividade atividade, @RequestParam("alunoIds") Long[] alunoIds, Model model) {
 
-        if (alunoIds == null || alunoIds.length == 0) {
-            model.addAttribute("error", "É necessário selecionar ao menos um aluno.");
-            return "atividade";
-        }
-
         atividadeService.save(atividade);
 
         for (int i = 0; i < alunoIds.length; i++) {
             Aluno aluno = alunoService.findById(alunoIds[i])
-                .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+                    .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
 
             AlunoAtividade alunoAtividade = new AlunoAtividade();
             alunoAtividade.setAtividade(atividade);
             alunoAtividade.setAluno(aluno);
 
-            alunoAtividadeService.save(alunoAtividade); // Salvar pedido_produto
+            alunoAtividadeService.save(alunoAtividade);
         }
 
         return "redirect:/atividades";
     }
 
-    @PostMapping("/deletar/{id}")
+    @GetMapping("/deletar/{id}")
     public String deletarAtividade(@PathVariable Long id) {
-        atividadeService.deletarPorId(id);
+        try {
+            atividadeService.delete(id);
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+        }
         return "redirect:/atividades";
     }
 
     @GetMapping("/editar/{id}")
     @ResponseBody
-    public ResponseEntity<Atividade> editarAtividade(@PathVariable("id") Long id) {
-        Optional<Atividade> atividadeOpt = atividadeService.findById(id);
-        return atividadeOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<?> editarAtividade(@PathVariable Long id) {
+        Atividade atividade = atividadeService.findById(id).orElseThrow(() -> new RuntimeException("Atividade não encontrada"));
+
+        Long idAtividade = atividade.getId();
+
+        List<AlunoAtividade> alunosAtividadeIds = atividade.getAlunoAtividade();
+
+        AlunoAtividade abcAlunoAtividade = new AlunoAtividade();
+
+        for (int i = 0; i < alunosAtividadeIds.size(); i++) {
+            Long idnfnofnosdf = alunosAtividadeIds.get(i).getAtividade().getId();
+            if (idAtividade == idnfnofnosdf ) {
+                abcAlunoAtividade = alunoAtividadeService.findById(idnfnofnosdf);
+            }
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", atividade.getId());
+        response.put("idAluno", abcAlunoAtividade.getAluno().getId());
+        response.put("idProfessor", atividade.getProfessor().getId());
+        response.put("nome", atividade.getNome());
+        response.put("descricao", atividade.getDescricao());
+        response.put("tipo", atividade.getTipo());
+        response.put("localizacao", atividade.getLocalizacao());
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/atualizar/{id}")
