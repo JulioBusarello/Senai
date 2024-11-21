@@ -1,7 +1,9 @@
 package com.psii.appescola.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,12 +25,10 @@ public class Atividade {
 
     @ManyToOne
     @JoinColumn(name = "professor_id")
-    
     private Professor professor;
 
-    @OneToMany(mappedBy = "atividade")
-    
-    private List<AlunoAtividade> alunoAtividade;
+    @OneToMany(mappedBy = "atividade", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AlunoAtividade> alunoAtividade = new ArrayList<>();
 
     // --- Getters and Setters
 

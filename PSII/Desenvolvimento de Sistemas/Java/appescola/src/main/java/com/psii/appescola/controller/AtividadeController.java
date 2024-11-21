@@ -1,10 +1,7 @@
 package com.psii.appescola.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -53,9 +50,10 @@ public class AtividadeController {
     }
 
     @PostMapping("/salvar")
-    public String salvarAtividade(Atividade atividade, @RequestParam("alunoIds") Long[] alunoIds, Model model) {
-
+    public String salvarAtividade(Atividade atividade, @RequestParam Long[] alunoIds, Model model) {
         atividadeService.save(atividade);
+
+        atividade.getAlunoAtividade().clear();
 
         for (int i = 0; i < alunoIds.length; i++) {
             Aluno aluno = alunoService.findById(alunoIds[i])
@@ -67,6 +65,8 @@ public class AtividadeController {
 
             alunoAtividadeService.save(alunoAtividade);
         }
+
+        atividadeService.save(atividade);
 
         return "redirect:/atividades";
     }
@@ -86,27 +86,16 @@ public class AtividadeController {
     public ResponseEntity<?> editarAtividade(@PathVariable Long id) {
         Atividade atividade = atividadeService.findById(id).orElseThrow(() -> new RuntimeException("Atividade não encontrada"));
 
-        Long idAtividade = atividade.getId();
-
-        List<AlunoAtividade> alunosAtividadeIds = atividade.getAlunoAtividade();
-
-        AlunoAtividade abcAlunoAtividade = new AlunoAtividade();
-
-        for (int i = 0; i < alunosAtividadeIds.size(); i++) {
-            Long idnfnofnosdf = alunosAtividadeIds.get(i).getAtividade().getId();
-            if (idAtividade == idnfnofnosdf ) {
-                abcAlunoAtividade = alunoAtividadeService.findById(idnfnofnosdf);
-            }
-        }
-
         Map<String, Object> response = new HashMap<>();
         response.put("id", atividade.getId());
-        response.put("idAluno", abcAlunoAtividade.getAluno().getId());
-        response.put("idProfessor", atividade.getProfessor().getId());
         response.put("nome", atividade.getNome());
         response.put("descricao", atividade.getDescricao());
         response.put("tipo", atividade.getTipo());
         response.put("localizacao", atividade.getLocalizacao());
+
+        response.put("professor", Map.of("id", atividade.getProfessor().getId(), "nome", atividade.getProfessor().getNome()));
+        response.put("alunoAtividade", atividade.getAlunoAtividade().stream().map(pp -> Map.of(
+                "alunoId", pp.getAluno().getId())));
 
         return ResponseEntity.ok(response);
     }

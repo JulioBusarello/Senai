@@ -20,6 +20,7 @@ public class AlunoAtividadeService {
 
     public AlunoAtividade findById(Long id) {
         Optional<AlunoAtividade> alunoAtividade = alunoAtividadeRepository.findById(id);
-        return alunoAtividade.orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+        System.out.println(id);
+        return alunoAtividade.orElseThrow(() -> new RuntimeException("AlunoAtividade não encontrado"));
     }
 }
