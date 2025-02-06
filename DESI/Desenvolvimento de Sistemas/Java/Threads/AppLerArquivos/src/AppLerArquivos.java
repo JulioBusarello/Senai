@@ -1,43 +1,111 @@
-import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+
+import javax.swing.*;
+import javax.swing.border.Border;
 
 public class AppLerArquivos extends JFrame {
 
-    private JTextArea textArea1;
-    private JTextArea textArea2;
+    private JTextArea textArea;
+    private JTextField jTfArquivo1;
+    private JTextField jTfArquivo2;
+    private JTextField jTfTempo1;
+    private JTextField jTfTempo2;
+    private JProgressBar progresso1;
+    private JProgressBar progresso2;
 
     public AppLerArquivos() {
         // Configurando o JFrame
-        setTitle("Leitor de Arquivos Texto ");
-        setSize(600, 400);
+        setTitle("Leitor de Arquivo Texto MultiThreading");
+        setSize(600, 450);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
 
         // Inicializando o JTextArea
-        textArea1 = new JTextArea();
-        textArea1.setEditable(false);
-        textArea1.setFont(new Font("Serif", Font.PLAIN, 16));
-
-        textArea2 = new JTextArea();
-        textArea2.setEditable(false);
-        textArea2.setFont(new Font("Serif", Font.PLAIN, 16));
+        textArea = new JTextArea();
+        textArea.setFont(new Font("Arial", Font.PLAIN, 16));
 
         // Adicionando o JTextArea a um JScrollPane para permitir rolagem
-        JScrollPane scrollPane1 = new JScrollPane(textArea1);
-        scrollPane1.setBounds(10, 10, 200, 300);
-        add(scrollPane1, BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setBounds(310, 10, 260, 340);
+        add(scrollPane);
 
-        JScrollPane scrollPane2 = new JScrollPane(textArea2);
-        scrollPane2.setBounds(280, 10, 200, 300);
-        add(scrollPane2, BorderLayout.CENTER);
+        Border gray = BorderFactory.createLineBorder(Color.GRAY);
+
+        scrollPane.setBorder(gray);
+
+        JLabel arquivo1 = new JLabel("Progresso de leitura do arquivo 1:");
+        arquivo1.setBounds(10, 10, 280, 25);
+
+        jTfArquivo1 = new JTextField();
+        jTfArquivo1.setBounds(10, 35, 280, 30);
+
+        progresso1 = new JProgressBar(0, 100);
+        progresso1.setBounds(10, 70, 280, 20);
+        progresso1.setStringPainted(true);
+
+        JLabel tempo1 = new JLabel("Tempo da tarefa 1:");
+        tempo1.setBounds(10, 103, 180, 25);
+
+        jTfTempo1 = new JTextField();
+        jTfTempo1.setBounds(150, 100, 140, 30);
+        jTfTempo1.setText("100");
+
+        JLabel arquivo2 = new JLabel("Progresso de leitura do arquivo 2:");
+        arquivo2.setBounds(10, 140, 280, 25);
+
+        jTfArquivo2 = new JTextField();
+        jTfArquivo2.setBounds(10, 165, 280, 30);
+
+        progresso2 = new JProgressBar(0, 100);
+        progresso2.setBounds(10, 200, 280, 20);
+        progresso2.setStringPainted(true);
+
+        JLabel tempo2 = new JLabel("Tempo da tarefa 2:");
+        tempo2.setBounds(10, 233, 180, 25);
+
+        jTfTempo2 = new JTextField();
+        jTfTempo2.setBounds(150, 230, 140, 30);
+        jTfTempo2.setText("100");
+
+        JLabel texto = new JLabel("Texto de Entrada:");
+        texto.setBounds(10, 345, 200, 25);
+
+        JTextField jTfTexto = new JTextField();
+        jTfTexto.setBounds(10, 370, 560, 30);
+
+        add(jTfTempo1);
+        add(jTfTempo2);
+        add(progresso1);
+        add(progresso2);
+        add(tempo1);
+        add(tempo2);
+
+        add(arquivo1);
+        add(arquivo2);
+        add(texto);
+        // add(scrollPane, null);
+        add(jTfArquivo1);
+        add(jTfArquivo2);
+        add(jTfTexto);
+
+        JButton button = new JButton("Iniciar a leitura");
+        button.setBounds(10, 300, 280, 30);
+        button.addActionListener(e -> {
+            // Iniciar a leitura apenas quando o botão for pressionado
+            LerArquivosSimultaneo("./arquivo1.txt", "./arquivo2.txt", button);
+        });
+        add(button);
     }
 
-    public void lerArquivos(String filePath1, String filePath2) {
+    public void LerArquivosSimultaneo(String filePath1, String filePath2, JButton button) {
         // Criando instâncias de FileLoaderTask para cada arquivo
 
-        TarefaLerArquivo task1 = new TarefaLerArquivo(filePath1, textArea1);
-        TarefaLerArquivo task2 = new TarefaLerArquivo(filePath2, textArea2);
+        LerArquivos task1 = new LerArquivos(filePath1, textArea, jTfArquivo1, Integer.parseInt(jTfTempo1.getText()),
+                progresso1, button);
+        LerArquivos task2 = new LerArquivos(filePath2, textArea, jTfArquivo2, Integer.parseInt(jTfTempo2.getText()),
+                progresso2, button);
 
         // Criando threads para cada tarefa de leitura de arquivo
         Thread thread1 = new Thread(task1);
@@ -48,14 +116,13 @@ public class AppLerArquivos extends JFrame {
         thread2.start();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 AppLerArquivos gui = new AppLerArquivos();
                 gui.setVisible(true);
 
-                gui.lerArquivos("./arquivo1.txt", "./arquivo2.txt");
             }
         });
     }
