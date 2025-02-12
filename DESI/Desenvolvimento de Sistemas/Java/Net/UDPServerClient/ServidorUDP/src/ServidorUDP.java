@@ -15,7 +15,7 @@ public class ServidorUDP {
                 socket.receive(receivePacket);
 
                 String mensagem = new String(receivePacket.getData(), 0, receiveData.length);
-                System.out.println("Mensagem recebida " + mensagem);
+                System.out.println("Mensagem recebida: " + mensagem);
 
                 InetAddress clientAddres = receivePacket.getAddress();
                 int clientPort = receivePacket.getPort();
