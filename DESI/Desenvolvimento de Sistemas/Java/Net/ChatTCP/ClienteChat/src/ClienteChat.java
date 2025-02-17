@@ -36,7 +36,8 @@ public class ClienteChat extends JFrame {
     private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
-    private String serverAddres = "192.168.1.6";
+    // private String serverAddres = "localhost";
+    private String serverAddres;
     private int port = 12345;
 
     private String nameUser;
@@ -59,7 +60,8 @@ public class ClienteChat extends JFrame {
         add(userScrollPane, BorderLayout.EAST);
 
         // Dividindo panel
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(taChat), new JScrollPane(userScrollPane));
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(taChat),
+                new JScrollPane(userScrollPane));
         splitPane.setDividerLocation(400);
         splitPane.setDividerSize(5);
         add(splitPane, BorderLayout.CENTER);
@@ -126,8 +128,9 @@ public class ClienteChat extends JFrame {
 
     private void connectToServer() {
         try {
-            /*String iphost = JOptionPane.showInputDialog("Insira o ip do servidor");
-            serverAddres = iphost;*/
+
+            String iphost = JOptionPane.showInputDialog("Insira o ip do servidor");
+            serverAddres = iphost;
 
             socket = new Socket(serverAddres, port);
             out = new PrintWriter(socket.getOutputStream(), true);
@@ -135,11 +138,7 @@ public class ClienteChat extends JFrame {
 
             nameUser = JOptionPane.showInputDialog("Insira seu nome:");
 
-            nameUser = nameUser.trim();
-
-            if (nameUser.contains(" ")) {
-                nameUser = nameUser.replace(" ", "_");
-            }
+            verifyName();
 
             while (true) {
                 out.println(nameUser);
@@ -147,6 +146,7 @@ public class ClienteChat extends JFrame {
 
                 if (serverResponse.equals("Nome ja esta em uso. Digite outro nome:")) {
                     nameUser = JOptionPane.showInputDialog("Nome ja esta em uso. Digite outro nome:");
+                    verifyName();
                 } else {
                     break;
                 }
@@ -176,7 +176,7 @@ public class ClienteChat extends JFrame {
             try {
                 String message;
                 while ((message = in.readLine()) != null) {
-                    System.out.println("Mensagem recebida: " + message);
+                    // System.out.println("Mensagem recebida: " + message);
                     if (message.startsWith("/users")) {
                         updateUserList(message);
                     } else {
@@ -184,7 +184,8 @@ public class ClienteChat extends JFrame {
                     }
                 }
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(ClienteChat.this, "Conexão perdida com o servidor.", "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(ClienteChat.this, "Conexão perdida com o servidor.", "Erro",
+                        JOptionPane.ERROR_MESSAGE);
                 System.exit(1);
             }
         }
@@ -201,6 +202,14 @@ public class ClienteChat extends JFrame {
                 }
             }
         });
+    }
+
+    private void verifyName() {
+        nameUser = nameUser.trim();
+
+        if (nameUser.contains(" ")) {
+            nameUser = nameUser.replace(" ", "_");
+        }
     }
 
     public static void main(String[] args) throws Exception {

@@ -54,12 +54,12 @@ public class ServidorChat {
                         clientName = in.readLine();
                     }
                     clients.put(clientName, out);
-                    sendClientsListToClient(out);
+                    sendClientsList(out);
                 }
 
                 System.out.println(clientName + " entrou no chat.");
 
-                sendClientsListToAllClients();
+                sendClientsList(null);
 
                 String message;
                 while ((message = in.readLine()) != null) {
@@ -79,35 +79,27 @@ public class ServidorChat {
                 synchronized (clients) {
                     if (clientName != null) {
                         clients.remove(clientName);
-                        sendClientsListToAllClients();
+                        sendClientsList(null);
                         System.out.println(clientName + " saiu do chat.");
                     }
                 }
             }
         }
 
-        private void sendClientsListToAllClients() {
+        private void sendClientsList(PrintWriter clientOut) {
             synchronized (clients) {
                 StringBuilder userList = new StringBuilder("/users ");
                 for (String client : clients.keySet()) {
                     userList.append(client).append(" ");
                 }
                 String userListSend = userList.toString().trim();
-
-                for (PrintWriter writer : clients.values()) {
-                    writer.println(userListSend);
+                if (clientOut != null) {
+                    clientOut.println(userListSend);
+                } else {
+                    for (PrintWriter writer : clients.values()) {
+                        writer.println(userListSend);
+                    }
                 }
-            }
-        }
-
-        private void sendClientsListToClient(PrintWriter clientOut) {
-            synchronized (clients) {
-                StringBuilder userList = new StringBuilder("/users ");
-                for (String client : clients.keySet()) {
-                    userList.append(client).append(" ");
-                }
-
-                clientOut.println(userList.toString().trim());
             }
         }
 
