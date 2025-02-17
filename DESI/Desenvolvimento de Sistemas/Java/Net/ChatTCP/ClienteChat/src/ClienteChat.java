@@ -1,32 +1,68 @@
-import java.awt.*;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
-import java.net.*;
-import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import javax.swing.DefaultListModel;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 public class ClienteChat extends JFrame {
 
     private JTextArea taChat;
+    private JList<String> userList;
+    private DefaultListModel<String> userModel;
     private JTextField jtfMessage;
     private JTextField jtfRecipient;
     private JButton btnSend;
     private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
-    private String serverAddres = "10.74.241.66";
+    private String serverAddres = "192.168.1.6";
     private int port = 12345;
+
+    private String nameUser;
 
     public ClienteChat() {
         // Configurações da janela
         setTitle("Chat Client");
-        setSize(400, 300);
+        setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         taChat = new JTextArea();
         taChat.setEditable(false);
-        add(new JScrollPane(taChat), BorderLayout.CENTER);
+        taChat.setLineWrap(true);
+        taChat.setWrapStyleWord(true);
+
+        userModel = new DefaultListModel<>();
+        userList = new JList<>(userModel);
+        JScrollPane userScrollPane = new JScrollPane(userList);
+        add(userScrollPane, BorderLayout.EAST);
+
+        // Dividindo panel
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(taChat), new JScrollPane(userScrollPane));
+        splitPane.setDividerLocation(400);
+        splitPane.setDividerSize(5);
+        add(splitPane, BorderLayout.CENTER);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -36,7 +72,7 @@ public class ClienteChat extends JFrame {
         recipientPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         JLabel lblRecipient = new JLabel("Destinatário:");
         recipientPanel.add(lblRecipient);
-        jtfRecipient = new JTextField(15);
+        jtfRecipient = new JTextField(20);
         recipientPanel.add(jtfRecipient);
         panel.add(recipientPanel, BorderLayout.NORTH);
 
@@ -45,7 +81,7 @@ public class ClienteChat extends JFrame {
         messagePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         JLabel lblMessage = new JLabel("Mensagem:");
         messagePanel.add(lblMessage);
-        jtfMessage = new JTextField(20);
+        jtfMessage = new JTextField(30);
         messagePanel.add(jtfMessage);
         panel.add(messagePanel, BorderLayout.CENTER);
 
@@ -62,6 +98,25 @@ public class ClienteChat extends JFrame {
             }
         });
 
+        jtfMessage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    sendMessage();
+                }
+            }
+        });
+
+        userList.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1) {
+                    String selectedUser = userList.getSelectedValue();
+                    if (selectedUser != null) {
+                        jtfRecipient.setText(selectedUser);
+                    }
+                }
+            }
+        });
+
         // Conectar ao servidor
         connectToServer();
 
@@ -71,16 +126,34 @@ public class ClienteChat extends JFrame {
 
     private void connectToServer() {
         try {
-            String iphost = JOptionPane.showInputDialog("Insira o ip do servidor");
-            serverAddres = iphost;
+            /*String iphost = JOptionPane.showInputDialog("Insira o ip do servidor");
+            serverAddres = iphost;*/
 
             socket = new Socket(serverAddres, port);
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            String name = JOptionPane.showInputDialog("Insira seu nome:");
-            setTitle("Chat client - " + name);
-            out.println(name);
+            nameUser = JOptionPane.showInputDialog("Insira seu nome:");
+
+            nameUser = nameUser.trim();
+
+            if (nameUser.contains(" ")) {
+                nameUser = nameUser.replace(" ", "_");
+            }
+
+            while (true) {
+                out.println(nameUser);
+                String serverResponse = in.readLine();
+
+                if (serverResponse.equals("Nome ja esta em uso. Digite outro nome:")) {
+                    nameUser = JOptionPane.showInputDialog("Nome ja esta em uso. Digite outro nome:");
+                } else {
+                    break;
+                }
+            }
+
+            setTitle("Chat client - " + nameUser);
+            out.println(nameUser);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -103,13 +176,31 @@ public class ClienteChat extends JFrame {
             try {
                 String message;
                 while ((message = in.readLine()) != null) {
-                    taChat.append(message + "\n");
+                    System.out.println("Mensagem recebida: " + message);
+                    if (message.startsWith("/users")) {
+                        updateUserList(message);
+                    } else {
+                        taChat.append(message + "\n");
+                    }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(ClienteChat.this, "Conexão perdida com o servidor.", "Erro", JOptionPane.ERROR_MESSAGE);
+                System.exit(1);
             }
         }
 
+    }
+
+    private void updateUserList(String message) {
+        SwingUtilities.invokeLater(() -> {
+            userModel.clear();
+            String[] users = message.split(" ");
+            for (int i = 1; i < users.length; i++) {
+                if (!users[i].equals(nameUser)) {
+                    userModel.addElement(users[i]);
+                }
+            }
+        });
     }
 
     public static void main(String[] args) throws Exception {
