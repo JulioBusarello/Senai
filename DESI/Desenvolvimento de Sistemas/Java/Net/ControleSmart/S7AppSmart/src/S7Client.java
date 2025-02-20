@@ -1,9 +1,6 @@
 
 //-------------------------------------------------------------------------------------------------
-/*  SENAI TIMBÓ/SC
- *  CURSO TÉCNICO EM DESENVOLVIMENTO DE SISTEMAS
- *  AUTOR: Gerson Trindade        DATA: AGO/2024
- * 
+/*  
  *  Classe de implementação parcial do protocolo S7 Siemens
  *  para leitura e escrita de DATA BLOCKs (DB) do CLP
  */
