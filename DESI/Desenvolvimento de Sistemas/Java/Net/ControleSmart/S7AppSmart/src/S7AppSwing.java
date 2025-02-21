@@ -1,14 +1,19 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
 public class S7AppSwing extends JFrame {
 
+    public byte[] indxColorBlk = new byte[28];
+    public PlcConnector plcStock;
+
     public S7AppSwing() {
         setTitle("Leitura e Escrita de TAGs no CLP - Protocolo S7");
-        setSize(450, 600);
+        setSize(850, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
+        setLocationRelativeTo(null);
 
         JLabel labelIp = new JLabel("Ip Host:");
         labelIp.setBounds(50, 10, 100, 30);
@@ -220,6 +225,22 @@ public class S7AppSwing extends JFrame {
             }
         });
 
+        JPanel pnlBlkEst = new JPanel();
+        pnlBlkEst.setBounds(380, 10, 280, 245);
+        pnlBlkEst.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        pnlBlkEst.setLayout(null);
+        add(pnlBlkEst);
+
+        JButton buttonUpdate = new JButton("Update");
+        buttonUpdate.setBounds(380, 265, 280, 30);
+        add(buttonUpdate);
+
+        updateStock(pnlBlkEst, textIp);
+
+        buttonUpdate.addActionListener((ActionEvent e) -> {
+            updateStock(pnlBlkEst, textIp);
+        });
+
     }
 
     private static String bytesToHex(byte[] bytes, int length) {
@@ -236,6 +257,60 @@ public class S7AppSwing extends JFrame {
 
     private static void extracted(int id, byte[] bytes) {
 
+    }
+
+    private void updateStock(JPanel pnlBlkEst, JTextField textIp) {
+        plcStock = new PlcConnector(textIp.getText().trim(), 102);
+        try {
+            plcStock.connect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            indxColorBlk = plcStock.readBlock(9, 68, 28);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        SwingUtilities.invokeLater(() -> {
+            // Criar matriz de JPanels 6x5 - 2
+            int largura = 35;
+            int altura = 35;
+            int espaco = 10;
+
+            for (int i = 0; i < 28; i++) {
+                JLabel block = new JLabel("" + (i + 1), SwingConstants.CENTER);
+
+                block.setSize(largura, altura);
+                block.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+                int x = (i % 6) * (largura + espaco);
+                int y = (i / 6) * (altura + espaco);
+
+                block.setLocation(x + 10, y + 10);
+
+                switch (indxColorBlk[i]) {
+                    case 0 -> {
+                        block.setBackground(Color.WHITE);
+                    }
+                    case 1 -> {
+                        block.setBackground(Color.BLACK);
+                    }
+                    case 2 -> {
+                        block.setBackground(Color.RED);
+                    }
+                    case 3 -> {
+                        block.setBackground(Color.BLUE);
+                    }
+
+                }
+
+                pnlBlkEst.add(block);
+                pnlBlkEst.revalidate();
+                pnlBlkEst.repaint();
+            }
+        });
     }
 
     public static void main(String[] args) throws Exception {
