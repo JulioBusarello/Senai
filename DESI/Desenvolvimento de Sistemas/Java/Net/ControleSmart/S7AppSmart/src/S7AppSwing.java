@@ -284,6 +284,8 @@ public class S7AppSwing extends JFrame {
 
                 block.setSize(largura, altura);
                 block.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                block.setOpaque(true);
+                block.setForeground(Color.WHITE);
 
                 int x = (i % 6) * (largura + espaco);
                 int y = (i / 6) * (altura + espaco);
