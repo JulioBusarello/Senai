@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 
 import javax.swing.*;
@@ -6,7 +7,9 @@ import javax.swing.*;
 public class S7AppSwing extends JFrame {
 
     public byte[] indxColorBlk = new byte[28];
+    public Integer indxExpedition;
     public PlcConnector plcStock;
+    public PlcConnector plcExpedition;
 
     public S7AppSwing() {
         setTitle("Leitura e Escrita de TAGs no CLP - Protocolo S7");
@@ -231,14 +234,30 @@ public class S7AppSwing extends JFrame {
         pnlBlkEst.setLayout(null);
         add(pnlBlkEst);
 
-        JButton buttonUpdate = new JButton("Update");
-        buttonUpdate.setBounds(380, 265, 280, 30);
-        add(buttonUpdate);
+        JButton buttonUpdateStock = new JButton("Update");
+        buttonUpdateStock.setBounds(380, 265, 280, 30);
+        add(buttonUpdateStock);
 
         updateStock(pnlBlkEst, textIp);
 
-        buttonUpdate.addActionListener((ActionEvent e) -> {
+        buttonUpdateStock.addActionListener((ActionEvent e) -> {
             updateStock(pnlBlkEst, textIp);
+        });
+
+        JPanel pnlExp = new JPanel();
+        pnlExp.setBounds(380, 305, 370, 160);
+        pnlExp.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        pnlExp.setLayout(null);
+        add(pnlExp);
+
+        updateExpedition(pnlExp, textIp);
+
+        JButton buttonUpdateExp = new JButton("Update");
+        buttonUpdateExp.setBounds(380, 475, 370, 30);
+        add(buttonUpdateExp);
+
+        buttonUpdateExp.addActionListener((ActionEvent e) -> {
+            updateExpedition(pnlExp, textIp);
         });
 
     }
@@ -260,7 +279,7 @@ public class S7AppSwing extends JFrame {
     }
 
     private void updateStock(JPanel pnlBlkEst, JTextField textIp) {
-        plcStock = new PlcConnector(textIp.getText().trim(), 102);
+        plcStock = new PlcConnector("10.74.241.10", 102);
         try {
             plcStock.connect();
         } catch (Exception e) {
@@ -275,6 +294,7 @@ public class S7AppSwing extends JFrame {
 
         SwingUtilities.invokeLater(() -> {
             // Criar matriz de JPanels 6x5 - 2
+            pnlBlkEst.removeAll();
             int largura = 35;
             int altura = 35;
             int espaco = 10;
@@ -285,7 +305,6 @@ public class S7AppSwing extends JFrame {
                 block.setSize(largura, altura);
                 block.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 block.setOpaque(true);
-                block.setForeground(Color.WHITE);
 
                 int x = (i % 6) * (largura + espaco);
                 int y = (i / 6) * (altura + espaco);
@@ -295,15 +314,19 @@ public class S7AppSwing extends JFrame {
                 switch (indxColorBlk[i]) {
                     case 0 -> {
                         block.setBackground(Color.WHITE);
+                        block.setForeground(Color.BLACK);
                     }
                     case 1 -> {
                         block.setBackground(Color.BLACK);
+                        block.setForeground(Color.WHITE);
                     }
                     case 2 -> {
                         block.setBackground(Color.RED);
+                        block.setForeground(Color.WHITE);
                     }
                     case 3 -> {
                         block.setBackground(Color.BLUE);
+                        block.setForeground(Color.WHITE);
                     }
 
                 }
@@ -313,6 +336,61 @@ public class S7AppSwing extends JFrame {
                 pnlBlkEst.repaint();
             }
         });
+    }
+
+    public void updateExpedition(JPanel pnlExp, JTextField textIp) {
+        int returns[] = new int[12];
+        plcExpedition = new PlcConnector("10.74.241.40", 102);
+        try {
+            plcExpedition.connect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            int j = 0;
+            for (int i = 6; i <= 28; i += 2) {
+                returns[j] = plcExpedition.readInt(9, i);
+                j++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Falha no Read");
+        }
+
+        SwingUtilities.invokeLater(() -> {
+            pnlExp.removeAll();
+            int largura = 80;
+            int altura = 40;
+            int espaco = 10;
+
+            for (int i = 0; i < 12; i++) {
+                String formattedReturn;
+                if (returns[i] == 0) {
+                    formattedReturn = "____";
+                } else {
+                    formattedReturn = String.format("%04d", returns[i]);
+                }
+                JLabel label = new JLabel("P" + (i + 1) + "= [OP" + formattedReturn + "]", SwingConstants.CENTER);
+
+                label.setSize(largura, altura);
+                label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                label.setOpaque(true);
+                label.setForeground(Color.WHITE);
+                label.setBackground(Color.DARK_GRAY);
+                label.setFont(new Font("Arial", Font.PLAIN, 10));
+
+                int x = (i % 4) * (largura + espaco);
+                int y = (i / 4) * (altura + espaco);
+
+                label.setLocation(x + 10, y + 10);
+
+                pnlExp.add(label);
+                pnlExp.revalidate();
+                pnlExp.repaint();
+            }
+        });
+
     }
 
     public static void main(String[] args) throws Exception {
