@@ -10,6 +10,9 @@ public class S7AppSwing extends JFrame {
     public Integer indxExpedition;
     public PlcConnector plcStock;
     public PlcConnector plcExpedition;
+    public JPanel pnlBlkEst;
+    public JPanel pnlExp;
+    private boolean leituraCiclica = false;
 
     public S7AppSwing() {
         setTitle("Leitura e Escrita de TAGs no CLP - Protocolo S7");
@@ -112,12 +115,19 @@ public class S7AppSwing extends JFrame {
         textValueWrite.setBounds(150, 450, 200, 30);
         add(textValueWrite);
 
-        JButton buttonLeituras = new JButton("Leitura Ciclica");
+        JButton buttonLeituras = new JButton("Ativar Leitura Cíclica");
         buttonLeituras.setBounds(150, 500, 200, 30);
         add(buttonLeituras);
 
         buttonLeituras.addActionListener((ActionEvent e) -> {
-
+            if (leituraCiclica) {
+                leituraCiclica = false;
+                buttonLeituras.setText("Ativar Leitura Cíclica");
+            } else {
+                leituraCiclica = true;
+                buttonLeituras.setText("Desativar Leitura Cíclica");
+            }
+            updateTimer();
         });
 
         buttonRead.addActionListener((ActionEvent e) -> {
@@ -228,36 +238,36 @@ public class S7AppSwing extends JFrame {
             }
         });
 
-        JPanel pnlBlkEst = new JPanel();
-        pnlBlkEst.setBounds(380, 10, 280, 245);
+        pnlBlkEst = new JPanel();
+        pnlBlkEst.setBounds(380, 10, 280, 235);
         pnlBlkEst.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         pnlBlkEst.setLayout(null);
         add(pnlBlkEst);
 
         JButton buttonUpdateStock = new JButton("Update");
-        buttonUpdateStock.setBounds(380, 265, 280, 30);
+        buttonUpdateStock.setBounds(380, 255, 280, 30);
         add(buttonUpdateStock);
 
-        updateStock(pnlBlkEst, textIp);
+        updateStock();
 
         buttonUpdateStock.addActionListener((ActionEvent e) -> {
-            updateStock(pnlBlkEst, textIp);
+            updateStock();
         });
 
-        JPanel pnlExp = new JPanel();
+        pnlExp = new JPanel();
         pnlExp.setBounds(380, 305, 370, 160);
         pnlExp.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         pnlExp.setLayout(null);
         add(pnlExp);
 
-        updateExpedition(pnlExp, textIp);
+        updateExpedition();
 
         JButton buttonUpdateExp = new JButton("Update");
         buttonUpdateExp.setBounds(380, 475, 370, 30);
         add(buttonUpdateExp);
 
         buttonUpdateExp.addActionListener((ActionEvent e) -> {
-            updateExpedition(pnlExp, textIp);
+            updateExpedition();
         });
 
     }
@@ -278,7 +288,7 @@ public class S7AppSwing extends JFrame {
 
     }
 
-    private void updateStock(JPanel pnlBlkEst, JTextField textIp) {
+    private void updateStock() {
         plcStock = new PlcConnector("10.74.241.10", 102);
         try {
             plcStock.connect();
@@ -338,7 +348,7 @@ public class S7AppSwing extends JFrame {
         });
     }
 
-    public void updateExpedition(JPanel pnlExp, JTextField textIp) {
+    public void updateExpedition() {
         int returns[] = new int[12];
         plcExpedition = new PlcConnector("10.74.241.40", 102);
         try {
@@ -369,9 +379,9 @@ public class S7AppSwing extends JFrame {
                 if (returns[i] == 0) {
                     formattedReturn = "____";
                 } else {
-                    formattedReturn = String.format("%04d", returns[i]);
+                    formattedReturn = String.format("OP%04d", returns[i]);
                 }
-                JLabel label = new JLabel("P" + (i + 1) + "= [OP" + formattedReturn + "]", SwingConstants.CENTER);
+                JLabel label = new JLabel("P" + (i + 1) + "= [" + formattedReturn + "]", SwingConstants.CENTER);
 
                 label.setSize(largura, altura);
                 label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -391,6 +401,22 @@ public class S7AppSwing extends JFrame {
             }
         });
 
+    }
+
+    public void updateTimer() {
+        Thread thread = new Thread(() -> {
+            while (leituraCiclica) {
+                updateExpedition();
+                updateStock();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.setDaemon(true);
+        thread.start();
     }
 
     public static void main(String[] args) throws Exception {
