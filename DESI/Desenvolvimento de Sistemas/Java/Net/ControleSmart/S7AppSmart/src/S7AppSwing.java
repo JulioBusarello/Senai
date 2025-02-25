@@ -404,19 +404,22 @@ public class S7AppSwing extends JFrame {
     }
 
     public void updateTimer() {
-        Thread thread = new Thread(() -> {
-            while (leituraCiclica) {
-                updateExpedition();
-                updateStock();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                while (leituraCiclica) {
+                    updateExpedition();
+                    updateStock();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
+                return null;
             }
-        });
-        thread.setDaemon(true);
-        thread.start();
+        };
+        worker.execute();
     }
 
     public static void main(String[] args) throws Exception {
