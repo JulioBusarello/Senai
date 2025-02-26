@@ -22,7 +22,7 @@ public class CalculatorTest {
     @Test
     void testSubtracao() {
         Calculator c = new Calculator();
-        Assertions.assertEquals(-1, c.soma(2, 3));
+        Assertions.assertEquals(-1, c.subtrair(2, 3));
     }
     
     @Test
