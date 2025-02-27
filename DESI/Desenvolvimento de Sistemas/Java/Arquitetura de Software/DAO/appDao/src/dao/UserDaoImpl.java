@@ -19,34 +19,21 @@ public class UserDaoImpl implements UserDao {
         this.connection = Conexao.conector();
     }
 
-    /*
-     * public UserDaoImpl() {
-     * try {
-     * String url = "jdbc:mysql://localhost:3306/db_dao";
-     * String user = "root";
-     * String password = "senai";
-     * connection = DriverManager.getConnection(url, user, password);
-     * } catch (Exception e) {
-     * JOptionPane.showMessageDialog(null,
-     * "Erro no módulo de conexão: " + e);
-     * connection = null;
-     * }
-     * }
-     */
-
     @Override
     public User findUserById(int id) {
         User user = null;
-        try {
-            String query = "SELECT * FROM users WHERE id = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                user = new User(resultSet.getInt("id"), resultSet.getString("name"));
+        if (verifyId(id)) {
+            try {
+                String query = "SELECT * FROM users WHERE id = ?";
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setInt(1, id);
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    user = new User(resultSet.getInt("id"), resultSet.getString("name"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return user;
     }
@@ -61,30 +48,41 @@ public class UserDaoImpl implements UserDao {
             JOptionPane.showMessageDialog(null, "O usuário foi Adicionado com sucesso!");
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Houve um erro ao Adicionar usuário!");
+            JOptionPane.showMessageDialog(null, "Houve um erro ao Adicionar usuário!", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
     @Override
     public void deleteUser(int id) {
-        try {
-            String query = "DELETE FROM users WHERE id = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, id);
-            statement.executeUpdate();
-            JOptionPane.showMessageDialog(null, "O usuário foi Deletado com sucesso!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Houve um erro ao Deletar usuário!");
+        if (verifyId(id)) {
+            try {
+                String query = "DELETE FROM users WHERE id = ?";
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setInt(1, id);
+                statement.executeUpdate();
+                JOptionPane.showMessageDialog(null, "O usuário foi Deletado com sucesso!");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Houve um erro ao Deletar usuário!", "Erro",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
     @Override
-    public void updateUser(int id, String name) {
+    public void updateUser(User user) {
         try {
-
+            String query = "UPDATE users SET name = ? WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, user.getName());
+            statement.setInt(2, user.getId());
+            statement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "O usuário foi Atualizado com sucesso!");
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Houve um erro ao Atualizar usuário!", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -102,5 +100,13 @@ public class UserDaoImpl implements UserDao {
             e.printStackTrace();
         }
         return users;
+    }
+
+    public boolean verifyId(int id) {
+        boolean exists = (findUserById(id) != null);// Se for diferente de "null" o id existe
+        if (!exists) {
+            JOptionPane.showMessageDialog(null, "O ID do Usuário é inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        return exists;
     }
 }

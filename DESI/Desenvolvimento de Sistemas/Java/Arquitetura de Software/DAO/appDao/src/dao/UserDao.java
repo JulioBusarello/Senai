@@ -11,7 +11,9 @@ public interface UserDao {
 
     void deleteUser(int id);
 
-    void updateUser(int id, String name);
+    void updateUser(User user);
 
     List<User> findAllUsers();
+
+    boolean verifyId(int id);
 }

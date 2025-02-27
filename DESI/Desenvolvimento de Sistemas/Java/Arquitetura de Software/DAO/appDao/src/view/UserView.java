@@ -60,9 +60,33 @@ public class UserView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String name = JOptionPane.showInputDialog("Informe o nome do Usuário:");
                 if (name != null && name.isBlank()) {
-                    JOptionPane.showMessageDialog(null, "Você deve informar um Nome!");
+                    JOptionPane.showMessageDialog(null, "Você deve informar um Nome!", "Warning",
+                            JOptionPane.WARNING_MESSAGE);
                 } else if (name != null) {
                     userDao.saveUser((new User(0, name)));
+                }
+                loadUser();
+            }
+        });
+
+        btnUpdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String id = JOptionPane.showInputDialog("Informe o ID do Usuário a ser atualizado:");
+                if (id != null && id.isBlank()) {
+                    JOptionPane.showMessageDialog(null, "Você deve informar um ID!", "Warning",
+                            JOptionPane.WARNING_MESSAGE);
+                } else if (id != null) {
+                    if (userDao.verifyId(Integer.parseInt(id))) {
+                        String name = JOptionPane.showInputDialog("Informe o nome atualizado do Usuário:");
+                        if (name != null && name.isBlank()) {
+                            JOptionPane.showMessageDialog(null, "Você deve informar um Nome!", "Warning",
+                                    JOptionPane.WARNING_MESSAGE);
+                        } else if (name != null) {
+                            User user = new User(Integer.parseInt(id), name);
+                            userDao.updateUser(user);
+                        }
+                    }
                 }
                 loadUser();
             }
@@ -73,10 +97,14 @@ public class UserView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String id = JOptionPane.showInputDialog("Informe o ID do Usuário a ser buscado:");
                 if (id != null && id.isBlank()) {
-                    JOptionPane.showMessageDialog(null, "Você deve informar um ID!");
+                    JOptionPane.showMessageDialog(null, "Você deve informar um ID!", "Warning",
+                            JOptionPane.WARNING_MESSAGE);
                 } else if (id != null) {
                     User user = userDao.findUserById(Integer.parseInt(id));
-                    JOptionPane.showMessageDialog(null, "ID: " + user.getId() + "\n" + "Name: " + user.getName());
+                    if (user != null) {
+                        JOptionPane.showMessageDialog(null, "ID: " + user.getId() + "\n" + "Name: " + user.getName(),
+                                "Success", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             }
         });
@@ -86,7 +114,8 @@ public class UserView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String id = JOptionPane.showInputDialog("Informe o id do Usuário:");
                 if (id != null && id.isBlank()) {
-                    JOptionPane.showMessageDialog(null, "Você deve informar um ID!");
+                    JOptionPane.showMessageDialog(null, "Você deve informar um ID!", "Warning",
+                            JOptionPane.WARNING_MESSAGE);
                 } else if (id != null) {
                     userDao.deleteUser(Integer.parseInt(id));
                     loadUser();
