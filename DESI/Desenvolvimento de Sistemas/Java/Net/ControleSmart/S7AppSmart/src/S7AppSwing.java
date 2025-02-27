@@ -284,10 +284,6 @@ public class S7AppSwing extends JFrame {
 
     }
 
-    private static void extracted(int id, byte[] bytes) {
-
-    }
-
     private void updateStock() {
         plcStock = new PlcConnector("10.74.241.10", 102);
         try {
