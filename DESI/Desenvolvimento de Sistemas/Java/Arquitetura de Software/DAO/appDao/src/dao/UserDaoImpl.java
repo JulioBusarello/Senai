@@ -102,11 +102,24 @@ public class UserDaoImpl implements UserDao {
         return users;
     }
 
+    @Override
     public boolean verifyId(int id) {
-        boolean exists = (findUserById(id) != null);// Se for diferente de "null" o id existe
+        boolean exists = false;
+        try {
+            String query = "SELECT COUNT(*) FROM users WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                exists = resultSet.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         if (!exists) {
             JOptionPane.showMessageDialog(null, "O ID do Usuário é inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         return exists;
     }
+
 }
