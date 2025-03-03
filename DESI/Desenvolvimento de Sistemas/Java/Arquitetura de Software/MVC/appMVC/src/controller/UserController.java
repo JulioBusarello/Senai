@@ -1,26 +1,40 @@
 package controller;
 
+import java.util.List;
+
+import dao.UserDao;
+import dao.UserDaoImpl;
 import model.User;
-import view.UserView;
 
 public class UserController {
-    private User model;
-    private UserView view;
+    private UserDao userDao;
 
-    public UserController(User model, UserView view) {
-        this.model = model;
-        this.view = view;
+    public UserController() {
+        userDao = new UserDaoImpl();
     }
 
-    public void setUserName(String name) {
-        model.setName(name);
+    public void addUser(String name) {
+        userDao.saveUser(new User(name));
     }
 
-    public String getUserName() {
-        return model.getName();
+    public void deleteUser(int id) {
+        userDao.deleteUser(id);
     }
 
-    public void updateView() {
-        view.displayUser(model);
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
+
+    public User getUserById(int id) {
+        return userDao.findUserById(id);
+    }
+
+    public List<User> getAllUsers() {
+        return userDao.findAllUsers();
+    }
+
+    public boolean verifyId(int id) {
+        return userDao.verifyId(id);
+    }
+
 }

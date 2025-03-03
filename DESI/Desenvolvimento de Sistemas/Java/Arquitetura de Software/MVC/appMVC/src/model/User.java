@@ -9,6 +9,10 @@ public class User {
         this.name = name;
     }
 
+    public User(String name) {
+        this.name = name;
+    }
+
     // Getters and Setters
     public int getId() {
         return id;
