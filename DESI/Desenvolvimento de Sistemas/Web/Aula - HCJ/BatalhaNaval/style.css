@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    padding: 5%;
+    font-family: Arial, Helvetica, sans-serif;
+    gap: 3%;
+    align-items: center;
+    height: 100vh;
+    flex-direction: row;
+    background-color: lightgray;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.container-1, .container-2, .container-3 {
+    display: flex;
+    width: 600px;
+    height: 95%;
+    flex-direction: column;
+    border: 1px solid rgb(20, 20, 20);
+    padding: 2%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: rgb(0, 190, 0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(0, 100, 0);
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(16, 30px); /* 16 colunas */
+    grid-template-rows: repeat(16, 30px); /* 16 linhas */
+    gap: 1px; /* Espaço entre as células */
+    margin-bottom: 20px;
+}
+
+.cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.cell.ship {
+    background-color: #4CAF50; /* Cor para os barcos */
+}
+
+.title {
+    background-color: #e0e0e0;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.cell[data-row="0"], .cell[data-col="0"] {
+    background-color: #a280d8;
+    font-weight: bold;
+}
