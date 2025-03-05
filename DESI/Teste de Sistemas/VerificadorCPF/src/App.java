@@ -6,6 +6,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         String cpf = JOptionPane.showInputDialog(null, "Informe o CPF a ser validado:");
         String validacao = verificador.validarCpf(cpf);
+
         switch (validacao) {
             case "contemletras" -> {
                 JOptionPane.showMessageDialog(null, "CPF inválido, não pode conter letras!", "Erro",

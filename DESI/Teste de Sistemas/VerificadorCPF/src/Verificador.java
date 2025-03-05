@@ -1,52 +1,49 @@
-import java.util.HashMap;
-import java.util.Map;
-
 public class Verificador {
     private String retorno = "";
 
     public String validarCpf(String cpf) {
-        cpf = cpf.replaceAll("[^0-9a-zA-Z]", "");
+        cpf = tratarCpf(cpf);
 
-        if (cpf.length() == 11) { // Verificando se o CPF possui 11 dígitos
-            if (!verificarIgualdade(cpf)) {
-                if (!cpf.matches(".*[A-Za-z].*")) { // Verificando se o CPF não possui letras
-                    if (verificarCpfValido(cpf)) {
-                        retorno = "valido";
-                    }
-                } else {
-                    retorno = "contemletras";
-                }
-            } else {
-                retorno = "digitosiguais";
-            }
-        } else { // Caso não possua exatamente 11 dígitos
-            if (cpf.length() < 11) { // Verifica se é menos ou mais que 11 dígitos
-                retorno = "menosdigitos";
-            } else {
-                retorno = "maisdigitos";
-            }
+        if (cpf.length() < 11) {
+            retorno = "menosdigitos";
+        } else if (cpf.length() > 11) {
+            retorno = "maisdigitos";
         }
+
+        if (verificarIgualdade(cpf)) {
+            retorno = "digitosiguais";
+        }
+
+        if (verificarLetras(cpf)) {
+            retorno = "contemletras";
+        }
+
+        if (!retorno.equals("")) {
+            return retorno;
+        }
+
+        if (verificarValidade(cpf)) {
+            retorno = "valido";
+        } else {
+            retorno = "invalido";
+        }
+
         return retorno;
     }
 
-    private boolean verificarIgualdade(String cpf) {
-        boolean igual = false;
-        Map<Character, Integer> charCountMap = new HashMap<>();
-        for (char ch : cpf.toCharArray()) {
-            charCountMap.put(ch, charCountMap.getOrDefault(ch, 0) + 1);
-        }
-
-        for (Map.Entry<Character, Integer> entry : charCountMap.entrySet()) {
-            if (entry.getValue() == 11) {
-                igual = true;
-            } else {
-                igual = false;
-            }
-        }
-        return igual;
+    private String tratarCpf(String cpf) {
+        return cpf.replaceAll("[^0-9A-Za-z]", "");
     }
 
-    private boolean verificarCpfValido(String cpf) {
+    private boolean verificarIgualdade(String cpf) {
+        return cpf.matches("(\\d)\\1{10}");
+    }
+
+    private boolean verificarLetras(String cpf) {
+        return cpf.matches(".*[A-Za-z].*");
+    }
+
+    private boolean verificarValidade(String cpf) {
         int calculoPrimeiro = 0;
         int calculoSegundo = 0;
 
@@ -75,5 +72,4 @@ public class Verificador {
 
         return (calculoPrimeiro == digito1 && calculoSegundo == digito2);
     }
-
 }
