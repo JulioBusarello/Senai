@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div class="container-1">
+        <h1>Batalha Naval - Seu tabuleiro</h1>
+        <form id="player-form">
+            <label for="username">Jogador:</label>
+            <input type="text" id="username" placeholder="Insira seu nome." required>
+
+            <label for="serverIp">Servidor:</label>
+            <input type="text" id="serverIp" placeholder="Insira o ip do servidor." required>
+
+            <button class="connect" onclick="connectServer(event)">Conectar</button>
+        </form>
+
+        <div id="board">
+
+        </div>
+        <button onclick="createBoard()" id="resetBtn">Reiniciar Tabuleiro</button>
+    </div>
+
+    <div class="container-2">
+        <h1>Batalha Naval - Jogador 2</h1>
+
+        <form id="adversary-form">
+            <label for="adversaryList">Jogador:</label>
+            <select name="adversaryList" id="adversaryList">
+                <option value="Todos">Todos</option>
+            </select>
+
+            <label for="shooting">Disparo:</label>
+            <input type="text" id="shooting" placeholder="Coordenadas do seu disparo." required readonly>
+
+            <button class="shot" onclick="sendShooting(event)">Disparar</button>
+        </form>
+
+        <div id="boardAdversary">
+
+        </div>
+        <button onclick="createAdversaryBoard()" id="resetBtnAdversary">Reiniciar Tabuleiro</button>
+
+    </div>
+
+    <div class="container-3">
+        <h1>Batalha Naval - Histórico</h1>
+
+        <div class="historic" id="historic"></div>
+    </div>
+</body>
+
+</html>

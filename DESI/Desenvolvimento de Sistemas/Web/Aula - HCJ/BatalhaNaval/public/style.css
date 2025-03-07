@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: space-between;
+    /* Alinha as colunas com espaçamento entre elas */
+    padding: 2%;
+    font-family: 'Arial', Helvetica, sans-serif;
+    gap: 2%;
+    align-items: flex-start;
+    /* Ajusta o alinhamento das colunas */
+    height: 100vh;
+    flex-direction: row;
+    background-color: #f0f4f8;
+    /* Cor suave de fundo */
+}
+
+h1 {
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    /* Ajuste no tamanho do título */
+    color: #333;
+    /* Cor escura para o título */
+}
+
+.container-1,
+.container-2,
+.container-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Alinha os itens centralizados */
+    width: 30%;
+    /* Reduzido para distribuir bem as colunas */
+    min-width: 250px;
+    /* Largura mínima para responsividade */
+    height: auto;
+    padding: 2%;
+    border: 1px solid #ddd;
+    /* Bordas mais suaves */
+    border-radius: 12px;
+    /* Bordas arredondadas */
+    background-color: #fff;
+    /* Fundo branco para as colunas */
+}
+
+button {
+    padding: 12px 25px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#resetBtn,
+#resetBtnAdversary {
+    width: 100%;
+}
+
+#board,
+#boardAdversary {
+    display: grid;
+    grid-template-columns: repeat(16, 30px);
+    /* Tamanho das células */
+    grid-template-rows: repeat(16, 30px);
+    gap: 1px;
+    margin-bottom: 20px;
+}
+
+.cell,
+.cellAdversary {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cell.ship,
+.cellAdversary.ship {
+    background-color: #6B8E23;
+    /* Cor dos barcos */
+}
+
+.title,
+.titleAdversary {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.cell[data-row="0"],
+.cell[data-col="0"] {
+    background-color: #4b5aac;
+    /* Cor de destaque para as células especiais */
+    font-weight: bold;
+}
+
+.cellAdversary[data-row="0"],
+.cellAdversary[data-col="0"] {
+    background-color: #ad4545;
+    /* Cor de destaque para as células especiais */
+    font-weight: bold;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fafafa;
+    color: #333;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: #6200ea;
+    /* Cor vibrante para o foco */
+    outline: none;
+}
+
+label {
+    display: block;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 8px;
+    padding-top: 10px;
+    text-align: left;
+    width: 100%;
+}
+
+#player-form,
+#adversary-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Alinha os elementos do formulário */
+    margin-bottom: 20px;
+}
+
+.historic {
+    flex-grow: 1;
+    background-color: #fafafa;
+    border-radius: 5px;
+    padding: 10px;
+    overflow-y: auto;
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    border: 1px solid #e0e0e0;
+}

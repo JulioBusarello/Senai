@@ -1,5 +1,56 @@
+// --- Servidor
+let logado = false;
+let socket;
+
+function connectServer(event) {
+    event.preventDefault(); // Impede o envio do formulário
+
+    const serverIp = document.getElementById('serverIp').value;
+    const username = document.getElementById('username').value;
+
+    socket = new WebSocket(`ws://${serverIp}:3000`);
+
+    // Evento disparado quando a conexão é estabelecida
+    socket.onopen = () => {
+        socket.send(JSON.stringify({ type: 'login', username }));
+        logado = true;
+    };
+
+    // Evento disparado quando uma mensagem é recebida do servidor
+    socket.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+
+        if (data.type === 'updateUsers') {
+            const adversaryList = document.getElementById('adversaryList');
+            adversaryList.innerHTML = ''; // Limpa a lista existente
+
+            data.users.forEach((user) => {
+                if (user.username != "allusers") {
+                    const option = document.createElement('option');
+                    option.value = user.username;
+                    // Exibe nome do usuário seguido do IP
+                    option.innerText = `${user.username} (${user.ip})`;
+                    adversaryList.appendChild(option);
+                }
+            });
+            const option = document.createElement('option');
+            option.value = "Todos";
+            option.innerText = "Todos";
+            adversaryList.appendChild(option);
+        }
+
+        if (data.from && data.message) {
+            const chat = document.getElementById('historic');
+            chat.innerHTML += `<p><strong>${data.from}:</strong> ${data.message}</p>`;
+        }
+    };
+
+}
+
+// --- Tabuleiro
 const boardSize = 16;
 const board = [];
+const boardAdversary = [];
 
 let esquadra = {
     submarino: { size: 1, count: 4, color: 'blue' },
@@ -50,32 +101,38 @@ function changeItem() {
     const shipOrder = ["submarino", "cruzador", "hidroaviao", "encouracado", "portaAvioes"];
     const currentIndex = shipOrder.indexOf(itemEsquadraAtual);
 
-    itemEsquadraAtual = shipOrder[(currentIndex + 1) % shipOrder.length];
-    alert(`Agora coloque o ${itemEsquadraAtual}.`);
+    if (logado) {
+        itemEsquadraAtual = shipOrder[(currentIndex + 1) % shipOrder.length];
+        alert(`Agora coloque o ${itemEsquadraAtual}.`);
+    }
 }
 
 // Alterar direção do barco através do mouse
 function onCellClick(event, row, col) {
     let qtd = esquadra[itemEsquadraAtual].count;
 
-    if (event.button === 0) {
-        currentDirection = "HORIZONTAL";
-        //alert(currentDirection + "\nLinha: " + row + "\nColuna: " + col);
-    } else if (event.button === 2) {
-        currentDirection = "VERTICAL";
-        //alert(currentDirection + "\nLinha: " + row + "\nColuna: " + col);
-    }
-
-    if (esquadra[itemEsquadraAtual].count === 0) {
-        alert("Toda a esquadra já está posicionada.")
-        return;
-    } else {
-        alert(currentDirection + ": " + "\nLinha: " + row + "\nColuna: " + col + "\n" + itemEsquadraAtual + "\n Posicionado 1 " + itemEsquadraAtual + " restam " + (qtd - 1));
-        esquadra[itemEsquadraAtual].count--;
-        placePart(row, col);
-        if (esquadra[itemEsquadraAtual].count === 0) {
-            changeItem();
+    if (logado) {
+        if (event.button === 0) {
+            currentDirection = "HORIZONTAL";
+            //alert(currentDirection + "\nLinha: " + row + "\nColuna: " + col);
+        } else if (event.button === 2) {
+            currentDirection = "VERTICAL";
+            //alert(currentDirection + "\nLinha: " + row + "\nColuna: " + col);
         }
+
+        if (esquadra[itemEsquadraAtual].count === 0) {
+            alert("Toda a esquadra já está posicionada.")
+            return;
+        } else {
+            alert(currentDirection + ": " + "\nLinha: " + row + "\nColuna: " + col + "\n" + itemEsquadraAtual + "\n Posicionado 1 " + itemEsquadraAtual + " restam " + (qtd - 1));
+            esquadra[itemEsquadraAtual].count--;
+            placePart(row, col);
+            if (esquadra[itemEsquadraAtual].count === 0) {
+                changeItem();
+            }
+        }
+    } else {
+        alert('Você deve estar logado para usar o sistema!')
     }
 }
 
@@ -277,7 +334,7 @@ function placePart(row, col) {
     }
     else if (itemEsquadraAtual === "portaAvioes") {
         if (currentDirection === "HORIZONTAL") {
-            if (col + itemSize - 1 >= boardSize || col < 1 || row < 1 ) {
+            if (col + itemSize - 1 >= boardSize || col < 1 || row < 1) {
                 alert("Não é possível colocar o porta-aviões aqui.");
                 esquadra[itemEsquadraAtual].count++;
                 return;
@@ -320,4 +377,109 @@ function placePart(row, col) {
     }
 }
 
-window.onload = () => createBoard();
+
+// --- Jogador 2
+function createAdversaryBoard() {
+    const boardContainer = document.getElementById('boardAdversary');
+    boardContainer.innerHTML = '';
+    // Cria a matriz 16x16 do tabuleiro
+    for (let row = 0; row < boardSize; row++) {
+        boardAdversary[row] = [];
+        for (let col = 0; col < boardSize; col++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cellAdversary');
+            cell.dataset.row = row;
+            cell.dataset.col = col;
+
+            if (row === 0 && col > 0) {
+                cell.textContent = String.fromCharCode(64 + col);
+                cell.classList.add('titleAdversary');
+            }
+            if (col === 0 && row > 0) {
+                cell.textContent = row;
+                cell.classList.add('titleAdversary');
+            }
+
+            cell.addEventListener('mousedown', () => onCellClickShot(row, col));
+            boardAdversary[row].push(cell);
+            boardContainer.appendChild(cell);
+        }
+    }
+}
+
+function onCellClickShot(row, col) {
+    if (logado) {
+        if (row < 1 || col < 1) {
+            alert("Não é possível efetuar um disparo fora do tabuleiro.");
+        } else {
+            const coordenateInput = document.getElementById('shooting');
+            coordenateInput.value = `L${row}:C${col}`;
+        }
+    } else {
+        alert('Você deve estar logado para usar o sistema!')
+    }
+
+}
+
+function sendShooting(event) {
+    event.preventDefault();
+
+    const coordenates = document.getElementById('shooting').value;
+    const toUser = document.getElementById('adversaryList').value;
+    const username = document.getElementById('username').value;
+
+    if (logado) {
+        if (coordenates === '') {
+            alert('Você deve selecionar uma coordenada.')
+            return;
+        }
+
+        // Não exibe a mensagem para o próprio usuário
+        if (toUser !== username) {
+            const chat = document.getElementById('historic');
+            if (toUser === "Todos") {
+                chat.innerHTML += `<p><strong>Você</strong> para <strong>Todos:</strong> ${coordenates}</p>`;
+            } else {
+                chat.innerHTML += `<p><strong>Você</strong> para <strong>${toUser}:</strong> ${coordenates}</p>`;
+            }
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        socket.send(JSON.stringify({
+            type: 'message',
+            from: username,
+            to: toUser,
+            message: coordenates
+        }));
+
+        document.getElementById('shooting').value = '';
+
+    } else {
+        alert('Você deve estar logado para usar o sistema!')
+    }
+}
+
+
+// Carregar tabuleiros
+function loadBoards() {
+    createBoard();
+    createAdversaryBoard();
+}
+
+window.onload = () => loadBoards();
+
+function disconnectServer() {
+    if (socket) {
+        // Evento disparado quando a conexão é fechada
+        socket.close(); // Fecha a conexão WebSocket
+        console.log("Desconectado do servidor");
+
+        // Atualiza a interface, removendo a lista de usuários e chat
+        const userList = document.getElementById('userList');
+        userList.innerHTML = '';
+        const chat = document.getElementById('chat');
+        chat.innerHTML = `<p><strong>Você foi desconectado.</strong></p>`;
+
+        logado = false;
+    }
+}
