@@ -33,19 +33,13 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Alinha os itens centralizados */
     width: 30%;
-    /* Reduzido para distribuir bem as colunas */
     min-width: 250px;
-    /* Largura mínima para responsividade */
     height: auto;
-    padding: 2%;
+    padding: 1.5%;
     border: 1px solid #ddd;
-    /* Bordas mais suaves */
     border-radius: 12px;
-    /* Bordas arredondadas */
     background-color: #fff;
-    /* Fundo branco para as colunas */
 }
 
 button {
@@ -66,7 +60,7 @@ button:hover {
 
 #resetBtn,
 #resetBtnAdversary {
-    width: 100%;
+    width: 105%;
 }
 
 #board,
@@ -76,7 +70,7 @@ button:hover {
     /* Tamanho das células */
     grid-template-rows: repeat(16, 30px);
     gap: 1px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .cell,
@@ -166,7 +160,7 @@ label {
     border-radius: 5px;
     padding: 10px;
     overflow-y: auto;
-    height: 85vh;
+    height: 75vh;
     width: 100%;
     display: flex;
     flex-direction: column;

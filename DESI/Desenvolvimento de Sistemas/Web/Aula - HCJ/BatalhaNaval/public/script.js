@@ -42,6 +42,21 @@ function connectServer(event) {
         if (data.from && data.message) {
             const chat = document.getElementById('historic');
             chat.innerHTML += `<p><strong>${data.from}:</strong> ${data.message}</p>`;
+
+            const partes = data.message.split(":");
+            const linha = parseInt(partes[1].substring(1));
+            const coluna = parseInt(partes[0].substring(1));
+            const tiro = partes[2];
+
+            //alert("Linha: " + linha + "\nColuna: " + coluna + "\nTIRO: " + tiro);
+
+            if (tiro.includes('FOGO')) {
+                paintShoot(linha, coluna, "F");
+            } else if (tiro.includes('AGUA')) {
+                paintShoot(linha, coluna, "A");
+            } else if (tiro.includes('TIRO')) {
+                checkBomb(linha, coluna, data.from);
+            }
         }
     };
 
@@ -377,6 +392,28 @@ function placePart(row, col) {
     }
 }
 
+function paintShoot(row, col, tiro) {
+    const newBomb = [];
+    const msgTiro = tiro;
+
+    document.querySelector(`.cellAdversary[data-row="${row}"][data-col="${col}"]`).classList.add('tiro');
+    const cell = document.querySelector(`.cellAdversary[data-row="${row}"][data-col="${col}"]`);
+    if (cell) {
+        if (msgTiro === 'F') {
+            cell.style.backgroundColor = 'green';
+
+        } else if (msgTiro === 'A') {
+            cell.style.backgroundColor = 'gray';
+        }
+        //cell.innerHTML = `<p><strong>X</p>`;
+    }
+
+    else {
+        alert("Célula não existe...")
+    }
+
+    newBomb.push({ row, col: col });
+}
 
 // --- Jogador 2
 function createAdversaryBoard() {
@@ -413,7 +450,7 @@ function onCellClickShot(row, col) {
             alert("Não é possível efetuar um disparo fora do tabuleiro.");
         } else {
             const coordenateInput = document.getElementById('shooting');
-            coordenateInput.value = `L${row}:C${col}`;
+            coordenateInput.value = `C${col}:L${row}`;
         }
     } else {
         alert('Você deve estar logado para usar o sistema!')
@@ -427,6 +464,7 @@ function sendShooting(event) {
     const coordenates = document.getElementById('shooting').value;
     const toUser = document.getElementById('adversaryList').value;
     const username = document.getElementById('username').value;
+    let adversary = document.getElementById('adversaryOficial');
 
     if (logado) {
         if (coordenates === '') {
@@ -434,22 +472,22 @@ function sendShooting(event) {
             return;
         }
 
+        if(adversary.value === ""){
+            adversary.value = toUser;
+        }
+
         // Não exibe a mensagem para o próprio usuário
-        if (toUser !== username) {
+        if (adversary.value !== username) {
             const chat = document.getElementById('historic');
-            if (toUser === "Todos") {
-                chat.innerHTML += `<p><strong>Você</strong> para <strong>Todos:</strong> ${coordenates}</p>`;
-            } else {
-                chat.innerHTML += `<p><strong>Você</strong> para <strong>${toUser}:</strong> ${coordenates}</p>`;
-            }
+            chat.innerHTML += `<p><strong>Você</strong> para <strong>${adversary.value}:</strong> ${coordenates}:TIRO</p>`;
             chat.scrollTop = chat.scrollHeight;
         }
 
         socket.send(JSON.stringify({
             type: 'message',
             from: username,
-            to: toUser,
-            message: coordenates
+            to: adversary.value,
+            message: coordenates + ":TIRO"
         }));
 
         document.getElementById('shooting').value = '';
@@ -482,4 +520,29 @@ function disconnectServer() {
 
         logado = false;
     }
+}
+
+function checkBomb(row, col, returnFrom) {
+    if (document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`).classList.contains('ship')) {
+        infoShoot('C' + col + ':L' + row + ':FOGO', returnFrom);
+        //alert("FOGO");
+    } else {
+        infoShoot('C' + col + ':L' + row + ':AGUA', returnFrom);
+        //alert("AGUA");
+    }
+}
+
+function infoShoot(msg, returnFrom) {
+    const username = document.getElementById('username').value;
+    const to = returnFrom;
+    //const toUser = document.getElementById('adversaryList').value;
+
+    socket.send(JSON.stringify({
+        type: 'message',
+        from: username,
+        to: to,
+        message: msg
+    }));
+
+    document.getElementById('shooting').value = '';
 }
