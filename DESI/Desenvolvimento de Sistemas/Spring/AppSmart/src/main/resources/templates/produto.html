@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Exemplo de Página HTML</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Detalhes do produto</h1>
+        <p><strong>ID:</strong> <span th:text="${id}"></span></p>
+        <p><strong>Produto:</strong> <span th:text="${produto}"></span></p>
+        <p><strong>Preço:</strong> <span th:text="${preco}"></span></p>
+        <p><strong>Quantidade:</strong> <span th:text="${quantidade}"></span></p>
+    </div>
+</body>
+</html>
