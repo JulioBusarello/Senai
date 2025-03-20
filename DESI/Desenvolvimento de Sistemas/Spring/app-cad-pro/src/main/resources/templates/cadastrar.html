@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/register.css">
     <title>Cadastrar Produto</title>
 </head>
 
@@ -12,34 +12,33 @@
     <form th:action="@{/cadastrar}" method="post" enctype="multipart/form-data">
 
         <label>Nome:</label>
-        <input type="text" name="nome" required><br>
+        <input type="text" name="name" required><br>
 
         <label>Descrição:</label>
-        <input type="text" name="descricao" required><br>
+        <input type="text" name="description" required><br>
 
         <label>Preço:</label>
-        <input type="number" name="preco" step="0.01" required><br>
+        <input type="number" name="price" step="0.01" required><br>
 
         <label>Quantidade:</label>
-        <input type="number" name="quantidade" required><br>
+        <input type="number" name="quantity" required><br>
 
         <label>Categoria:</label>
-        <input type="text" name="categoria" required><br>
+        <input type="text" name="category" required><br>
 
         <label>Fornecedor:</label>
-        <input type="text" name="fornecedor" required><br>
+        <input type="text" name="supplier" required><br>
 
 
         <label>Imagem:</label>
         <input type="file" name="file" accept="image/*"><br>
 
-        <button type="submit">Cadastrar</button>
+        <button type="submit" class="register">Cadastrar</button>
     </form>
     <!-- Botão para retornar ao formulário de listagem -->
     <br>
-    <a th:href="@{/listar}">
-        <button type="button">Listar Produto</button>
-    </a>
+    <button type="button" class="list" onclick="window.location.href='/listar'">Listar Produto</button>
+
 </body>
 
 </html>

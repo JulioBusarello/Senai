@@ -34,7 +34,7 @@ public class App {
             }
             default -> {
                 JOptionPane.showMessageDialog(null, "O CPF informado é Inválido!", "Inválido",
-                        JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.ERROR_MESSAGE);
             }
 
         }

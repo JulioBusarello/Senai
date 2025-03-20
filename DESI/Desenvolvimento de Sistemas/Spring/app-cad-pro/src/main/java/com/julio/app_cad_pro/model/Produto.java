@@ -40,7 +40,7 @@ public class Produto {
     private MultipartFile image;
 
     @Lob
-    @Column(name = "imagem")
+    @Column(name = "image")
     private byte[] imageBytes;
 
     public void setImagem(MultipartFile image) {

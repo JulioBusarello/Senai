@@ -1,0 +1,156 @@
+/* Resetando o estilo padrão do navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2em;
+    color: #4CAF50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo da tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 1.1em;
+}
+
+td {
+    font-size: 1em;
+}
+
+.produto-imagem {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Estilo das ações */
+.acao {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.edit {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.edit:hover {
+    background-color: #45a049;
+}
+
+.del {
+    background-color: #f44336;
+    color: white;
+}
+
+.del:hover {
+    background-color: #e53935;
+}
+
+/* Botão de "Cadastrar Novo Produto" */
+.new-product-btn {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.1em;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+.new-product-btn:hover {
+    background-color: #45a049;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+    table {
+        font-size: 0.9em;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    .acao {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .new-product-btn {
+        font-size: 1em;
+        padding: 10px 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 1.6em;
+    }
+
+    table {
+        font-size: 0.8em;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    .new-product-btn {
+        font-size: 1em;
+        padding: 10px 15px;
+    }
+}
