@@ -1,9 +1,3 @@
-//------------------------------------------------------------------------------------------
-// Atualização de Eventos do Backend para o Frontend utilizando SSE - Server Sent Events
-// Curso Técnico em Desenvolvimento de Sistemas - SENAI Timbó -SC
-// UC: Desenvolvimento de Sistemas
-// Docente: Gerson Trindade         SET-2024
-//------------------------------------------------------------------------------------------
 package com.julio.clpmonitor.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;

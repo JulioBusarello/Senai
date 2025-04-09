@@ -100,7 +100,5 @@ th {
     max-width: 600px;
 }
 
-.expedition-grid .color-0 { background-color: white; }
-.expedition-grid .color-1 { background-color: black; }
-.expedition-grid .color-2 { background-color: red; }
-.expedition-grid .color-3 { background-color: blue; }
+.expedition-grid .color-0 { background-color: red; }
+.expedition-grid .color-1 { background-color: green; }

@@ -4,17 +4,17 @@
 <head>
     <title>Monitoramento de CLPs</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
 </head>
 
 <body>
     <div class="container1">
 
         <h1>Leitura dos 4 CLPs (Simulada)</h1>
-        
+
         <h2>CLP 1 (Matriz de 28 bytes)</h2>
         <div id="clp1-grid" class="grid"></div>
-        
+
         <h2>CLP 2 a 4</h2>
         <table>
             <thead>
@@ -38,13 +38,14 @@
                 </tr>
             </tbody>
         </table>
+
         <h2>Expedição (12 espaços)</h2>
         <div id="expedition-grid" class="grid expedition-grid"></div>
     </div>
 
     <div class="container2">
         <div class="clp-write-section" id="clp-write-container" th:replace="fragments/formulario :: clp-write-fragment">
-            
+
         </div>
     </div>
 
@@ -142,7 +143,20 @@
                         });
                 })
         });
-        
+
+        // Adicione este novo listener
+        eventSource.addEventListener('expedition-data', function (event) {
+            const data = JSON.parse(event.data);
+            const expeditionArray = Array.isArray(data.value) ? data.value : JSON.parse(data.value);
+            const grid = document.getElementById('expedition-grid');
+            grid.innerHTML = '';
+
+            expeditionArray.forEach((val, i) => {
+                const cell = document.createElement('div');
+                cell.classList.add('cell', `color-${val}`);
+                grid.appendChild(cell);
+            });
+        });
     </script>
 </body>
 

@@ -1,10 +1,10 @@
-package com.julio.clpmonitor;
+package com.julio.cplmonitor;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ClpmonitorApplicationTests {
+class CplmonitorApplicationTests {
 
 	@Test
 	void contextLoads() {

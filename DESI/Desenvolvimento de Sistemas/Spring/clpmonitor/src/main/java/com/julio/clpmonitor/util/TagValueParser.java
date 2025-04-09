@@ -1,7 +1,6 @@
 package com.julio.clpmonitor.util;
 
 public class TagValueParser {
-
     public static Object parseValue(String value, String type) {
         try {
             return switch (type.toUpperCase()) {

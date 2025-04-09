@@ -81,7 +81,7 @@ public class ClpSimulatorService {
         Random rand = new Random();
         List<Integer> expeditionArray = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            expeditionArray.add(rand.nextInt(4)); // 0 a 3
+            expeditionArray.add(rand.nextInt(2)); // 0 a 3
         }
 
         ClpData expeditionData = new ClpData(5, expeditionArray);
