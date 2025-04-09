@@ -45,22 +45,26 @@ th {
     width: 40px;
     height: 40px;
     border: 1px solid #aaa;
+    font-size: 12px;
 }
 
-.color-0 {
+.cell.color-0 {
     background-color: white;
 }
 
-.color-1 {
+.cell.color-1 {
     background-color: black;
+    color: white;
 }
 
-.color-2 {
+.cell.color-2 {
     background-color: red;
+    color: white;
 }
 
-.color-3 {
+.cell.color-3 {
     background-color: blue;
+    color: white;
 }
 
 .clp-write-section {
@@ -96,9 +100,14 @@ th {
 }
 
 .expedition-grid {
-    grid-template-columns: repeat(6, 1fr);
-    max-width: 600px;
+    grid-template-columns: repeat(4, 80px);
+    grid-template-rows: repeat(3, 40px);
+    gap: 5px;
 }
 
-.expedition-grid .color-0 { background-color: red; }
-.expedition-grid .color-1 { background-color: green; }
+.cell2 {
+    text-align: center;
+}
+
+.expedition-grid .color-0 { border: 1px solid green; background-color: rgba(0, 255, 0, 0.3); }
+.expedition-grid .color-1 { border: 1px solid red; background-color: rgba(255, 0, 0, 0.3);}

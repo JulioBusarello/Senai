@@ -3,13 +3,12 @@
 
 <head>
     <title>Monitoramento de CLPs</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/estilo.css}" />
 </head>
 
 <body>
     <div class="container1">
-
         <h1>Leitura dos 4 CLPs (Simulada)</h1>
 
         <h2>CLP 1 (Matriz de 28 bytes)</h2>
@@ -45,70 +44,30 @@
 
     <div class="container2">
         <div class="clp-write-section" id="clp-write-container" th:replace="fragments/formulario :: clp-write-fragment">
-
         </div>
     </div>
-
-
 
     <script>
         const eventSource = new EventSource('/clp-data-stream');
 
-        // CLP 1 - grade 5x6
-        // registra um "ouvinte" para eventos do tipo clp1-data recebidos por 
-        // EventSource SSE (Server-Sent Events) criado anteriormente.
-        // Quando o servidor envia um evento com event.name("clp1-data"), essa função é disparada.
-        eventSource.addEventListener('clp1-data', function (event) {
-            // Os dados do evento chegam como string JSON.
-            // convertendo essa string para um objeto JavaScript.
-            // O formato do dado é:
-            // {
-            //  "clpId": 1,
-            //  "value": [0, 1, 2, 0, 3, ..., 1] // tamanho 28
-            // }
+        eventSource.addEventListener('clp1-data', function(event) {
             const data = JSON.parse(event.data);
-
-            // Se data.value já for um array, ele usa diretamente.
-            // Se data.value for uma string JSON representando um array,
-            // ele faz o JSON.parse para transformá-lo em array.
-            // Essa verificação é uma forma segura de lidar com possíveis variações no que o backend envia.
             const byteArray = Array.isArray(data.value) ? data.value : JSON.parse(data.value);
-
-            // Obtém o elemento do DOM com ID 'clp1-grid' (ex: uma <div> na interface).
             const grid = document.getElementById('clp1-grid');
-
-            // Limpa o conteúdo anterior (innerHTML = '') para renderizar os novos dados.
             grid.innerHTML = '';
-
-            // forEach percorre os 28 valores do array byteArray.
+    
             byteArray.forEach((val, i) => {
-
-                // Para cada valor (val): Cria um novo elemento <div>.
                 const cell = document.createElement('div');
-                // Adiciona classes CSS:
-                //  cell: define tamanho, margem, borda etc.
-                //  color-0, color-1, color-2 ou color-3: define a cor de fundo com base no valor.
                 cell.classList.add('cell', `color-${val}`);
-                // Adiciona a célula ao container da grade (#clp1-grid).
+                cell.textContent = i + 1; // Mostra o número do bloco
                 grid.appendChild(cell);
             });
         });
 
-        // CLP 2
-        // Escuta eventos SSE (Server-Sent Events) com nome clp2-data.
-        // Rregistra um listener para eventos SSE com o nome clp2-data.
         eventSource.addEventListener('clp2-data', function (event) {
-            // Quando um evento chega, ele extrai o valor (data.value) 
-            // e coloca esse valor no conteúdo de um elemento HTML com id="clp2".
-            // Converte os dados do evento (que chegam como string JSON) em um objeto JavaScript.
+
             const data = JSON.parse(event.data);
-            // Exemplo de dados recebidos:
-            // {
-            //   "clpId": 2,
-            //   "value": 73
-            // }
-            // Seleciona o elemento HTML com o id="clp2".
-            // Substitui o texto do elemento com o valor recebido do backend (data.value).
+
             document.getElementById('clp2').textContent = data.value;
         });
 
@@ -145,15 +104,16 @@
         });
 
         // Adicione este novo listener
-        eventSource.addEventListener('expedition-data', function (event) {
+        eventSource.addEventListener('expedition-data', function(event) {
             const data = JSON.parse(event.data);
             const expeditionArray = Array.isArray(data.value) ? data.value : JSON.parse(data.value);
             const grid = document.getElementById('expedition-grid');
             grid.innerHTML = '';
-
+    
             expeditionArray.forEach((val, i) => {
                 const cell = document.createElement('div');
-                cell.classList.add('cell', `color-${val}`);
+                cell.classList.add('cell2', `color-${val}`);
+                cell.textContent = val === 0 ? "____" : `OP${String(val).padStart(4, '0')}`;
                 grid.appendChild(cell);
             });
         });

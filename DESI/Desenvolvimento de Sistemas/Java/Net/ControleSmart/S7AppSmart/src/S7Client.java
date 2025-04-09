@@ -278,6 +278,9 @@ public class S7Client {
         } catch (Exception e) {
             throw new Exception("Erro ao enviar o pacote de configuração: " + e.getMessage(), e);
         }
+
+        System.out.println("Pacote de configuração (hex): " + bytesToHex(packet, length));
+
     }
 
     private String lastReadValue;
