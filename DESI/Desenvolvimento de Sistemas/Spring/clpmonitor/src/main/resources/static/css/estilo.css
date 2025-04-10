@@ -45,7 +45,7 @@ th {
     width: 40px;
     height: 40px;
     border: 1px solid #aaa;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .cell.color-0 {
@@ -100,13 +100,18 @@ th {
 }
 
 .expedition-grid {
-    grid-template-columns: repeat(4, 80px);
+    grid-template-columns: repeat(4, 95px);
     grid-template-rows: repeat(3, 40px);
     gap: 5px;
 }
 
 .cell2 {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: monospace;
 }
 
 .expedition-grid .color-0 { border: 1px solid green; background-color: rgba(0, 255, 0, 0.3); }

@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import com.julio.clpmonitor.clp.PlcConnector;
 import com.julio.clpmonitor.model.ClpData;
 
 import jakarta.annotation.PostConstruct;
@@ -23,16 +24,22 @@ public class ClpSimulatorService {
 
     private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
 
+    private PlcConnector plcConnectorEstoque;
+    public static byte[] indexColorEst = new byte[28];
+
+    private PlcConnector plcConnectorExpedicao;
+    public static byte[] indexColorExp = new byte[28];
+
     @PostConstruct
 
     public void startSimulation() {
         // Agendamento separado para CLP 1 (800ms)
-        executor.scheduleAtFixedRate(this::sendClp1Update, 0, 3800, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(this::sendClp1Update, 0, 40, TimeUnit.SECONDS);
 
         // Agendamento para CLPs 2 a 4 (1 segundo)
         executor.scheduleAtFixedRate(this::sendClp2to4Updates, 0, 3, TimeUnit.SECONDS);
 
-        executor.scheduleAtFixedRate(this::sendExpeditionUpdate, 0, 2, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(this::sendExpeditionUpdate, 0, 40, TimeUnit.SECONDS);
     }
 
     public SseEmitter subscribe() {
@@ -47,24 +54,56 @@ public class ClpSimulatorService {
     }
 
     private void sendClp1Update() {
-        Random rand = new Random();
+        plcConnectorEstoque = new PlcConnector("10.74.241.10", 102);
         List<Integer> byteArray = new ArrayList<>();
+
+        try {
+            plcConnectorEstoque.connect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            indexColorEst = plcConnectorEstoque.readBlock(9, 68, 28);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         for (int i = 0; i < 28; i++) {
-            byteArray.add(rand.nextInt(4));
+            byteArray.add((int) indexColorEst[i]);
         }
 
         ClpData clp1 = new ClpData(1, byteArray);
         sendToEmitters("clp1-data", clp1);
+
     }
 
     private void sendExpeditionUpdate() {
-        Random rand = new Random();
-        List<Integer> expeditionArray = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            expeditionArray.add(rand.nextInt(2)); // 0 a 3
+        plcConnectorExpedicao = new PlcConnector("10.74.241.10", 102);
+        List<Integer> byteArray = new ArrayList<>();
+        int returns[] = new int[12];
+
+        try {
+            plcConnectorExpedicao.connect();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        ClpData expeditionData = new ClpData(5, expeditionArray);
+        try {
+            int j = 0;
+            for (int i = 6; i <= 28; i += 2) {
+                returns[j] = plcConnectorExpedicao.readInt(9, i);
+                j++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < 12; i++) {
+            byteArray.add(returns[i]);
+        }
+
+        ClpData expeditionData = new ClpData(5, byteArray);
         sendToEmitters("expedition-data", expeditionData);
     }
 

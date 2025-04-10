@@ -9,7 +9,7 @@
 
 <body>
     <div class="container1">
-        <h1>Leitura dos 4 CLPs (Simulada)</h1>
+        <h1>Leitura dos 4 CLPs</h1>
 
         <h2>CLP 1 (Matriz de 28 bytes)</h2>
         <div id="clp1-grid" class="grid"></div>
@@ -109,14 +109,19 @@
             const expeditionArray = Array.isArray(data.value) ? data.value : JSON.parse(data.value);
             const grid = document.getElementById('expedition-grid');
             grid.innerHTML = '';
-    
+        
             expeditionArray.forEach((val, i) => {
                 const cell = document.createElement('div');
                 cell.classList.add('cell2', `color-${val}`);
-                cell.textContent = val === 0 ? "____" : `OP${String(val).padStart(4, '0')}`;
+        
+                // Formata o texto como "____" ou "OP0001", "OP0010", etc.
+                const formattedText = val === 0 ? "____" : `OP${val.toString().padStart(4, '0')}`;
+                cell.textContent = `P${i + 1}= [${formattedText}]`;
+        
                 grid.appendChild(cell);
             });
         });
+        
     </script>
 </body>
 
