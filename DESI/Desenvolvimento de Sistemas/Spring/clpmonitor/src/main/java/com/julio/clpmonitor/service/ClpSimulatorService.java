@@ -30,18 +30,6 @@ public class ClpSimulatorService {
     private PlcConnector plcConnectorExpedicao;
     public static byte[] indexColorExp = new byte[28];
 
-    @PostConstruct
-
-    public void startSimulation() {
-        // Agendamento separado para CLP 1 (800ms)
-        executor.scheduleAtFixedRate(this::sendClp1Update, 0, 40, TimeUnit.SECONDS);
-
-        // Agendamento para CLPs 2 a 4 (1 segundo)
-        executor.scheduleAtFixedRate(this::sendClp2to4Updates, 0, 3, TimeUnit.SECONDS);
-
-        executor.scheduleAtFixedRate(this::sendExpeditionUpdate, 0, 40, TimeUnit.SECONDS);
-    }
-
     public SseEmitter subscribe() {
         SseEmitter emitter = new SseEmitter(0L);
 
@@ -53,7 +41,7 @@ public class ClpSimulatorService {
         return emitter;
     }
 
-    private void sendClp1Update() {
+    public void sendClp1Update() {
         plcConnectorEstoque = new PlcConnector("10.74.241.10", 102);
         List<Integer> byteArray = new ArrayList<>();
 
@@ -78,8 +66,8 @@ public class ClpSimulatorService {
 
     }
 
-    private void sendExpeditionUpdate() {
-        plcConnectorExpedicao = new PlcConnector("10.74.241.10", 102);
+    public void sendExpeditionUpdate() {
+        plcConnectorExpedicao = new PlcConnector("10.74.241.40", 102);
         List<Integer> byteArray = new ArrayList<>();
         int returns[] = new int[12];
 
@@ -103,16 +91,8 @@ public class ClpSimulatorService {
             byteArray.add(returns[i]);
         }
 
-        ClpData expeditionData = new ClpData(5, byteArray);
+        ClpData expeditionData = new ClpData(4, byteArray);
         sendToEmitters("expedition-data", expeditionData);
-    }
-
-    private void sendClp2to4Updates() {
-        Random rand = new Random();
-
-        sendToEmitters("clp2-data", new ClpData(2, rand.nextInt(100)));
-        sendToEmitters("clp3-data", new ClpData(3, rand.nextInt(100)));
-        sendToEmitters("clp4-data", new ClpData(4, rand.nextInt(100)));
     }
 
     // sendToEmitters() – Envia um evento SSE para todos os clientes

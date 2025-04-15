@@ -1,6 +1,6 @@
 <div th:fragment="clp-write-fragment" class="clp-write-section">
     <link rel="stylesheet" th:href="@{/css/estilos.css}"> <!-- Importa os estilos -->
-    <h2>Escrever Tag no CLP</h2>
+    <h1>Escrever Tag no CLP</h1>
     <form id="clp-write-form" th:action="@{/write-tag}" th:object="${tag}" method="post">
         <label>IP do CLP:</label>
         <input type="text" th:field="*{ip}" required />

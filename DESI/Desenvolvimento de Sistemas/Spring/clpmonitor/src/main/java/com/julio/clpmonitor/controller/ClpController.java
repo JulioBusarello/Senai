@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.julio.clpmonitor.model.TagWriteRequest;
 import com.julio.clpmonitor.service.ClpSimulatorService;
 import com.julio.clpmonitor.util.TagValueParser;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ClpController {
@@ -57,4 +58,19 @@ public class ClpController {
         model.addAttribute("tag", new TagWriteRequest());
         return "fragments/formulario :: clp-write-fragment";
     }
+
+    @PostMapping("/update-stock")
+    public String updateEstoque() {
+        simulatorService.sendClp1Update();
+
+        return "index";
+    }
+
+    @PostMapping("/update-expedition")
+    public String updateExpedicao() {
+        simulatorService.sendExpeditionUpdate();
+
+        return "index";
+    }
+
 }

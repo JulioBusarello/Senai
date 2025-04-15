@@ -9,37 +9,16 @@
 
 <body>
     <div class="container1">
-        <h1>Leitura dos 4 CLPs</h1>
+        <h1>Leitura da bancada</h1>
 
-        <h2>CLP 1 (Matriz de 28 bytes)</h2>
+        <h2>Estoque (28 espaços)</h2>
         <div id="clp1-grid" class="grid"></div>
 
-        <h2>CLP 2 a 4</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>CLP</th>
-                    <th>Valor</th>
-                </tr>
-            </thead>
-            <tbody id="clp-table">
-                <tr>
-                    <td>CLP 2</td>
-                    <td id="clp2">-</td>
-                </tr>
-                <tr>
-                    <td>CLP 3</td>
-                    <td id="clp3">-</td>
-                </tr>
-                <tr>
-                    <td>CLP 4</td>
-                    <td id="clp4">-</td>
-                </tr>
-            </tbody>
-        </table>
+        <button class="update" onclick="updateEstoque()">Atualizar</button>
 
         <h2>Expedição (12 espaços)</h2>
         <div id="expedition-grid" class="grid expedition-grid"></div>
+        <button class="update" onclick="updateExpedicao()">Atualizar</button>
     </div>
 
     <div class="container2">
@@ -50,12 +29,12 @@
     <script>
         const eventSource = new EventSource('/clp-data-stream');
 
-        eventSource.addEventListener('clp1-data', function(event) {
+        eventSource.addEventListener('clp1-data', function (event) {
             const data = JSON.parse(event.data);
             const byteArray = Array.isArray(data.value) ? data.value : JSON.parse(data.value);
             const grid = document.getElementById('clp1-grid');
             grid.innerHTML = '';
-    
+
             byteArray.forEach((val, i) => {
                 const cell = document.createElement('div');
                 cell.classList.add('cell', `color-${val}`);
@@ -104,24 +83,48 @@
         });
 
         // Adicione este novo listener
-        eventSource.addEventListener('expedition-data', function(event) {
+        eventSource.addEventListener('expedition-data', function (event) {
             const data = JSON.parse(event.data);
             const expeditionArray = Array.isArray(data.value) ? data.value : JSON.parse(data.value);
             const grid = document.getElementById('expedition-grid');
             grid.innerHTML = '';
-        
+
             expeditionArray.forEach((val, i) => {
                 const cell = document.createElement('div');
                 cell.classList.add('cell2', `color-${val}`);
-        
-                // Formata o texto como "____" ou "OP0001", "OP0010", etc.
+
                 const formattedText = val === 0 ? "____" : `OP${val.toString().padStart(4, '0')}`;
                 cell.textContent = `P${i + 1}= [${formattedText}]`;
-        
+
+                if(val) {
+                    cell.style.border = "1px solid red";
+                    cell.style.backgroundColor = "rgba(255, 0, 0, 0.3)";
+                }else {
+                    cell.style.border = "1px solid green";
+                    cell.style.backgroundColor = "rgba(0, 255, 0, 0.3)";
+                }
+
                 grid.appendChild(cell);
             });
         });
-        
+
+        function updateEstoque() {
+            fetch('/update-stock', {
+                method: 'POST'
+            })
+        }
+
+        function updateExpedicao() {
+            fetch('/update-expedition', {
+                method: 'POST'
+            })
+        }
+
+        window.onload = function () {
+            updateEstoque();
+            updateExpedicao();
+        };
+
     </script>
 </body>
 
