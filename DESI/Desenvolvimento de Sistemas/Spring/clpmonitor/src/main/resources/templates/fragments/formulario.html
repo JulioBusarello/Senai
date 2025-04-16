@@ -1,9 +1,9 @@
 <div th:fragment="clp-write-fragment" class="clp-write-section">
-    <link rel="stylesheet" th:href="@{/css/estilos.css}"> <!-- Importa os estilos -->
+    <link rel="stylesheet" th:href="@{/css/estilo.css}"> <!-- Importa os estilos -->
     <h1>Escrever Tag no CLP</h1>
     <form id="clp-write-form" th:action="@{/write-tag}" th:object="${tag}" method="post">
         <label>IP do CLP:</label>
-        <input type="text" th:field="*{ip}" required />
+        <input type="text" th:field="*{ip}" required placeholder="10.74.241.10" />
 
         <label>Porta do CLP:</label>
         <input type="number" th:field="*{port}" required />
@@ -12,7 +12,7 @@
         <input type="number" th:field="*{db}" required />
 
         <label>Tipo:</label>
-        <select th:field="*{type}" required>
+        <select th:field="*{type}" required onchange="updateFields()">
             <option value="STRING">String</option>
             <option value="BLOCK">Block</option>
             <option value="FLOAT">Float</option>
@@ -25,22 +25,22 @@
         <input type="number" th:field="*{offset}" required />
 
         <label>Bit Number:</label>
-        <input type="number" th:field="*{bitNumber}" />
+        <input type="number" th:field="*{bitNumber}" id="bitNumberField" />
 
         <label>Size:</label>
-        <input type="number" th:field="*{size}" />
+        <input type="number" th:field="*{size}" id="sizeField" />
 
         <label>Valor:</label>
-        <input type="text" th:field="*{value}" required />
+        <input type="text" th:field="*{value}" required placeholder="1 - Preto // 2 - Vermelho // 3 - Azul"/>
 
         <button type="submit">Enviar</button>
     </form>
 
     <div id="mensagem-tag">
-        <div th:if="${mensagem}" style="color: green;">
+        <div th:if="${mensagem}" class="alert alert-success">
             <p th:text="${mensagem}"></p>
         </div>
-        <div th:if="${erro}" style="color: red;">
+        <div th:if="${erro}" class="alert alert-danger">
             <p th:text="${erro}"></p>
         </div>
     </div>

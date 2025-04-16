@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import com.julio.clpmonitor.clp.PlcConnector;
+import com.julio.clpmonitor.model.Tag;
 import com.julio.clpmonitor.model.TagWriteRequest;
 import com.julio.clpmonitor.service.ClpSimulatorService;
 import com.julio.clpmonitor.util.TagValueParser;
@@ -32,25 +34,60 @@ public class ClpController {
         return simulatorService.subscribe();
     }
 
+    @GetMapping("/write-tag")
+    public String showWriteForm(Model model) {
+        model.addAttribute("tag", new Tag());
+        return "clp-write-fragment"; // ou o nome da sua página que contém o fragmento
+    }
+
     @PostMapping("/write-tag")
-    public String writeTag(@ModelAttribute TagWriteRequest request, Model model) {
+    public String writeTag(@ModelAttribute Tag tag, Model model) {
         try {
-            Object typedValue = TagValueParser.parseValue(request.getValue(), request.getType());
+            PlcConnector plc = new PlcConnector(tag.getIp().trim(), tag.getPort());
+            plc.connect();
 
-            System.out.println("\nEscrevendo no CLP: " + request.getIp() + "\n"
-                    + " | DB: " + request.getDb() + "\n"
-                    + " | Offset: " + request.getOffset() + "\n"
-                    + " | Type: " + request.getType() + "\n"
-                    + " | Valor convertido: " + typedValue + "\n");
+            boolean success = false;
 
-            model.addAttribute("message", "Valor escrito com sucesso!");
-        } catch (Exception e) {
-            model.addAttribute("error", "Erro ao escrever valor: " + e.getMessage());
+            switch (tag.getType().toUpperCase()) {
+                case "STRING":
+                    success = plc.writeString(tag.getDb(), tag.getOffset(), tag.getSize(), tag.getValue().trim());
+                    break;
+                case "BLOCK":
+                    byte[] bytes = PlcConnector.hexStringToByteArray(tag.getValue().trim());
+                    success = plc.writeBlock(tag.getDb(), tag.getOffset(), tag.getSize(), bytes);
+                    break;
+                case "FLOAT":
+                    success = plc.writeFloat(tag.getDb(), tag.getOffset(), Float.parseFloat(tag.getValue().trim()));
+                    break;
+                case "INTEGER":
+                    success = plc.writeInt(tag.getDb(), tag.getOffset(), Integer.parseInt(tag.getValue().trim()));
+                    break;
+                case "BYTE":
+                    success = plc.writeByte(tag.getDb(), tag.getOffset(), Byte.parseByte(tag.getValue().trim()));
+                    break;
+                case "BIT":
+                    if (tag.getBitNumber() == null) {
+                        throw new IllegalArgumentException("Bit Number é obrigatório para tipo BIT");
+                    }
+                    success = plc.writeBit(tag.getDb(), tag.getOffset(), tag.getBitNumber(),
+                            Boolean.parseBoolean(tag.getValue().trim()));
+                    break;
+                default:
+                    throw new IllegalArgumentException("Tipo não suportado: " + tag.getType());
+            }
+
+            plc.disconnect();
+
+            if (success) {
+                model.addAttribute("mensagem", "Escrita no CLP realizada com sucesso!");
+            } else {
+                model.addAttribute("erro", "Erro de escrita no CLP!");
+            }
+        } catch (Exception ex) {
+            model.addAttribute("erro", "Erro: " + ex.getMessage());
         }
 
-        model.addAttribute("tag", new TagWriteRequest());
-
-        return "index";
+        return "clp-write-fragment"; // ou o nome da sua página que contém o fragmento
     }
 
     @GetMapping("/fragmento-formulario")
