@@ -3,11 +3,7 @@ package com.julio.clpmonitor.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -15,14 +11,10 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.julio.clpmonitor.clp.PlcConnector;
 import com.julio.clpmonitor.model.ClpData;
 
-import jakarta.annotation.PostConstruct;
-
 @Service
 public class ClpSimulatorService {
 
     private final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
-
-    private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
 
     private PlcConnector plcConnectorEstoque;
     public static byte[] indexColorEst = new byte[28];
@@ -73,6 +65,7 @@ public class ClpSimulatorService {
 
         try {
             plcConnectorExpedicao.connect();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

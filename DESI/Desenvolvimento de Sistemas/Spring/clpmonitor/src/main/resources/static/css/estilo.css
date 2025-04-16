@@ -72,7 +72,7 @@ h2 {
 /* Grid de expedição */
 #expedition-grid {
     display: grid;
-    grid-template-columns: repeat(4, 146px);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 40px);
     gap: 5px;
     margin-bottom: 20px;
@@ -83,7 +83,6 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60px;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     font-weight: bold;
@@ -222,11 +221,8 @@ button.update:hover {
 
 @media (max-width: 768px) {
     #clp1-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    #expedition-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(6, 70px);
+        grid-template-rows: repeat(5, 70px);
     }
 
     #clp-write-form {
@@ -238,13 +234,37 @@ button.update:hover {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
     #clp1-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(6, 60px);
+        grid-template-rows: repeat(5, 60px);
     }
 
     .container1,
     .container2 {
         padding: 15px;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    #clp1-grid {
+        grid-template-columns: repeat(6, 50px);
+        grid-template-rows: repeat(5, 50px);
+        gap: 5px;
+    }
+
+    #expedition-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .cell {
+        font-size: 10px;
+    }
+
+    .container1,
+    .container2 {
+        padding: 15px;
+        max-width: 90%;
     }
 }

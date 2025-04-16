@@ -12,8 +12,6 @@ import com.julio.clpmonitor.clp.PlcConnector;
 import com.julio.clpmonitor.model.Tag;
 import com.julio.clpmonitor.model.TagWriteRequest;
 import com.julio.clpmonitor.service.ClpSimulatorService;
-import com.julio.clpmonitor.util.TagValueParser;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ClpController {

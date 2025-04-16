@@ -12,7 +12,7 @@
         <input type="number" th:field="*{db}" required />
 
         <label>Tipo:</label>
-        <select th:field="*{type}" required onchange="updateFields()">
+        <select th:field="*{type}" required>
             <option value="STRING">String</option>
             <option value="BLOCK">Block</option>
             <option value="FLOAT">Float</option>
