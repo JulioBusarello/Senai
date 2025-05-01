@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciador de Contratos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .form-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    .input, .btn {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <form method="post" action="/contratos/criar" class="space-y-4">
+      <input name="partes" placeholder="Nome, CPF, Endereço..." class="input" />
+      <input name="objeto" placeholder="O que está sendo contratado?" class="input" />
+      <textarea name="obrigacoes" class="input" placeholder="Quem faz o quê?"></textarea>
+      <input name="preco" placeholder="R$ ou outras formas de pagamento" class="input" />
+      <input name="prazo" placeholder="Data ou período do contrato" class="input" />
+      <textarea name="assinaturas" placeholder="Nomes ou áreas de assinatura" class="input"></textarea>
+      <button type="submit" class="btn">Gerar Contrato</button>
+    </form>
+  </div>
+
+</body>
+</html>

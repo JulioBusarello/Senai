@@ -262,6 +262,10 @@ button.update:hover {
         font-size: 10px;
     }
 
+    .cell2 {
+        font-size: 10px;
+    }
+
     .container1,
     .container2 {
         padding: 15px;

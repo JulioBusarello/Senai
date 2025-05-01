@@ -1,0 +1,24 @@
+-- Dropa o schema inteiro se existir (remove todas as tabelas)
+DROP SCHEMA IF EXISTS documentclone_db;
+
+-- Cria o schema novamente
+CREATE SCHEMA documentclone_db;
+
+-- Usa o schema criado
+USE documentclone_db;
+
+-- Cria a tabela de usuários
+CREATE TABLE user (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Cria a tabela de contratos
+CREATE TABLE contratos (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(255) NOT NULL,
+    conteudo TEXT NOT NULL,
+    criado_por VARCHAR(100) NOT NULL,
+    FOREIGN KEY (criado_por) REFERENCES user(username)
+)
